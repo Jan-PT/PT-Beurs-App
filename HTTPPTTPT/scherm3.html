@@ -6,51 +6,54 @@
 <link rel="stylesheet" type="text/css" href="style/style.css" />
 <link rel="stylesheet" type="text/css" href="style/css/bootstrap.css" />
 <script src="style/js/bootstrap.js"></script>
-    <script type="text/javascript">
-		var rand = Math.floor((Math.random() * 9) + 1); 
-		var src1 = "logo/pt-logo-signed-";
-		var src2 = ".png";
-		var srcAll =  src1.concat(rand.toString(), src2);
-		
-		var image = document.getElementById(logo);
-		image.src = srcAll;
-		
-		//document.getElementById(logo).src =  srcAll;
-	</script>
+    <script>
+    window.onload = function(){
+        var rand = Math.floor((Math.random() * 9) + 1); 
+        var src1 = "logo/pt-logo-signed-";
+        var src2 = ".png";
+        var srcAll =  src1.concat(rand.toString(), src2);
+        
+        //var logo = document.getElementById(logo);
+        //logo.src = srcAll;
+        
+        document.getElementById("logo").src =  srcAll;
+        
+    }
+    
+    </script>
 </head>
 
 <body>
 	<div id="container" class="container-fluid">
     	<div id="header">
-        <h1>Waar ga je naar school? - Gemeenschap</h1>
+            <h1>Waar ga je naar school? - Gemeenschap</h1>
         </div>
-        <div id="info" class="form-group">
-            <form>
-                <div class="col-sm-4">
-                	<p><button type="button" class="btn btn-success form-control">AP</button></p> 
-                    <p><button type="button" class="btn btn-success form-control">UA</button></p>
-                    <p><button type="button" class="btn btn-success form-control">Thomas More</button></p> 
-                </div>
-                <div class="col-sm-4">
-                    <p><button type="button" class="btn btn-success form-control">KDG</button></p>
-                    <p><button type="button" class="btn btn-success form-control">KUL</button></p>
-                    <p><button type="button" class="btn btn-success form-control">VUB</button></p>
-                </div>
-            </form>
+        <div class="panel-body">
+            <div id="info" class="form-group">
+                <form>
+                    <div class="col-sm-4">
+                        <p><a href="scherm5.html" class="btn btn-warning" style="width:300px">AP</a></p>
+                        <p><a href="scherm5.html" class="btn btn-warning" style="width:300px">UA</a></p>
+                        <p><a href="scherm5.html" class="btn btn-warning" style="width:300px">Thomas More</a> </p>
+                    </div>
+                    <div class="col-sm-4">
+                        <p><a href="scherm5.html" class="btn btn-warning" style="width:300px">KDG</a></p>
+                        <p><a href="scherm5.html" class="btn btn-warning" style="width:300px">KUL</a></p>
+                        <p><a href="scherm5.html" class="btn btn-warning" style="width:300px">VUB</a> </p>
+                    </div>
+                </form>
+            </div>
         </div>
-         <div id="breadcrumbs">
-		<ol class="breadcrumb">
-			<li class="active"><a href="#"> Home </a> </li>
-			<li><a href="#"> Personal Info </a> </li>
-			<li><a href="#"> School </a> </li>
-			<li><a href="#"> Gewenste funcite </a> </li>
-			
-		</ol>
-        </div>
-        <div id="footer">
-        
-        	<img id="logo" />
-            
+        <div id="footer" class="panel-footer" style="background:white">
+            <div id="breadcrumbs" class="col-sm-4">
+                <ol class="breadcrumb">
+                    <li class="active"><a href="index.html"> Home </a> </li>
+                    <li><a href="index.html"> Personal Info </a> </li>
+                    <li><a href="scherm2.html"> School </a> </li>
+                    <li><a href="scherm5.html"> Gewenste funcite </a> </li>         
+                </ol>
+            </div>
+            <img id="logo" class="col-sm-4">
         </div>
     </div>
 
