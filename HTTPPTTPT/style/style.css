@@ -1,0 +1,10 @@
+.left {
+    background-color: Red;
+    float: left;
+    width: 50%;
+}
+
+.right {
+    background-color: Aqua;
+    margin-left: 50%;
+}
