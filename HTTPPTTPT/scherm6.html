@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>HTTPPTTPT</title>
+<link rel="stylesheet" type="text/css" href="style/style.css" />
+<link rel="stylesheet" type="text/css" href="style/css/bootstrap.css" />
+<script src="style/js/bootstrap.js"></script>
+    <script type="text/javascript">
+		var rand = Math.floor((Math.random() * 9) + 1); 
+		var src1 = "logo/pt-logo-signed-";
+		var src2 = ".png";
+		var srcAll =  src1.concat(rand.toString(), src2);
+		
+		var image = document.getElementById(logo);
+		image.src = srcAll;
+		
+		//document.getElementById(logo).src =  srcAll;
+	</script>
+</head>
+
+<body>
+	<div id="container">
+    	<div id="header">
+        <h1>Waarvoor kunnen we jou contacteren?</h1>
+        </div>
+        <div id="info" class="form-group col-sm-8">
+            <form>
+                <div class="input-group">
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-primary">Diploma niveau</button>
+                        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span class="caret"></span>
+                            <span class="sr-only">Toggle Dropdown</span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Action</a></li>
+                            <li><a href="#">Another action</a></li>
+                            <li><a href="#">Something else here</a></li>
+                            <li><a href="#">Separated link</a></li>
+                        </ul>
+                    </div>
+                    <p><input type="text"></p>
+                    <p><button class="btn btn-primary span-8"/>Verder</button></p>
+                </div>
+            </form>
+        </div>
+         <div id="breadcrumbs">
+		<ol class="breadcrumb">
+            <li><a href="index.html">Home </a> </li>
+            <li><a href="scherm2.html"> Personal Info </a> </li>
+            <li><a href="scherm3.html"> School </a> </li>
+            <li class="active">Gewenste funcite </a> </li>
+        </ol>
+        </div>
+        <div id="footer">
+        
+        	<img id="logo" />
+            
+        </div>
+    </div>
+
+</body>
+</html>

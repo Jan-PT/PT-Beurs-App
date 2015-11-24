@@ -6,44 +6,55 @@
 <link rel="stylesheet" type="text/css" href="style/style.css" />
 <link rel="stylesheet" type="text/css" href="style/css/bootstrap.css" />
 <script src="style/js/bootstrap.js"></script>
-    <script type="text/javascript">
+    <script>
+	window.onload = function(){
 		var rand = Math.floor((Math.random() * 9) + 1); 
 		var src1 = "logo/pt-logo-signed-";
 		var src2 = ".png";
 		var srcAll =  src1.concat(rand.toString(), src2);
 		
-		var image = document.getElementById(logo);
-		image.src = srcAll;
+		//var logo = document.getElementById(logo);
+		//logo.src = srcAll;
 		
-		//document.getElementById(logo).src =  srcAll;
+		document.getElementById("logo").src =  srcAll;
+		
+	}
+	
 	</script>
 </head>
 
-<body OnLoad="document.getElementById(logo).src = srcAll">
+<body>
 	<div id="container" class="container-fluid">
     	<div id="header">
         <h1>Waar ga je naar school? - Provincie</h1>
         </div>
+        <div class="panel-body">
         <div id="info" class="form-group">
             <form>
                 <div class="col-sm-4">
-                    <p><button type="button" class="btn btn-success form-control">Antwerpen</button></p>  
-                    <p><button type="button" class="btn btn-success form-control">Oost-Vlaanderen</button></p> 
-                    <p><button type="button" class="btn btn-success form-control">Limburg</button></p> 
+                    <p><a href="scherm5.html" class="btn btn-warning" style="width:300px">Antwerpen</a></p>
+                    <p><a href="scherm5.html" class="btn btn-warning" style="width:300px">Oost-Vlaanderen</a></p>
+                    <p><a href="scherm5.html" class="btn btn-warning" style="width:300px">Limburg</a> </p>
                 </div>
                 <div class="col-sm-4">
-                    <p><button type="button" class="btn btn-success form-control">Vlaams Brabant</button></p>  
-                    <p><button type="button" class="btn btn-success form-control">West-Vlaanderen</button></p> 
-                    <p><button type="button" class="btn btn-success form-control">Andere</button></p> 
+                    <p><a href="scherm5.html" class="btn btn-warning" style="width:300px">Vlaams Brabant</a></p>
+                    <p> <a href="scherm5.html" class="btn btn-warning" style="width:300px">West-Vlaanderen</a></p>
+                    <p> <a href="scherm5.html" class="btn btn-warning" style="width:300px">Andere</a> </p>
                 </div>
             </form>
         </div>
-        <div id="breadcrumbs">
         </div>
-        <div id="footer">
-        
-        	<img id="logo" />
+         <div id="footer" class="panel-footer" style="background:white">
+        <div id="breadcrumbs" class="col-sm-4">
+		<ol class="breadcrumb">
+			<li class="active"><a href="index.html"> Home </a> </li>
+			<li><a href="index.html"> Personal Info </a> </li>
+			<li><a href="scherm2.html"> School </a> </li>
+			<li><a href="scherm5.html"> Gewenste funcite </a> </li>			
+		</ol>
             
+        </div>
+        	<img id="logo" class="col-sm-4">
         </div>
     </div>
 
