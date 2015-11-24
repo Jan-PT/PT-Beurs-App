@@ -1,26 +1,47 @@
 <!DOCTYPE html>
+<<<<<<< HEAD
 <html lang="en">
+=======
+>>>>>>> 76f98bc07d45a96cc7bab3b20224f33ec47ddec3
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <title>HTTPPTTPT</title>
 <link rel="stylesheet" type="text/css" href="style/style.css" />
 <link rel="stylesheet" type="text/css" href="style/css/bootstrap.css" />
+<<<<<<< HEAD
 <script src="style/js/bootstrap.min.js"></script>
     <script type="text/javascript">
+=======
+<script src="style/js/bootstrap.js"></script>
+
+    <script>
+	window.onload = function(){
+>>>>>>> 76f98bc07d45a96cc7bab3b20224f33ec47ddec3
 		var rand = Math.floor((Math.random() * 9) + 1); 
 		var src1 = "logo/pt-logo-signed-";
 		var src2 = ".png";
 		var srcAll =  src1.concat(rand.toString(), src2);
 		
-		var image = document.getElementById(logo);
-		image.src = srcAll;
+		var logo = document.getElementById(logo);
+		logo.src = srcAll;
 		
 		//document.getElementById(logo).src =  srcAll;
+		
+	}
+	
+
 	</script>
+
 </head>
 
+<<<<<<< HEAD
 <body OnLoad="document.getElementById(logo).src = srcAll">
 	<div id="container" class="container-fluid">
+=======
+<!-- <body OnLoad="randLogo();"> -->
+<body>
+	<div id="container">
+>>>>>>> 76f98bc07d45a96cc7bab3b20224f33ec47ddec3
     	<div id="header">
         <h1>Vertel ons wat over jezelf</h1>
         </div>
@@ -45,7 +66,7 @@
         </div>
         <div id="footer">
         
-        	<img id="logo" />
+        	<img id="logo" src="logo/pt-logo-signed-1.png">
             
         </div>
     </div>
