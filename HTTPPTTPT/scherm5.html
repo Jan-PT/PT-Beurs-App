@@ -6,16 +6,20 @@
 <link rel="stylesheet" type="text/css" href="style/style.css" />
 <link rel="stylesheet" type="text/css" href="style/css/bootstrap.css" />
 <script src="style/js/bootstrap.js"></script>
-    <script type="text/javascript">
+    <script>
+	window.onload = function(){
 		var rand = Math.floor((Math.random() * 9) + 1); 
 		var src1 = "logo/pt-logo-signed-";
 		var src2 = ".png";
 		var srcAll =  src1.concat(rand.toString(), src2);
 		
-		var image = document.getElementById(logo);
-		image.src = srcAll;
+		//var logo = document.getElementById(logo);
+		//logo.src = srcAll;
 		
-		//document.getElementById(logo).src =  srcAll;
+		document.getElementById("logo").src =  srcAll;
+		
+	}
+	
 	</script>
 </head>
 
@@ -26,6 +30,7 @@
         </div>
         <div id="info" class="form-group col-sm-8">
             <form>
+                <div class="panel-body">
                 <div class="input-group ">
                     <span class="input-group-addon">
                         <input type="checkbox" id="vaste_job" aria-label="...">
@@ -47,19 +52,18 @@
                 <button class="btn btn-primary span-8"/>Verder</button>
             </form>
         </div>
-         <div id="breadcrumbs">
+                </div>
+         <div id="footer" class="panel-footer" style="background:white">
+        <div id="breadcrumbs" class="col-sm-4">
 		<ol class="breadcrumb">
-			<li><a href="index.html">Home </a> </li>
-			<li><a href="scherm2.html"> Personal Info </a> </li>
-			<li><a href="scherm3.html"> School </a> </li>
-			<li class="active">Gewenste funcite </a> </li>
-            <li><a href="scherm6.html"> Diploma </a></li>
+			<li class="active"><a href="index.html"> Home </a> </li>
+			<li><a href="index.html"> Personal Info </a> </li>
+			<li><a href="scherm2.html"> School </a> </li>
+			<li><a href="scherm5.html"> Gewenste funcite </a> </li>			
 		</ol>
-        </div>
-        <div id="footer">
-        
-        	<img id="logo" />
             
+        </div>
+        	<img id="logo" class="col-sm-4">
         </div>
     </div>
 
