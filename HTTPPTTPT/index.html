@@ -1,25 +1,32 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title>HTTPPTTPT</title>
 <link rel="stylesheet" type="text/css" href="style/style.css" />
 <link rel="stylesheet" type="text/css" href="style/css/bootstrap.css" />
 <script src="style/js/bootstrap.js"></script>
-    <script type="text/javascript">
+
+    <script>
+	window.onload = function(){
 		var rand = Math.floor((Math.random() * 9) + 1); 
 		var src1 = "logo/pt-logo-signed-";
 		var src2 = ".png";
 		var srcAll =  src1.concat(rand.toString(), src2);
 		
-		var image = document.getElementById(logo);
-		image.src = srcAll;
+		var logo = document.getElementById(logo);
+		logo.src = srcAll;
 		
 		//document.getElementById(logo).src =  srcAll;
+		
+	}
+	
+
 	</script>
+
 </head>
 
-<body OnLoad="document.getElementById(logo).src = srcAll">
+<!-- <body OnLoad="randLogo();"> -->
+<body>
 	<div id="container">
     	<div id="header">
         <h1>Vertel ons wat over jezelf</h1>
@@ -45,7 +52,7 @@
         </div>
         <div id="footer">
         
-        	<img id="logo" />
+        	<img id="logo" src="logo/pt-logo-signed-1.png">
             
         </div>
     </div>
