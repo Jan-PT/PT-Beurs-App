@@ -24,14 +24,27 @@
     	<div id="header">
         <h1>Waarvoor kunnen we jou contacteren?</h1>
         </div>
-        <div id="info">
+        <div id="info" class="form-group col-sm-8">
             <form>
-                <select>
-                    <option>Vaste Job</option>
-                    <option>Stage</option>
-                    <option>Andere</option>
-                </select>
-                <input type="button" href="scherm2.html"/>
+                <div class="input-group ">
+                    <span class="input-group-addon">
+                        <input type="checkbox" id="vaste_job" aria-label="...">
+                    </span>
+                    <label  class="form-control" aria-label="...">Vaste job</label>
+                </div>
+                <div class="input-group">
+                    <span class="input-group-addon">
+                        <input type="checkbox" id="stage" aria-label="...">
+                    </span>
+                    <label  class="form-control" aria-label="...">Stage</label>
+                </div>
+                <div class="input-group">
+                    <span class="input-group-addon">
+                        <input type="checkbox" id="andere" aria-label="...">
+                    </span>
+                    <label  class="form-control" aria-label="...">Andere</label>
+                </div>
+                <button class="btn btn-primary span-8"/>Verder</button>
             </form>
         </div>
         <div id="breadcrumbs">
