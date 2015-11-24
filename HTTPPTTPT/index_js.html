@@ -9,26 +9,29 @@
     <script src="style/js/bootstrap.js"></script>
 
     <script>
-	window.onload = function(){
+		function randLogo(){
 		var rand = Math.floor((Math.random() * 9) + 1); 
 		var src1 = "logo/pt-logo-signed-";
 		var src2 = ".png";
 		var srcAll =  src1.concat(rand.toString(), src2);
 		
 		var logo = document.getElementById(logo);
+		var test = document.getElementById(footer.logo);
 		logo.src = srcAll;
 		
 		//document.getElementById(logo).src =  srcAll;
-		
-	}
+		}
 	
+	window.onload = randLogo;
 	</script>
 
 </head>
 
 <body>
 	<div id="container" class="container-fluid">
-
+<!-- <body OnLoad="randLogo();"> -->
+<body>
+	<div id="container">
     	<div id="header">
         <h1>Vertel ons wat over jezelf</h1>
         </div>
