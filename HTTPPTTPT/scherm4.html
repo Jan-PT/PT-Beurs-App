@@ -20,19 +20,37 @@
 </head>
 
 <body OnLoad="document.getElementById(logo).src = srcAll">
-	<div id="container">
+	<div id="container" class="container-fluid">
     	<div id="header">
         <h1>Vertel ons wat over jezelf</h1>
         </div>
-        <div id="info">
+        <div id="info" class="form-group">
             <form>
-                <select>
-                    <option>Management</option>
-                    <option>Sales</option>
-                    <option>ICT Applications</option>
-                    <option>ICT Development</option>
-                </select>
-                <input type="button" href="scherm5.html"/>
+                <div class="input-group">
+                    <span class="input-group-addon">
+                        <input type="checkbox" id="management" aria-label="...">
+                    </span>
+                    <label  class="form-control" aria-label="...">Management</label>
+                </div>
+                <div class="input-group">
+                    <span class="input-group-addon">
+                        <input type="checkbox" id="sales" aria-label="...">
+                    </span>
+                    <label  class="form-control" aria-label="...">Sales</label>
+                </div>
+                <div class="input-group">
+                    <span class="input-group-addon">
+                        <input type="checkbox" id="ict_applications" aria-label="...">
+                    </span>
+                    <label  class="form-control" aria-label="...">ICT Applications</label>
+                </div>
+                <div class="input-group">
+                    <span class="input-group-addon">
+                        <input type="checkbox" id="ict_development" aria-label="...">
+                    </span>
+                    <label  class="form-control" aria-label="...">ICT Developtment</label>
+                </div>
+                <button class="btn btn-primary"/>Verder</button>
             </form>
         </div>
         <div id="breadcrumbs">
