@@ -20,9 +20,48 @@ class Beursapp extends CI_Controller {
 	 */
 	public function index()
 	{
-		$this->load->helper('url');
+		$this->home();
+	}
+	
+	# View waarvan de studenten starten (moet nog aangepast worden)
+	public function home (){
+		$this->info();
+	}
+	
+	# View met contact info van de student
+	public function info (){
+		$this->viewLoader('content/personal_info');
+	}
+	
+	# View met de verschillende provincies 
+	public function region (){
+		$this->viewLoader('content/region_selector');
+	}
+	
+	# View met de scholen binnen de gekozen provincie
+	public function school(){
+		$this->viewLoader('content/school_selector');
+	}
+	
+	# View met de mogelijke jobs
+	public function job(){
+		$this->viewLoader('content/job_selector');
+	}
+	
+	# View met de type jobs (stage, vaste job)
+	public function type(){
+		$this->viewLoader('content/job_type');
+	}
+	
+	# View met bedanking & melding succesvolle verwerking gegevens
+	public function processed(){
+		$this->viewLoader('content/data_processed');
+	}
+	
+	public function viewLoader($content){
 		$this->load->view('templates/header');
-		$this->load->view('content/contact_info');
+		$this->load->view($content);
 		$this->load->view('templates/footer');
 	}
+	
 }
