@@ -15,7 +15,8 @@
 					"id" => "naam",
 					"placeholder" => "Naam",
 					"value" => set_Value("naam"),
-					"class" => "form-control"
+					"class" => "form-control",
+                                        "tabindex" => "1"
 				);	
 				echo "<p>".form_input($naam)."</p>";
 				
@@ -25,7 +26,8 @@
 					"id" => "straat",
 					"placeholder" => "Straat",
 					"value" => set_Value("straat"),
-					"class" => "form-control"
+					"class" => "form-control",
+                                        "tabindex" => "3"
 				);	
 				echo "<p>".form_input($straat)."</p>";
 				
@@ -35,7 +37,8 @@
 					"id" => "bus",
 					"placeholder" => "Bus",
 					"value" => set_Value("bus"),
-					"class" => "form-control"
+					"class" => "form-control",
+                                        "tabindex" => "5"
 				);	
 				echo "<p>".form_input($bus)."</p>";
 				
@@ -45,7 +48,8 @@
 					"id" => "gsm",
 					"placeholder" => "Gsm nummer",
 					"value" => set_Value("gsm"),
-					"class" => "form-control"
+					"class" => "form-control",
+                                        "tabindex" => "7"
 				);
 				echo "<p>".form_input($gsm)."</p>";
 			?>
@@ -58,7 +62,8 @@
 					"id" => "voornaam",
 					"placeholder" => "Voornaam",
 					"value" => set_Value("voornaam"),
-					"class" => "form-control"
+					"class" => "form-control",
+                                        "tabindex" => "2"
 				);	
 				echo "<p>".form_input($voornaam)."</p>";
 				
@@ -68,7 +73,8 @@
 					"id" => "huisnr",
 					"placeholder" => "Huisnummer",
 					"value" => set_Value("huisnr"),
-					"class" => "form-control"
+					"class" => "form-control",
+                                        "tabindex" => "4"
 				);	
 				echo "<p>".form_input($huisnr)."</p>";
 				
@@ -78,7 +84,8 @@
 					"id" => "postcode",
 					"placeholder" => "Postcode",
 					"value" => set_Value("postcode"),
-					"class" => "form-control"
+					"class" => "form-control",
+                                        "tabindex" => "6"
 				);	
 				echo "<p>".form_input($postcode)."</p>";
 				
@@ -88,7 +95,8 @@
 					"id" => "email",
 					"placeholder" => "Email",
 					"value" => set_Value("email"),
-					"class" => "form-control"
+					"class" => "form-control",
+                                        "tabindex" => "8"
 				);
 				echo "<p>".form_input($email)."</p>";
 			?>
