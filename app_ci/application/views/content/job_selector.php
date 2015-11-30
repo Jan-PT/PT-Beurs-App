@@ -27,7 +27,7 @@
 				<span class="input-group-addon">
 					<input type="checkbox" id="ict_development" aria-label="...">
 				</span>
-				<label  class="form-control" aria-label="...">ICT Developtment</label>
+				<label  class="form-control" aria-label="...">ICT Development</label>
 			</div>
 			<BR>
 			<a href="<?php echo site_url('beursapp/type');?>" class="btn btn-warning">Volgende</a>
