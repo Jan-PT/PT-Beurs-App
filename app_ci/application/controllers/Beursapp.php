@@ -25,7 +25,9 @@ class Beursapp extends CI_Controller {
 	
 	# View waarvan de studenten starten (moet nog aangepast worden)
 	public function home (){
-		$this->info();
+		#$this->info();
+                $this->load->view('templates/header');
+                $this->load->view('content/start_page');
 	}
 	
 	# View met contact info van de student
