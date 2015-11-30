@@ -53,11 +53,6 @@ class Beursapp extends CI_Controller {
 		}
 	}
 	
-	public function validation(){
-		
-		
-	}
-	
 	# View met de verschillende provincies 
 	public function region (){
 		$this->viewLoader('content/region_selector');
@@ -66,6 +61,11 @@ class Beursapp extends CI_Controller {
 	# View met de scholen binnen de gekozen provincie
 	public function school(){
 		$this->viewLoader('content/school_selector');
+	}
+	
+	# View met de verschillende mogelijke diploma's 
+	public function diploma(){
+		$this->viewLoader('content/diploma_selector');
 	}
 	
 	# View met de mogelijke jobs

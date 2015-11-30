@@ -16,7 +16,7 @@
 					"placeholder" => "Naam",
 					"value" => set_Value("naam"),
 					"class" => "form-control",
-                                        "tabindex" => "1"
+                    "tabindex" => "1"
 				);	
 				echo "<p>".form_input($naam)."</p>";
 				
@@ -27,7 +27,7 @@
 					"placeholder" => "Straat",
 					"value" => set_Value("straat"),
 					"class" => "form-control",
-                                        "tabindex" => "3"
+                    "tabindex" => "3"
 				);	
 				echo "<p>".form_input($straat)."</p>";
 				
@@ -38,7 +38,7 @@
 					"placeholder" => "Bus",
 					"value" => set_Value("bus"),
 					"class" => "form-control",
-                                        "tabindex" => "5"
+                    "tabindex" => "5"
 				);	
 				echo "<p>".form_input($bus)."</p>";
 				
@@ -49,7 +49,7 @@
 					"placeholder" => "Gsm nummer",
 					"value" => set_Value("gsm"),
 					"class" => "form-control",
-                                        "tabindex" => "7"
+                    "tabindex" => "7"
 				);
 				echo "<p>".form_input($gsm)."</p>";
 			?>
@@ -63,7 +63,7 @@
 					"placeholder" => "Voornaam",
 					"value" => set_Value("voornaam"),
 					"class" => "form-control",
-                                        "tabindex" => "2"
+                    "tabindex" => "2"
 				);	
 				echo "<p>".form_input($voornaam)."</p>";
 				
@@ -74,7 +74,7 @@
 					"placeholder" => "Huisnummer",
 					"value" => set_Value("huisnr"),
 					"class" => "form-control",
-                                        "tabindex" => "4"
+                    "tabindex" => "4"
 				);	
 				echo "<p>".form_input($huisnr)."</p>";
 				
@@ -85,7 +85,7 @@
 					"placeholder" => "Postcode",
 					"value" => set_Value("postcode"),
 					"class" => "form-control",
-                                        "tabindex" => "6"
+                    "tabindex" => "6"
 				);	
 				echo "<p>".form_input($postcode)."</p>";
 				
@@ -96,7 +96,7 @@
 					"placeholder" => "Email",
 					"value" => set_Value("email"),
 					"class" => "form-control",
-                                        "tabindex" => "8"
+                    "tabindex" => "8"
 				);
 				echo "<p>".form_input($email)."</p>";
 			?>
