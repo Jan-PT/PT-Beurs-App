@@ -12,7 +12,7 @@
 			</div>
 			<div class="input-group">
 				<span class="input-group-addon">
-					<input checked type="checkbox" id="stage" aria-label="...">
+					<input type="checkbox" id="stage" aria-label="...">
 				</span>
 				<label  class="form-control" aria-label="...">Stage</label>
 			</div>

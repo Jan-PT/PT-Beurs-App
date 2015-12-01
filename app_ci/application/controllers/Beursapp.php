@@ -37,12 +37,9 @@ class Beursapp extends CI_Controller {
 	public function infoForm(){
 		$this->load->library("form_validation");
 		$this->form_validation->set_rules("naam", "naam", "required|alpha|min_length[3]|max_length[30]);");
-		$this->form_validation->set_rules("straat", "straat", "required|alpha|min_length[5]|max_length[50]");
-		$this->form_validation->set_rules("bus", "bus", "alpha_numeric|max_length[5]");
 		$this->form_validation->set_rules("gsm", "gsm nummer", "required|numeric|min_length[10]|max_length[15]");
 		$this->form_validation->set_rules("voornaam", "voornaam", "required|alpha|min_length[3]|max_length[30]");
-		$this->form_validation->set_rules("huisnr", "huisnummer", "required|max_length[5]|alpha_numeric");
-		$this->form_validation->set_rules("postcode", "postcode", "required|numeric|min_length[4]|max_length[10]");
+		$this->form_validation->set_rules("postcode", "postcode", "required|min_length[4]|max_length[50]");
 		$this->form_validation->set_rules("email", "email", "required|valid_email|min_length[10]|max_length[50]");
 	
 		if ($this->form_validation->run() == false){

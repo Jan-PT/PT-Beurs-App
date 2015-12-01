@@ -16,32 +16,10 @@
 					"placeholder" => "Naam",
 					"value" => set_Value("naam"),
 					"class" => "form-control",
-                    "tabindex" => "1"
+                                        "tabindex" => "1"
 				);	
 				echo "<p>".form_input($naam)."</p>";
-				
-				$straat = array(
-					"type" => "text",
-					"name" => "straat",
-					"id" => "straat",
-					"placeholder" => "Straat",
-					"value" => set_Value("straat"),
-					"class" => "form-control",
-                    "tabindex" => "3"
-				);	
-				echo "<p>".form_input($straat)."</p>";
-				
-				$bus = array(
-					"type" => "text",
-					"name" => "bus",
-					"id" => "bus",
-					"placeholder" => "Bus",
-					"value" => set_Value("bus"),
-					"class" => "form-control",
-                    "tabindex" => "5"
-				);	
-				echo "<p>".form_input($bus)."</p>";
-				
+
 				$gsm = array(
 					"type" => "text",
 					"name" => "gsm",
@@ -49,9 +27,20 @@
 					"placeholder" => "Gsm nummer",
 					"value" => set_Value("gsm"),
 					"class" => "form-control",
-                    "tabindex" => "7"
+                                        "tabindex" => "3"
 				);
 				echo "<p>".form_input($gsm)."</p>";
+                                
+                                $email = array(
+					"type" => "text",
+					"name" => "email",
+					"id" => "email",
+					"placeholder" => "Email",
+					"value" => set_Value("email"),
+					"class" => "form-control",
+                                        "tabindex" => "5"
+				);
+				echo "<p>".form_input($email)."</p>";
 			?>
 		</div>
 		<div class="col-sm-4">
@@ -63,40 +52,21 @@
 					"placeholder" => "Voornaam",
 					"value" => set_Value("voornaam"),
 					"class" => "form-control",
-                    "tabindex" => "2"
+                                        "tabindex" => "2"
 				);	
 				echo "<p>".form_input($voornaam)."</p>";
 				
-				$huisnr = array(
-					"type" => "text",
-					"name" => "huisnr",
-					"id" => "huisnr",
-					"placeholder" => "Huisnummer",
-					"value" => set_Value("huisnr"),
-					"class" => "form-control",
-                    "tabindex" => "4"
-				);	
-				echo "<p>".form_input($huisnr)."</p>";
-				
 				$postcode = array(
-					"list"=>"postcode",
-                                        "placeholder" => "Postcode",
-                                        "class" => "form-control",
-                                        "tabindex" => "6"
+                                    "name" => "postcode",
+                                    "list"=>"postcode",
+                                    "value" => set_Value("postcode"),
+                                    "placeholder" => "Postcode",
+                                    "class" => "form-control",
+                                    "tabindex" => "4"
 				);	
-				echo "<p>".form_input($postcode)."</p>";
-				
-				$email = array(
-					"type" => "text",
-					"name" => "email",
-					"id" => "email",
-					"placeholder" => "Email",
-					"value" => set_Value("email"),
-					"class" => "form-control",
-                    "tabindex" => "8"
-				);
-				echo "<p>".form_input($email)."</p>";
+				echo "<p>".form_input($postcode)."</p>";	
 			?>
+                    <input type="submit" class="btn btn-warning col-sm-12" value="Volgende">
 		</div>
             <datalist id="postcode">
                 <option value="1000 - BRUSSEL">
@@ -2923,7 +2893,7 @@
 <option value="9991 - Adegem">
 <option value="9992 - Middelburg">
             </datalist>
-		<input type="submit" class="btn btn-warning">
+		
 		<?php
 			echo form_close();
 		?>
