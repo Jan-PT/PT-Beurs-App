@@ -57,17 +57,20 @@
 				echo "<p>".form_input($voornaam)."</p>";
 				
 				$postcode = array(
+
                                     "name" => "postcode",
                                     "list"=>"postcode",
                                     "value" => set_Value("postcode"),
                                     "placeholder" => "Postcode",
                                     "class" => "form-control",
                                     "tabindex" => "4"
+
 				);	
 				echo "<p>".form_input($postcode)."</p>";	
 			?>
                     <input type="submit" class="btn btn-warning col-sm-12" value="Volgende">
 		</div>
+
             <datalist id="postcode">
                 <option value="1000 - BRUSSEL">
 <option value="1005 - Verenigde Vergadering van de Gemeenschappelijke ">
@@ -2894,6 +2897,7 @@
 <option value="9992 - Middelburg">
             </datalist>
 		
+
 		<?php
 			echo form_close();
 		?>

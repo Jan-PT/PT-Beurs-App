@@ -1,3 +1,5 @@
+<!--- View waarop de student een lijst met mogelijke diploma's te zien krijgt te zien krijgt nadat hij al zijn gegevens heeft ingevuld --->
+<!--- Hierop wordt een overzicht van alle gegevens weergegeven en bevestigd dat we deze goed ontvangen hebben. --> 
 <div id="header">
 	<h1>Welke diploma heb je of ga je behalen?</h1>
 </div>
@@ -15,7 +17,7 @@
 
 			<!--- 
 				diploma's opsplitsen in datalists aan de hand van diploma niveau 
-				en de datalist aan de input list hangen
+				en de datalist aan de input list hangen?
 			---->
 			
 			<datalist id="diploma">

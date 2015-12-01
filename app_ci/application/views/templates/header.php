@@ -1,5 +1,4 @@
-<!-- Header die boven elke content view geladen wordt -->
-<!-- Hierin worden de javascript files, css files en images,... geladen -->  
+<!-- Header die boven elke content view geladen wordt. Hierin worden de javascript files, css files en images,... geladen -->  
 <!DOCTYPE html>
 <html lang="en">
 	<head>
