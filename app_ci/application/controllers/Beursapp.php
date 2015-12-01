@@ -46,20 +46,28 @@ class Beursapp extends CI_Controller {
 		$this->form_validation->set_rules("email", "email", "required|valid_email|min_length[10]|max_length[50]");
 	
 		if ($this->form_validation->run() == false){
-			$this->viewLoader('content/personal_info');
+			$this->viewLoader('content/personal_info');      
 		}
 		else {
-			$this->region();
+                        $data['naam'] = $this->input->post('naam');
+                        $data['voornaam']  = $this->input->post('voornaam');
+                        $data['gsm']  = $this->input->post('gsm');
+                        $data['postcode']  = $this->input->post('postcode');
+                        $data['email']  = $this->input->post('email');
+                        
+			$this->region($data);
+                        
 		}
 	}
 	
 	# View met de verschillende provincies 
-	public function region (){
-		$this->viewLoader('content/region_selector');
+	public function region ($data){
+		$this->viewLoader('content/region_selector', $data);
 	}
 	
 	# View met de scholen binnen de gekozen provincie
-	public function school(){
+	public function school($provincie){
+                $data['provincie'] = $provincie;
 		$this->viewLoader('content/school_selector');
 	}
 	
@@ -84,10 +92,16 @@ class Beursapp extends CI_Controller {
 	}
 	
 	# Een functie om de header, meegegeven content en footer in één keer te laden.
-	public function viewLoader($content){
+	public function viewLoader($content, $data = NULL){
+            if (isset($data)){
 		$this->load->view('templates/header');
+		$this->load->view($content, $data);
+		$this->load->view('templates/footer');
+            } else {
+                $this->load->view('templates/header');
 		$this->load->view($content);
 		$this->load->view('templates/footer');
+            }
 	}
 	
 }
