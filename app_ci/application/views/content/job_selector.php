@@ -1,3 +1,4 @@
+<!-- View waarop de mogelijke functies die Planet Talent aanbied weergegeven worden. -->
 <div id="header">
 	<h1>Welke functies interesseren je?</h1>
 </div>

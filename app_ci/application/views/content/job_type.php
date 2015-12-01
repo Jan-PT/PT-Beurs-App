@@ -1,3 +1,4 @@
+<!--- View waarop de student kan aanduiden waarvoor hij gecontacteerd wil worden (Stage, vast contract,...) --->
 <div id="header">
 	<h1>Waarvoor kunnen we jou contacteren?</h1>
 </div>

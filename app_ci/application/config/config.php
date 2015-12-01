@@ -22,6 +22,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | If you need to allow multiple domains, remember that this file is still
 | a PHP script and you can easily do that on your own.
 |
+| BASE_URL = Het deel van de url dat zich voor de map van het project bevindt!
 */
 $config['base_url'] = 'http://127.0.0.1/app_ci/';
 

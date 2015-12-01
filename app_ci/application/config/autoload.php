@@ -82,6 +82,8 @@ $autoload['drivers'] = array();
 | Prototype:
 |
 |	$autoload['helper'] = array('url', 'file');
+|	
+|	Autoload de helper files url om de functie base_url te kunnen gebruiken en form om de formulieren te vereenvoudigen
 */
 $autoload['helper'] = array('url','form');
 
