@@ -42,9 +42,11 @@ class Beursapp extends CI_Controller {
         $this->load->view('content/start_page');
 	}
 	
-	# View met contact info van de student
+	# View met contact info van de student. De postcodes worden uit de database geladen via het BeursappModel
 	public function info (){
-		$this->viewLoader('content/personal_info');
+		$this->load->model('BeursappModel');
+		$codes['records'] = $this->BeursappModel->getPostcodes();
+		$this->viewLoader('content/personal_info',$codes);
 	}
 	
 	# Form voor contact info van de student (op de input velden gebeurt form_validation via de form_validation library
