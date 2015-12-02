@@ -74,7 +74,7 @@
         <datalist id="postcode">
 			<?php
 				foreach($records as $rec){
-					echo '<option value='.$rec->zipcode." - ".$rec->name.'>'; 
+					echo '<option value='.$rec->zipcode."-".$rec->name.'>'; 
 				}
 			?>
         </datalist>	
