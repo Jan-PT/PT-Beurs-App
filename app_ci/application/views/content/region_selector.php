@@ -1,5 +1,8 @@
 <div id="header">
-    <h1>Waar ga je naar school, <?php echo $voornaam;?>? - Provincie</h1>
+    <?php
+     
+    ?>
+    <h1>Waar ga je naar school, <?= $voornaam; ?>? - Provincie</h1>
 </div>
 <div class="panel-body">
     <div id="info" class="form-group">

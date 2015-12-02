@@ -20,6 +20,17 @@ class Beursapp extends CI_Controller {
 	 * @see http://codeigniter.com/user_guide/general/urls.html
 	 */
 	 
+         // publieke variabele om gegevens in te verzamelen
+        public $dataCollector;
+        
+        // Constructor 
+        public function __construct() {
+            parent::__construct();
+            if (!isset($this->dataCollector)){
+                $this->dataCollector = array();
+            }
+        }
+        
 	# Standaard functie van de Beursapp controller (verwijst in dit geval door naar de home functie)
 	public function index()
 	{
@@ -47,28 +58,35 @@ class Beursapp extends CI_Controller {
 	
 		if ($this->form_validation->run() == false){
 			$this->viewLoader('content/personal_info');      
-		}
-		else {
-                        $data['naam'] = $this->input->post('naam');
-                        $data['voornaam']  = $this->input->post('voornaam');
-                        $data['gsm']  = $this->input->post('gsm');
-                        $data['postcode']  = $this->input->post('postcode');
-                        $data['email']  = $this->input->post('email');
-                        
+		} else {
+                        $data = array (
+                            'naam'  => $this->input->post('naam'),
+                            'voornaam' => $this->input->post('voornaam'),
+                            'gsm' => $this->input->post('gsm'),
+                            'postcode' => $this->input->post('postcode'),
+                            'email' => $this->input->post('email')
+                        );
+                        //Poging tot toevoegen van data aan datacollector
+                        $this->dataCollector = $data;
+                        var_dump($this->dataCollector);
 			$this->region($data);
-                        
 		}
 	}
 	
 	# View met de verschillende provincies 
 	public function region ($data){
-		$this->viewLoader('content/region_selector', $data);
+            //hier zit data nog in $datacollector
+            $this->dataCollector =$data;
+            $this->viewLoader('content/region_selector', $data);
 	}
 	
 	# View met de scholen binnen de gekozen provincie
 	public function school($provincie){
-                $data['provincie'] = $provincie;
-		$this->viewLoader('content/school_selector');
+            // $dataCollector is om een of andere reden weer leeg.
+            var_dump($this->dataCollector);
+            $data = $this->dataCollector;
+            $data['provincie'] = $provincie;
+            $this->viewLoader('content/school_selector', $data);
 	}
 	
 	# View met de verschillende mogelijke diploma's 
