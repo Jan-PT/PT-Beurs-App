@@ -21,14 +21,17 @@ class Beursapp extends CI_Controller {
 	 */
 	 
          // publieke variabele om gegevens in te verzamelen
-        public $dataCollector;
+        //public $dataCollector;
         
         // Constructor 
         public function __construct() {
             parent::__construct();
-            if (!isset($this->dataCollector)){
-                $this->dataCollector = array();
-            }
+           
+            //$CI =& get_instance();
+            $this->load->library('session');
+//            if (!isset($this->dataCollector)){
+//                $this->dataCollector = array();
+//            }
         }
         
 	# Standaard functie van de Beursapp controller (verwijst in dit geval door naar de home functie)
@@ -61,38 +64,50 @@ class Beursapp extends CI_Controller {
 		if ($this->form_validation->run() == false){
 			$this->viewLoader('content/personal_info');      
 		} else {
+                        
+                    //postcode value fixen
+                        $postocdegemeente = $this->input->post('postcode');
+                        $postcodeArr = explode("-", $postocdegemeente);
+                        $postcode = $postcodeArr[0];
+                        
                         $data = array (
                             'naam'  => $this->input->post('naam'),
                             'voornaam' => $this->input->post('voornaam'),
                             'gsm' => $this->input->post('gsm'),
-                            'postcode' => $this->input->post('postcode'),
+                            'postcode' => $postcode,
                             'email' => $this->input->post('email')
                         );
-                        //Poging tot toevoegen van data aan datacollector
-                        $this->dataCollector = $data;
-                        var_dump($this->dataCollector);
-			$this->region($data);
+                         
+                        //$this->session->set_userdata('user_data', $data);
+                        $this->set_session($data);
+                        
+                        //Poging tot toevoegen van data aan datacollector-
+                        //$this->dataCollector = $data;
+
+			$this->region();
 		}
 	}
 	
 	# View met de verschillende provincies 
-	public function region ($data){
+	public function region (){
             //hier zit data nog in $datacollector
-            $this->dataCollector =$data;
-            $this->viewLoader('content/region_selector', $data);
+            //$this->dataCollector =$data;
+            $this->viewLoader('content/region_selector');
 	}
 	
 	# View met de scholen binnen de gekozen provincie
 	public function school($provincie){
-            // $dataCollector is om een of andere reden weer leeg.
-            var_dump($this->dataCollector);
-            $data = $this->dataCollector;
-            $data['provincie'] = $provincie;
-            $this->viewLoader('content/school_selector', $data);
+  
+            //var_dump($this->session) ."<br/>";
+
+            //$data = $this->dataCollector;
+            
+            $this->viewLoader('content/school_selector');
 	}
 	
 	# View met de verschillende mogelijke diploma's 
 	public function diploma(){
+            //var_dump($this->session);
 		$this->viewLoader('content/diploma_selector');
 	}
 	
@@ -123,5 +138,16 @@ class Beursapp extends CI_Controller {
 		$this->load->view('templates/footer');
             }
 	}
+        
+        public function set_session($session_data) {
+            $session_data = array (
+                            'naam'  => $session_data['naam'],
+                            'voornaam' => $session_data['voornaam'],
+                            'gsm' => $session_data['gsm'],
+                            'postcode' => $session_data['postcode'],
+                            'email' => $session_data['email']
+                        );
+            $this->session->set_userdata('user_data', $session_data);
+        }
 	
 }

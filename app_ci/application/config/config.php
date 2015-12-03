@@ -375,7 +375,7 @@ $config['sess_save_path'] = NULL;
 $config['sess_match_ip'] = FALSE;
 $config['sess_time_to_update'] = 300;
 $config['sess_regenerate_destroy'] = FALSE;
-
+$config['sess_use_database'] = FALSE;
 /*
 |--------------------------------------------------------------------------
 | Cookie Related Variables
@@ -393,7 +393,7 @@ $config['sess_regenerate_destroy'] = FALSE;
 */
 $config['cookie_prefix']	= '';
 $config['cookie_domain']	= '';
-$config['cookie_path']		= '/';
+$config['cookie_path']		= 'http://127.0.0.1/app_ci/';
 $config['cookie_secure']	= FALSE;
 $config['cookie_httponly'] 	= FALSE;
 

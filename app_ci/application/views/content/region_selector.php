@@ -1,8 +1,12 @@
 <div id="header">
     <?php
-     
+    if ($this->session->userdata('user_data')) {
+        $user_data = $this->session->userdata('user_data');
+        echo "<h1>Waar ga je naar school, " . $user_data['voornaam'] . "? - Provincie</h1>";
+    }else{
+        echo "<h1>Waar ga je naar school? - Provincie</h1>";
+    }
     ?>
-    <h1>Waar ga je naar school, <?= $voornaam; ?>? - Provincie</h1>
 </div>
 <div class="panel-body">
     <div id="info" class="form-group">
@@ -18,5 +22,6 @@
                 <p><a href="<?php echo site_url('beursapp/school/Andere');?>" id="provincie" class="btn btn-warning" style="width:300px">Andere</a> </p>
             </div>
         </form>
+        
     </div>
 </div>
