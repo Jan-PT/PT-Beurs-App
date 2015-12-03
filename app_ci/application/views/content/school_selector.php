@@ -1,12 +1,12 @@
 <div id="header">
     <?php
-    if (isset($this->session->userdata('user_data'))) {
+    if (($this->session->userdata('user_data'))) {
         $user_data = $this->session->userdata('user_data');
         echo "<h1>Waar ga je naar school, " . $user_data['voornaam'] . "? - Gemeenschap</h1>";
     }else{
         echo "<h1>Waar ga je naar school? - Gemeenschap</h1>";
     }
-    ?>k
+    ?>
 </div>
 <div class="panel-body">
     <div id="info" class="form-group">

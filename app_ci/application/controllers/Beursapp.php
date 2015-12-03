@@ -26,7 +26,6 @@ class Beursapp extends CI_Controller {
         // Constructor 
         public function __construct() {
             parent::__construct();
-           
             //$CI =& get_instance();
             $this->load->library('session');
 //            if (!isset($this->dataCollector)){

@@ -13,6 +13,7 @@
 		<script src="<?php echo base_url('assets/js/jquery/jquery-1.11.3.min.js');?>"></script>
 		<script src="<?php echo base_url('assets/js/bootstrap/bootstrap.min.js');?>"></script>
 		<script src="<?php echo base_url('assets/js/bootstrap/bootstrap.js');?>"></script>
+                <link rel="manifest" href="manifest.json">
 	</head>
 	<body>
 		<div id="container" class="container-fluid">

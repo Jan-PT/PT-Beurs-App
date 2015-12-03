@@ -1,5 +1,3 @@
-<link rel="manifest" href="manifest.json">
-
 <?php
 /**
  * CodeIgniter
