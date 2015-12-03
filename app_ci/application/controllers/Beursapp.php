@@ -65,8 +65,8 @@ class Beursapp extends CI_Controller {
 		} else {
                         
                     //postcode value fixen
-                        $postocdegemeente = $this->input->post('postcode');
-                        $postcodeArr = explode("-", $postocdegemeente);
+                        $postcodegemeente = $this->input->post('postcode');
+                        $postcodeArr = explode("-", $postcodegemeente);
                         $postcode = $postcodeArr[0];
                         
                         $data = array (
@@ -128,13 +128,13 @@ class Beursapp extends CI_Controller {
 	# Een functie om de header, meegegeven content en footer in één keer te laden.
 	public function viewLoader($content, $data = NULL){
             if (isset($data)){
-		$this->load->view('templates/header');
-		$this->load->view($content, $data);
-		$this->load->view('templates/footer');
+				$this->load->view('templates/header');
+				$this->load->view($content, $data);
+				$this->load->view('templates/footer');
             } else {
                 $this->load->view('templates/header');
-		$this->load->view($content);
-		$this->load->view('templates/footer');
+				$this->load->view($content);
+				$this->load->view('templates/footer');
             }
 	}
         
