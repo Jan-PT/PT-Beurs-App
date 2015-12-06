@@ -12,7 +12,7 @@
 		<script src="<?php echo base_url('assets/js/bootstrap/bootstrap.min.js');?>"></script>
 		<script src="<?php echo base_url('assets/js/bootstrap/bootstrap.js');?>"></script>
 		<script src="<?php echo base_url('assets/js/other/random_logo.js');?>"></script>
-                <link rel="manifest" href="manifest.json">
+        <link rel="manifest" href="manifest.json">
 	</head>
 	<body>
 		<div id="container" class="container-fluid">

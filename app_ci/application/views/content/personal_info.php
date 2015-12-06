@@ -1,3 +1,7 @@
+<!-- 
+	 View waarop de student zijn persoonlijke gegevens moet invullen. 
+	 Deze gegevens worden in een sessie geplaatst zodat we de overige views kunnen personaliseren en op het einde zijn gegevens kunnen opslaan.
+-->
 <div id="header">
 	<h1>Vertel ons wat over jezelf</h1>
 </div>
@@ -11,7 +15,12 @@
 		
 		<div class="col-sm-4">
 			<?php 
-				if (($this->session->userdata('user_data'))) {
+				# Als de user zijn data al eens correct ingevuld is wordt de data uit de session terug in de velden ingeladen.
+				# Hierdoor kan de gebruiker zijn gegevens makkelijk nakijken en wijzigen zonder alles opnieuw te moeten invullen.
+				# Als de user het form nog niet succesvol doorlopen is kan er nog geen data uit de sessie ($user_data) in de iput velden geladen worden.
+				# Dan wordt er indien een veld correct is ingevuld maar er fouten zijn bij andere velden de ingevulde waarde van dit veld behouden
+				# en anders de placeholder getoond.
+				if ($user_data) {
 										
 					$voornaam = array(
 						"type" => "text",
@@ -45,7 +54,8 @@
                         "tabindex" => "5"
 					);
 					echo "<p>".form_input($email)."</p>";
-				}else{
+				} 
+				else{
 					$voornaam = array(
 						"type" => "text",
 						"name" => "voornaam",
@@ -83,7 +93,7 @@
 		</div>
 		<div class="col-sm-4">
 			<?php 
-			if (($this->session->userdata('user_data'))) {
+			if ($user_data) {
 				$naam = array(
 					"type" => "text",
 					"name" => "naam",
@@ -95,11 +105,11 @@
 					);	
 				echo "<p>".form_input($naam)."</p>";
 					
-				
+				$postcodefield = $user_data['postcode']."-".$user_data['gemeente'];
 				$postcode = array(
                     "name" => "postcode",
                     "list"=>"postcode",
-                    "value" => $user_data['postcode'],
+                    "value" => $postcodefield,
                     "placeholder" => "Postcode",
                     "class" => "form-control",
                     "tabindex" => "4"
@@ -132,10 +142,11 @@
                     <input type="submit" class="btn btn-warning col-sm-12" value="Volgende">
 		</div>
 
+		<!-- Datalist met alle postcode opties die zich in de database bevinden. Deze datalist wordt achter het postcode input veld geplaats aan de hand van de id's -->
         <datalist id="postcode">
 			<?php
 				foreach($records as $rec){
-					echo "<option value=\"".$rec->zipcode."-".$rec->name."\">\n"; 
+					echo "<option value='".$rec->zipcode."-".$rec->name."'>\n"; 
 				}
 			?>
         </datalist>	

@@ -1,27 +1,127 @@
+<!-- 
+	 View met de verschillende provincies waaruit de student kan kiezen. 
+	 Door de keuze van de provincie krijgt de student op de volgende view enkel de scholen uit die provincie te zien. 
+-->
 <div id="header">
     <?php
-    if ($this->session->userdata('user_data')) {
-        $user_data = $this->session->userdata('user_data');
-        echo "<h1>Waar ga je naar school, " . $user_data['voornaam'] . "? - Provincie</h1>";
+	$user_data = $this->session->userdata('user_data');
+    if ($this->session->userdata('user_data') && $user_data['voornaam']) {
+        echo "<h1>In welke provincie ga je naar school, " . $user_data['voornaam'] . "?</h1>";
     }else{
-        echo "<h1>Waar ga je naar school? - Provincie</h1>";
+        echo "<h1>In welke provincie ga je naar school?</h1>";
     }
     ?>
 </div>
 <div class="panel-body">
     <div id="info" class="form-group">
-        <form>
+        <?php echo form_open("beursapp/regionForm");
+			  # Gaat kijken of er al een provincie geselecteerd was en deze als een groene button tonen ipv de oranje
+			  if($user_data['provincie']!='' && $user_data['provincie'] != null){
+				if($user_data['provincie'] == 'Antwerpen'){
+		?>
+					<div class="col-sm-4">
+						<p><input type="submit" name="provincie" id="provincie" value="Antwerpen" class="btn btn-success" style="width:300px"></p>
+						<p><input type="submit" name="provincie" id="provincie" value="Oost-Vlaanderen" class="btn btn-warning" style="width:300px"></p>
+						<p><input type="submit" name="provincie" id="provincie" value="Limburg" class="btn btn-warning" style="width:300px"></p>
+					</div>
+					<div class="col-sm-4">
+						<p><input type="submit" name="provincie" id="provincie" value="Vlaams-Brabant" class="btn btn-warning" style="width:300px"></p>
+						<p><input type="submit" name="provincie" id="provincie" value="West-Vlaanderen" class="btn btn-warning" style="width:300px"></p>
+						<p><input type="submit" name="provincie" id="provincie" value="Andere" class="btn btn-warning" style="width:300px"></p>
+					</div>
+		<?php
+				}
+				
+				if($user_data['provincie'] == 'Oost-Vlaanderen'){
+		?>
+					<div class="col-sm-4">
+						<p><input type="submit" name="provincie" id="provincie" value="Antwerpen" class="btn btn-warning" style="width:300px"></p>
+						<p><input type="submit" name="provincie" id="provincie" value="Oost-Vlaanderen" class="btn btn-success" style="width:300px"></p>
+						<p><input type="submit" name="provincie" id="provincie" value="Limburg" class="btn btn-warning" style="width:300px"></p>
+					</div>
+					<div class="col-sm-4">
+						<p><input type="submit" name="provincie" id="provincie" value="Vlaams-Brabant" class="btn btn-warning" style="width:300px"></p>
+						<p><input type="submit" name="provincie" id="provincie" value="West-Vlaanderen" class="btn btn-warning" style="width:300px"></p>
+						<p><input type="submit" name="provincie" id="provincie" value="Andere" class="btn btn-warning" style="width:300px"></p>
+					</div>
+		<?php
+				}
+				
+				if($user_data['provincie'] == 'Limburg'){
+		?>
+					<div class="col-sm-4">
+						<p><input type="submit" name="provincie" id="provincie" value="Antwerpen" class="btn btn-warning" style="width:300px"></p>
+						<p><input type="submit" name="provincie" id="provincie" value="Oost-Vlaanderen" class="btn btn-warning" style="width:300px"></p>
+						<p><input type="submit" name="provincie" id="provincie" value="Limburg" class="btn btn-success" style="width:300px"></p>
+					</div>
+					<div class="col-sm-4">
+						<p><input type="submit" name="provincie" id="provincie" value="Vlaams-Brabant" class="btn btn-warning" style="width:300px"></p>
+						<p><input type="submit" name="provincie" id="provincie" value="West-Vlaanderen" class="btn btn-warning" style="width:300px"></p>
+						<p><input type="submit" name="provincie" id="provincie" value="Andere" class="btn btn-warning" style="width:300px"></p>
+					</div>
+		<?php
+				}
+				
+				if($user_data['provincie'] == 'Vlaams-Brabant'){
+		?>
+					<div class="col-sm-4">
+						<p><input type="submit" name="provincie" id="provincie" value="Antwerpen" class="btn btn-warning" style="width:300px"></p>
+						<p><input type="submit" name="provincie" id="provincie" value="Oost-Vlaanderen" class="btn btn-warning" style="width:300px"></p>
+						<p><input type="submit" name="provincie" id="provincie" value="Limburg" class="btn btn-warning" style="width:300px"></p>
+					</div>
+					<div class="col-sm-4">
+						<p><input type="submit" name="provincie" id="provincie" value="Vlaams-Brabant" class="btn btn-success" style="width:300px"></p>
+						<p><input type="submit" name="provincie" id="provincie" value="West-Vlaanderen" class="btn btn-warning" style="width:300px"></p>
+						<p><input type="submit" name="provincie" id="provincie" value="Andere" class="btn btn-warning" style="width:300px"></p>
+					</div>
+		<?php
+				}
+				
+				if($user_data['provincie'] == 'West-Vlaanderen'){
+		?>
+					<div class="col-sm-4">
+						<p><input type="submit" name="provincie" id="provincie" value="Antwerpen" class="btn btn-warning" style="width:300px"></p>
+						<p><input type="submit" name="provincie" id="provincie" value="Oost-Vlaanderen" class="btn btn-warning" style="width:300px"></p>
+						<p><input type="submit" name="provincie" id="provincie" value="Limburg" class="btn btn-warning" style="width:300px"></p>
+					</div>
+					<div class="col-sm-4">
+						<p><input type="submit" name="provincie" id="provincie" value="Vlaams-Brabant" class="btn btn-warning" style="width:300px"></p>
+						<p><input type="submit" name="provincie" id="provincie" value="West-Vlaanderen" class="btn btn-success" style="width:300px"></p>
+						<p><input type="submit" name="provincie" id="provincie" value="Andere" class="btn btn-warning" style="width:300px"></p>
+					</div>
+		<?php
+				}
+				
+				if($user_data['provincie'] == 'Andere'){
+		?>
+					<div class="col-sm-4">
+						<p><input type="submit" name="provincie" id="provincie" value="Antwerpen" class="btn btn-warning" style="width:300px"></p>
+						<p><input type="submit" name="provincie" id="provincie" value="Oost-Vlaanderen" class="btn btn-warning" style="width:300px"></p>
+						<p><input type="submit" name="provincie" id="provincie" value="Limburg" class="btn btn-warning" style="width:300px"></p>
+					</div>
+					<div class="col-sm-4">
+						<p><input type="submit" name="provincie" id="provincie" value="Vlaams-Brabant" class="btn btn-warning" style="width:300px"></p>
+						<p><input type="submit" name="provincie" id="provincie" value="West-Vlaanderen" class="btn btn-warning" style="width:300px"></p>
+						<p><input type="submit" name="provincie" id="provincie" value="Andere" class="btn btn-success" style="width:300px"></p>
+					</div>
+		<?php
+				}
+			  }
+			  else{
+			  # Als er nog geen provincie in de sessie staat dan blijven alle knoppen gewoon oranje.
+		?>
             <div class="col-sm-4">
-                <p><a href="<?php echo site_url('beursapp/school/Antwerpen');?>" id="provincie" value="Antwerpen" class="btn btn-warning" style="width:300px">Antwerpen</a></p>
-                <p><a href="<?php echo site_url('beursapp/school/Oost-Vlaanderen');?>" id="provincie" value="Oost-Vlaanderen" class="btn btn-warning" style="width:300px">Oost-Vlaanderen</a></p>
-                <p><a href="<?php echo site_url('beursapp/school/Limburg');?>" id="provincie" value="Limburg" class="btn btn-warning" style="width:300px">Limburg</a> </p>
+                <p><input type="submit" name="provincie" id="provincie" value="Antwerpen" class="btn btn-warning" style="width:300px"></p>
+                <p><input type="submit" name="provincie" id="provincie" value="Oost-Vlaanderen" class="btn btn-warning" style="width:300px"></p>
+                <p><input type="submit" name="provincie" id="provincie" value="Limburg" class="btn btn-warning" style="width:300px"></p>
             </div>
             <div class="col-sm-4">
-                <p><a href="<?php echo site_url('beursapp/school/Vlaams-Brabant');?>" id="provincie" value="Vlaams-Brabant" class="btn btn-warning" style="width:300px">Vlaams Brabant</a></p>
-                <p><a href="<?php echo site_url('beursapp/school/West-Vlaanderen');?>" id="provincie" value="West-Vlaanderen" class="btn btn-warning" style="width:300px">West-Vlaanderen</a></p>
-                <p><a href="<?php echo site_url('beursapp/school/Andere');?>" id="provincie" value="Andere" class="btn btn-warning" style="width:300px">Andere</a> </p>
+                <p><input type="submit" name="provincie" id="provincie" value="Vlaams-Brabant" class="btn btn-warning" style="width:300px"></p>
+                <p><input type="submit" name="provincie" id="provincie" value="West-Vlaanderen" class="btn btn-warning" style="width:300px"></p>
+                <p><input type="submit" name="provincie" id="provincie" value="Andere" class="btn btn-warning" style="width:300px"></p>
             </div>
-        </form>
-        
+        <?php 
+			} echo form_close(); 
+		?>
     </div>
 </div>

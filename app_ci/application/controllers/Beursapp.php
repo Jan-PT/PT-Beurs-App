@@ -24,14 +24,14 @@ class Beursapp extends CI_Controller {
         //public $dataCollector;
         
         // Constructor 
-        public function __construct() {
-            parent::__construct();
-            //$CI =& get_instance();
-            $this->load->library('session');
-//            if (!isset($this->dataCollector)){
-//                $this->dataCollector = array();
-//            }
-        }
+    public function __construct() {
+        parent::__construct();
+        //$CI =& get_instance();
+        $this->load->library('session');
+//      if (!isset($this->dataCollector)){
+//  	    $this->dataCollector = array();
+//      }
+    }
         
 	# Standaard functie van de Beursapp controller (verwijst in dit geval door naar de home functie)
 	public function index()
@@ -53,6 +53,7 @@ class Beursapp extends CI_Controller {
 	
 	# Form voor contact info van de student (op de input velden gebeurt form_validation via de form_validation library
 	public function infoForm(){
+		# Form validation regels
 		$this->load->library("form_validation");
 		$this->form_validation->set_rules("naam", "naam", "required|alpha|min_length[3]|max_length[30]);");
 		$this->form_validation->set_rules("gsm", "gsm nummer", "required|numeric|min_length[10]|max_length[15]");
@@ -60,42 +61,156 @@ class Beursapp extends CI_Controller {
 		$this->form_validation->set_rules("postcode", "postcode", "required|min_length[4]|max_length[50]");
 		$this->form_validation->set_rules("email", "email", "required|valid_email|min_length[10]|max_length[50]");
 	
+		# Als de regels falen wordt de pagina opnieuw geladen en anders wordt de sessie aangemaakt en naar de volgende functie doorgegaan.
 		if ($this->form_validation->run() == false){
 			$this->viewLoader('content/personal_info');      
 		} else {
-                        
-                    //postcode value fixen
+						#Postcode en gemeente veld splitsen op '-'
                         $postcodegemeente = $this->input->post('postcode');
-                        $postcodeArr = explode("-", $postcodegemeente);
-                        $postcode = $postcodeArr[0];
+						$postcodeArr = explode("-",$postcodegemeente, 2);
+						$postcode = $postcodeArr[0];
+						$gemeente = $postcodeArr[1];
                         
                         $data = array (
                             'naam'  => $this->input->post('naam'),
                             'voornaam' => $this->input->post('voornaam'),
                             'gsm' => $this->input->post('gsm'),
                             'postcode' => $postcode,
-                            'email' => $this->input->post('email')
+							'gemeente' => $gemeente,
+                            'email' => $this->input->post('email'),
+							'provincie' => '',
+							'school' => '',
+							'diplomaLV' => '',
+							'diploma' => '',
+							'jobs' => '',
+							'type' => '',
                         );
+						
+						$user_data = $this->session->userdata('user_data');
+						if ($user_data){
+							$data['provincie'] = $user_data['provincie'];
+							$data['school'] = $user_data['school'];
+							$data['diplomaLV'] = $user_data['diplomaLV'];
+							$data['diploma'] = $user_data['diploma'];
+							$data['jobs'] = $user_data['jobs'];
+							$data['type'] = $user_data['type'];
+						}
                          
                         //$this->session->set_userdata('user_data', $data);
                         $this->set_session($data);
                         
                         //Poging tot toevoegen van data aan datacollector-
                         //$this->dataCollector = $data;
-
 			$this->region();
 		}
+	}
+	
+	# Functie die geladen wordt bij het verzenden van het form op region_selector
+	public function regionForm(){
+		$data = $this->session->userdata('user_data');
+		$data['provincie'] = $this->input->post('provincie');
+		if($data['provincie'] != ''){
+			$this->set_session($data);
+			$this->school();
+		}
+		else{
+			$this->viewLoader('content/region_selector'); 
+		}		
+	}
+	
+	# Functie die geladen wordt bij het verzenden van het form op school_selector
+	public function schoolForm(){
+		$data = $this->session->userdata('user_data');
+		$data['school'] = $this->input->post('school');
+		if($data['school'] != ''){
+			$this->set_session($data);
+			$this->diploma();
+		}
+		else{
+			$this->viewLoader('content/school_selector'); 
+		}		
+	}
+	
+	# Functie die geladen wordt bij het verzenden van het form op diploma_selector
+	public function diplomaForm(){
+		$data = $this->session->userdata('user_data');
+		$data['diplomaLV'] = $this->input->post('diplomaLV');
+		$data['diploma'] = $this->input->post('diploma');
+		if($data['diplomaLV'] != '' && $data['diploma'] != ''){
+			$this->set_session($data);
+			$this->job();
+		}
+		else{
+			$this->viewLoader('content/diploma_selector'); 
+		}		
+	}
+	
+	# Functie die geladen wordt bij het verzenden van het form op job_selector
+	public function jobForm(){
+		$data = $this->session->userdata('user_data');
+		$data['jobs']='';
+		if($this->input->post('management')!=null){
+			$data['jobs'] .= $this->input->post('management')."-";
+		}
+		if($this->input->post('sales')!=null){
+			$data['jobs'] .= $this->input->post('sales')."-";
+		}
+		if($this->input->post('ict_applications')!=null){
+			$data['jobs'] .= $this->input->post('ict_applications')."-";
+		}
+		if($this->input->post('ict_development')!=null){
+			$data['jobs'] .= $this->input->post('ict_development');
+		}
+		
+		if($data['jobs'] != ''){
+			$this->set_session($data);
+			$this->type();
+		}
+		else{
+			$this->viewLoader('content/job_selector'); 
+		}		
+	}
+	
+	# Functie die geladen wordt bij het verzenden van het form op job_type
+	public function typeForm(){
+		$data = $this->session->userdata('user_data');
+		$data['type']='';
+		if($this->input->post('vaste_job')!=null){
+			$data['type'] .= $this->input->post('vaste_job')."-";
+		}
+		if($this->input->post('stage')!=null){
+			$data['type'] .= $this->input->post('stage')."-";
+		}
+		if($this->input->post('andere')!=null){
+			$data['type'] .= $this->input->post('andere');
+		}
+		
+		if($data['type'] != ''){
+			$this->set_session($data);
+			$this->processed();
+		}
+		else{
+			$this->viewLoader('content/job_type'); 
+		}		
+	}
+	
+	# Functie die geladen wordt bij het verzenden van het form op data_processed
+	# Sessie wordt vernietigd bij het verzenden van dit form en na de timer voor de redirect 
+	public function confirmationForm(){
+		$this->session->sess_destroy();
+		$this->home();
 	}
 	
 	# View met de verschillende provincies 
 	public function region (){
             //hier zit data nog in $datacollector
             //$this->dataCollector =$data;
+			$data = $this->session->userdata('user_data');			
             $this->viewLoader('content/region_selector');
 	}
 	
 	# View met de scholen binnen de gekozen provincie
-	public function school($provincie){
+	public function school(){
   
             //var_dump($this->session) ."<br/>";
 
@@ -138,15 +253,23 @@ class Beursapp extends CI_Controller {
             }
 	}
         
-        public function set_session($session_data) {
-            $session_data = array (
-                            'naam'  => $session_data['naam'],
-                            'voornaam' => $session_data['voornaam'],
-                            'gsm' => $session_data['gsm'],
-                            'postcode' => $session_data['postcode'],
-                            'email' => $session_data['email']
-                        );
-            $this->session->set_userdata('user_data', $session_data);
-        }
+	# Een functie die gebruikt wordt om de sessie in te stellen
+    public function set_session($session_data) {
+        $session_data = array (
+                        'naam'  => $session_data['naam'],
+                        'voornaam' => $session_data['voornaam'],
+                        'gsm' => $session_data['gsm'],
+                        'postcode' => $session_data['postcode'],
+						'gemeente' => $session_data['gemeente'],
+                        'email' => $session_data['email'],
+						'provincie' => $session_data['provincie'],
+						'school' => $session_data['school'],
+						'diplomaLV' => $session_data['diplomaLV'],
+						'diploma' => $session_data['diploma'],
+						'jobs' => $session_data['jobs'],
+						'type' => $session_data['type']
+                    );
+        $this->session->set_userdata('user_data', $session_data);
+    }
 	
 }
