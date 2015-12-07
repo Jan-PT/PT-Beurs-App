@@ -3,7 +3,7 @@
 <!--- Nadat de student op de afsluit button drukt of als de refresh time verlopen is wordt de sessie leeggemaakt -->
 <!--- en naar de startpagina geredirect zodat de volgende student kan starten met het invullen van zijn gegevens -->
 <?php 
-	header("Refresh: 5;url=confirmationForm");
+	//header("Refresh: 10;url=confirmationForm");
 	$user_data = $this->session->userdata('user_data');
 ?>
 <div id="header">
@@ -47,6 +47,10 @@
 		<tr>
 			<th>Diploma: </th>
 			<td><?php echo $user_data['diploma'];?></td>
+		</tr>
+                <tr>
+			<th>Afstuderen in: </th>
+			<td><?php echo $user_data['grad_maand'];?> - <?php echo $user_data['grad_jaar'];?></td>
 		</tr>
 		<tr>
 			<th>Jobs: </th>

@@ -59,7 +59,7 @@ class Beursapp extends CI_Controller {
 		$this->form_validation->set_rules("gsm", "gsm nummer", "required|numeric|min_length[10]|max_length[15]");
 		$this->form_validation->set_rules("voornaam", "voornaam", "required|alpha|min_length[3]|max_length[30]");
 		$this->form_validation->set_rules("postcode", "postcode", "required|min_length[4]|max_length[50]");
-		$this->form_validation->set_rules("email", "email", "required|valid_email|min_length[10]|max_length[50]");
+		$this->form_validation->set_rules("email", "email", "required|valid_email|min_length[5]|max_length[96]");
 	
 		# Als de regels falen wordt de pagina opnieuw geladen en anders wordt de sessie aangemaakt en naar de volgende functie doorgegaan.
 		if ($this->form_validation->run() == false){
@@ -67,34 +67,36 @@ class Beursapp extends CI_Controller {
 		} else {
 						#Postcode en gemeente veld splitsen op '-'
                         $postcodegemeente = $this->input->post('postcode');
-						$postcodeArr = explode("-",$postcodegemeente, 2);
-						$postcode = $postcodeArr[0];
-						$gemeente = $postcodeArr[1];
+                        $postcodeArr = explode("-",$postcodegemeente, 2);
+                        $postcode = $postcodeArr[0];
+                        $gemeente = $postcodeArr[1];
                         
                         $data = array (
                             'naam'  => $this->input->post('naam'),
                             'voornaam' => $this->input->post('voornaam'),
                             'gsm' => $this->input->post('gsm'),
                             'postcode' => $postcode,
-							'gemeente' => $gemeente,
+                            'gemeente' => $gemeente,
                             'email' => $this->input->post('email'),
-							'provincie' => '',
-							'school' => '',
-							'diplomaLV' => '',
-							'diploma' => '',
-							'jobs' => '',
-							'type' => '',
+                            'provincie' => '',
+                            'school' => '',
+                            'diplomaLV' => '',
+                            'diploma' => '',
+                            'grad_maand' => '',
+                            'grad_jaar' => '',
+                            'jobs' => '',
+                            'type' => '',
                         );
 						
-						$user_data = $this->session->userdata('user_data');
-						if ($user_data){
-							$data['provincie'] = $user_data['provincie'];
-							$data['school'] = $user_data['school'];
-							$data['diplomaLV'] = $user_data['diplomaLV'];
-							$data['diploma'] = $user_data['diploma'];
-							$data['jobs'] = $user_data['jobs'];
-							$data['type'] = $user_data['type'];
-						}
+                        $user_data = $this->session->userdata('user_data');
+                        if ($user_data){
+                            $data['provincie'] = $user_data['provincie'];
+                            $data['school'] = $user_data['school'];
+                            $data['diplomaLV'] = $user_data['diplomaLV'];
+                            $data['diploma'] = $user_data['diploma'];
+                            $data['jobs'] = $user_data['jobs'];
+                            $data['type'] = $user_data['type'];
+                        }
                          
                         //$this->session->set_userdata('user_data', $data);
                         $this->set_session($data);
@@ -110,11 +112,11 @@ class Beursapp extends CI_Controller {
 		$data = $this->session->userdata('user_data');
 		$data['provincie'] = $this->input->post('provincie');
 		if($data['provincie'] != ''){
-			$this->set_session($data);
-			$this->school();
+                    $this->set_session($data);
+                    $this->school();
 		}
 		else{
-			$this->viewLoader('content/region_selector'); 
+                    $this->viewLoader('content/region_selector'); 
 		}		
 	}
 	
@@ -123,11 +125,11 @@ class Beursapp extends CI_Controller {
 		$data = $this->session->userdata('user_data');
 		$data['school'] = $this->input->post('school');
 		if($data['school'] != ''){
-			$this->set_session($data);
-			$this->diploma();
+                    $this->set_session($data);
+                    $this->diploma();
 		}
 		else{
-			$this->viewLoader('content/school_selector'); 
+                    $this->viewLoader('content/school_selector'); 
 		}		
 	}
 	
@@ -136,7 +138,12 @@ class Beursapp extends CI_Controller {
 		$data = $this->session->userdata('user_data');
 		$data['diplomaLV'] = $this->input->post('diplomaLV');
 		$data['diploma'] = $this->input->post('diploma');
-		if($data['diplomaLV'] != '' && $data['diploma'] != ''){
+                $data['grad_maand'] = $this->input->post('grad_maand');
+                $data['grad_jaar'] = $this->input->post('grad_jaar');
+                
+                
+                
+		if($data['diplomaLV'] != '' && $data['diploma'] != ''&& $data['grad_maand'] != ''&& $data['grad_jaar'] != ''){
 			$this->set_session($data);
 			$this->job();
 		}
@@ -237,6 +244,8 @@ class Beursapp extends CI_Controller {
 	
 	# View met bedanking & melding succesvolle verwerking gegevens
 	public function processed(){
+            $this->load->model('BeursappModel');
+            $this->BeursappModel->setUserData();
 		$this->viewLoader('content/data_processed');
 	}
 	
@@ -255,21 +264,23 @@ class Beursapp extends CI_Controller {
         
 	# Een functie die gebruikt wordt om de sessie in te stellen
     public function set_session($session_data) {
-        $session_data = array (
-                        'naam'  => $session_data['naam'],
-                        'voornaam' => $session_data['voornaam'],
-                        'gsm' => $session_data['gsm'],
-                        'postcode' => $session_data['postcode'],
-						'gemeente' => $session_data['gemeente'],
-                        'email' => $session_data['email'],
-						'provincie' => $session_data['provincie'],
-						'school' => $session_data['school'],
-						'diplomaLV' => $session_data['diplomaLV'],
-						'diploma' => $session_data['diploma'],
-						'jobs' => $session_data['jobs'],
-						'type' => $session_data['type']
-                    );
-        $this->session->set_userdata('user_data', $session_data);
+        $data = array (
+            'naam'  => $session_data['naam'],
+            'voornaam' => $session_data['voornaam'],
+            'gsm' => $session_data['gsm'],
+            'postcode' => $session_data['postcode'],
+            'gemeente' => $session_data['gemeente'],
+            'email' => $session_data['email'],
+            'provincie' => $session_data['provincie'],
+            'school' => $session_data['school'],
+            'diplomaLV' => $session_data['diplomaLV'],
+            'diploma' => $session_data['diploma'],
+            'grad_maand' => $session_data['grad_maand'],
+            'grad_jaar' => $session_data['grad_jaar'],
+            'jobs' => $session_data['jobs'],
+            'type' => $session_data['type']
+        );
+        $this->session->set_userdata('user_data', $data);
     }
 	
 }
