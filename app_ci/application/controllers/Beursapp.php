@@ -202,6 +202,8 @@ class Beursapp extends CI_Controller {
 	# Functie die geladen wordt bij het verzenden van het form op data_processed
 	# Sessie wordt vernietigd bij het verzenden van dit form en na de timer voor de redirect 
 	public function confirmationForm(){
+            $this->load->model('BeursappModel');
+            $this->BeursappModel->setUserData();
             $this->session->sess_destroy();
             $this->home();
 	}
@@ -235,8 +237,7 @@ class Beursapp extends CI_Controller {
 	
 	# View met bedanking & melding succesvolle verwerking gegevens
 	public function processed(){
-            $this->load->model('BeursappModel');
-            $this->BeursappModel->setUserData();
+            
             $this->viewLoader('content/data_processed');
 	}
 	

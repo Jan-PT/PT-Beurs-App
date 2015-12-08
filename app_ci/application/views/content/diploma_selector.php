@@ -86,20 +86,39 @@
 			</datalist>
 			<BR>
                         
-                        <p>Wanneer studeer je af?</p>
-                        <?php if(isset($user_data)){?>
-                            <input type="text" name="grad_maand" value="<?=$user_data['grad_maand']?>" class="form-control" placeholder="Maand">
-                        <?php }else{?>
-                            <input type="text" name="grad_maand" class="form-control" placeholder="Maand">
-                        <?php }?>
+                        <?php 
                         
-                        <?php if(isset($user_data)){?>
-                            <input type="text" name="grad_jaar" value="<?=$user_data['grad_jaar']?>" class="form-control" placeholder="Maand">
-                        <?php }else{?>
-                            <input type="text" name="grad_jaar" class="form-control" placeholder="Jaar">
-                        <?php }?>
+                        $this->load->helper('date');
+
+                        $jaar = date('Y'); 
+
+                        $months = array(0 => 'Maand', );
+                        for ($i = 1; $i <= 12; $i++)
+                        {
+                            $months[] = $i;
+                        }
+                        $years = array(0 => 'Jaar');
+                        for ($i = $jaar-5; $i <= $jaar+5; $i++)
+                        {
+                            $years[$i] = $i; 
+                        }
                         
-<BR>
+                        if ($user_data){
+                            $selected_month = $user_data['grad_maand'];
+                            $selected_year = $user_data['grad_jaar'];
+                        }
+                        
+                        $selected_month = (isset($selected_month)) ? $selected_month : 0;
+                        $selected_year = (isset($selected_year)) ? $selected_year : 0;
+                        
+                        echo "<p>";
+                            echo form_label('Wanneer studeer je af?:');
+                            echo form_dropdown('grad_maand', $months, $selected_month, 'class="btn btn-warning dropdown-toggle"'); 
+                            echo form_dropdown('grad_jaar', $years, $selected_year, 'class="btn btn-warning dropdown-toggle"'); 
+                        echo "</p>";
+                        ?>
+
+                        <BR>
 			<input type="submit" class="form-control btn btn-warning" value="Volgende">
 		<?php 
 			echo form_close(); 

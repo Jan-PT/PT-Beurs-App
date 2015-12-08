@@ -5,7 +5,7 @@
     <?php
 	$user_data = $this->session->userdata('user_data');
     if ($this->session->userdata('user_data') && $user_data['provincie']) {
-        echo "<h1>Waar in ".$user_data['provincie']." ga je naar school, ".$user_data['voornaam']."?</h1>";
+        echo "<h1>Naar welke school in ".$user_data['provincie']." ga je, ".$user_data['voornaam']."?</h1>";
     }else{
         echo "<h1>Waar ga je naar school?</h1>";
     }

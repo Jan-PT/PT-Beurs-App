@@ -30,7 +30,11 @@
 		</tr>
 		<tr>
 			<th>Postcode: </th>
-			<td><?php echo $user_data['postcode'].' '.$user_data['gemeente']; ?></td>
+			<td><?php echo $user_data['postcode'];?></td>
+		</tr>
+                <tr>
+			<th>Gemeente: </th>
+			<td><?php echo $user_data['gemeente'];?></td>
 		</tr>
 		<tr>
 			<th>Provincie: </th>
