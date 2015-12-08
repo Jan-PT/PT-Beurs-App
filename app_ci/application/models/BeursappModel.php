@@ -25,7 +25,8 @@ class BeursappModel extends CI_Model {
                     'graduation_year' => $user_data['grad_jaar'],
                     'mobile_phone' => $user_data['gsm'],
                     'private_email' => $user_data['email'],
-                    'address_postal_code' => $user_data['postcode']
+                    'address_postal_code' => $user_data['postcode'],
+                    'address_city_belgium' => $user_data['gemeente']                        
                     );
             
                 $query = $this->db->insert_string('pt_crm', $data); 
