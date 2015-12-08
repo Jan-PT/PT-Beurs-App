@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Admin extends CI_Controller {
+class admin extends CI_Controller {
 
     	public function index()
 	{
@@ -8,8 +8,10 @@ class Admin extends CI_Controller {
 	}
         
         
-        public function getexel()
+        public function getexcel()
         {
-            echo "test";
+            //echo "test";
+            $this->load->view('excel');
+            
         }
 }

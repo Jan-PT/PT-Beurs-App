@@ -6,7 +6,6 @@
     
 </head>
 <body>
-            <a href="admin/getexel">Click here to export data</a>
-            <?php getexel(); ?>
+            <a href="index.php/admin/getexcel">Click here to export data</a>
 </body>
 </html>
