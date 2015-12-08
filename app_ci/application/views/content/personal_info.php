@@ -37,10 +37,12 @@
 						"type" => "text",
 						"name" => "gsm",
 						"id" => "gsm",
-						"placeholder" => "Gsm nummer",
-						"value" => $user_data['gsm'],
+						"placeholder" => "Gsm +32123456789",
+						"value" => str_replace(' ', '', $user_data['gsm']),
 						"class" => "form-control",
-                        "tabindex" => "3"
+                                                "tabindex" => "3",
+                                                "pattern" => "[+]{1}[0-9]{11}",
+                                                "title" => "+xx xxx xx xx xx"
 					);
 					echo "<p>".form_input($gsm)."</p>";
                                 
@@ -71,10 +73,12 @@
 						"type" => "text",
 						"name" => "gsm",
 						"id" => "gsm",
-						"placeholder" => "Gsm nummer",
+						"placeholder" => "Gsm +32123456789",
 						"value" => set_Value("gsm"),
 						"class" => "form-control",
-                        "tabindex" => "3"
+                                                "tabindex" => "3",
+                                                "pattern" => "[+]{1}[0-9]{11}",
+                                                "title" => "+xx xxx xx xx xx"                                            
 					);
 					echo "<p>".form_input($gsm)."</p>";
                                 

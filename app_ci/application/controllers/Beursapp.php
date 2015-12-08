@@ -55,11 +55,15 @@ class Beursapp extends CI_Controller {
 	public function infoForm(){
             # Form validation regels
             $this->load->library("form_validation");
+            
+            $this->form_validation->set_message('contactVerify', 'Email of gsm-nummer is verplicht.');
+            $this->form_validation->set_message('alpha_dash_space', 'Naam mag geen nummers bevatten.');
+            
             $this->form_validation->set_rules("naam", "naam", "required|callback_alpha_dash_space|min_length[3]|max_length[30]);");
-            $this->form_validation->set_rules("gsm", "gsm nummer", "required|numeric|min_length[10]|max_length[15]");
+            $this->form_validation->set_rules("gsm", "gsm nummer", "numeric|min_length[10]|max_length[15]|callback_contactVerify[email]");
             $this->form_validation->set_rules("voornaam", "voornaam", "required|callback_alpha_dash_space|min_length[3]|max_length[30]");
             $this->form_validation->set_rules("postcode", "postcode", "required|min_length[4]|max_length[50]");
-            $this->form_validation->set_rules("email", "email", "required|valid_email|min_length[5]|max_length[96]");
+            $this->form_validation->set_rules("email", "email", "valid_email|min_length[5]|max_length[96]|callback_contactVerify[gsm]");
 
             # Als de regels falen wordt de pagina opnieuw geladen en anders wordt de sessie aangemaakt en naar de volgende functie doorgegaan.
             if ($this->form_validation->run() == false){
@@ -71,10 +75,20 @@ class Beursapp extends CI_Controller {
                 $postcode = $postcodeArr[0];
                 $gemeente = $postcodeArr[1];
                 
+                $gsm = $this->input->post('gsm');
+                
+                $gsmeerst = substr($gsm, 0, 3);
+                $gsmtweed = substr($gsm, 3, 3);
+                $gsmderde = substr($gsm, 6, 2);
+                $gsmvierd = substr($gsm, 8, 2);
+                $gsmvijfd = substr($gsm, 10, 2);
+                
+                $strGsm = $gsmeerst . " " . $gsmtweed . " " . $gsmderde . " " . $gsmvierd . " " . $gsmvijfd;
+                
                 $data = array (
                     'naam'  => $this->input->post('naam'),
                     'voornaam' => $this->input->post('voornaam'),
-                    'gsm' => $this->input->post('gsm'),
+                    'gsm' => $strGsm,
                     'postcode' => $postcode,
                     'gemeente' => $gemeente,
                     'email' => $this->input->post('email'),
@@ -280,4 +294,7 @@ class Beursapp extends CI_Controller {
         return ( ! preg_match("/^([-a-z_ ])+$/i", $str)) ? FALSE : TRUE;
     } 
 	
+    public function contactVerify($contact, $otherField) {
+        return ($contact != '' || $this->input->post($otherField) != '');
+    }
 }
