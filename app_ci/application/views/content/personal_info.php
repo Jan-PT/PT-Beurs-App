@@ -13,7 +13,7 @@
 			$user_data = $this->session->userdata('user_data');
 		?>	
 		
-		<div class="col-sm-4">
+		<div class="col-sm-6">
 			<?php 
 				# Als de user zijn data al eens correct ingevuld is wordt de data uit de session terug in de velden ingeladen.
 				# Hierdoor kan de gebruiker zijn gegevens makkelijk nakijken en wijzigen zonder alles opnieuw te moeten invullen.
@@ -91,7 +91,7 @@
 				}
 			?>
 		</div>
-		<div class="col-sm-4">
+		<div class="col-sm-6">
 			<?php 
 			if ($user_data) {
 				$naam = array(

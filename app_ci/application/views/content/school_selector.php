@@ -19,12 +19,12 @@
 			if($user_data['school']!=''){
 				if($user_data['school'] == 'AP'){
 		?>
-            <div class="col-sm-4">
+            <div class="col-sm-6">
 				<p><input type="submit" name="school" id="school" value="AP" class="btn btn-success" style="width:300px"></p>
 				<p><input type="submit" name="school" id="school" value="UA" class="btn btn-warning" style="width:300px"></p>
 				<p><input type="submit" name="school" id="school" value="Thomas More" class="btn btn-warning" style="width:300px"></p>
             </div>
-            <div class="col-sm-4">
+            <div class="col-sm-6">
 				<p><input type="submit" name="school" id="school" value="KDG" class="btn btn-warning" style="width:300px"></p>
 				<p><input type="submit" name="school" id="school" value="KUL" class="btn btn-warning" style="width:300px"></p>
 				<p><input type="submit" name="school" id="school" value="VUB" class="btn btn-warning" style="width:300px"></p>
@@ -34,12 +34,12 @@
 				
 				if($user_data['school'] == 'UA'){
 		?>
-            <div class="col-sm-4">
+            <div class="col-sm-6">
 				<p><input type="submit" name="school" id="school" value="AP" class="btn btn-warning" style="width:300px"></p>
 				<p><input type="submit" name="school" id="school" value="UA" class="btn btn-success" style="width:300px"></p>
 				<p><input type="submit" name="school" id="school" value="Thomas More" class="btn btn-warning" style="width:300px"></p>
             </div>
-            <div class="col-sm-4">
+            <div class="col-sm-6">
 				<p><input type="submit" name="school" id="school" value="KDG" class="btn btn-warning" style="width:300px"></p>
 				<p><input type="submit" name="school" id="school" value="KUL" class="btn btn-warning" style="width:300px"></p>
 				<p><input type="submit" name="school" id="school" value="VUB" class="btn btn-warning" style="width:300px"></p>
@@ -48,12 +48,12 @@
 				}
 				if($user_data['school'] == 'Thomas More'){
 		?>
-            <div class="col-sm-4">
+            <div class="col-sm-6">
 				<p><input type="submit" name="school" id="school" value="AP" class="btn btn-warning" style="width:300px"></p>
 				<p><input type="submit" name="school" id="school" value="UA" class="btn btn-warning" style="width:300px"></p>
 				<p><input type="submit" name="school" id="school" value="Thomas More" class="btn btn-success" style="width:300px"></p>
             </div>
-            <div class="col-sm-4">
+            <div class="col-sm-6">
 				<p><input type="submit" name="school" id="school" value="KDG" class="btn btn-warning" style="width:300px"></p>
 				<p><input type="submit" name="school" id="school" value="KUL" class="btn btn-warning" style="width:300px"></p>
 				<p><input type="submit" name="school" id="school" value="VUB" class="btn btn-warning" style="width:300px"></p>
@@ -63,12 +63,12 @@
 				
 				if($user_data['school'] == 'KDG'){
 		?>
-            <div class="col-sm-4">
+            <div class="col-sm-6">
 				<p><input type="submit" name="school" id="school" value="AP" class="btn btn-warning" style="width:300px"></p>
 				<p><input type="submit" name="school" id="school" value="UA" class="btn btn-warning" style="width:300px"></p>
 				<p><input type="submit" name="school" id="school" value="Thomas More" class="btn btn-warning" style="width:300px"></p>
             </div>
-            <div class="col-sm-4">
+            <div class="col-sm-6">
 				<p><input type="submit" name="school" id="school" value="KDG" class="btn btn-success" style="width:300px"></p>
 				<p><input type="submit" name="school" id="school" value="KUL" class="btn btn-warning" style="width:300px"></p>
 				<p><input type="submit" name="school" id="school" value="VUB" class="btn btn-warning" style="width:300px"></p>
@@ -78,12 +78,12 @@
 				
 				if($user_data['school'] == 'KUL'){
 		?>
-            <div class="col-sm-4">
+            <div class="col-sm-6">
 				<p><input type="submit" name="school" id="school" value="AP" class="btn btn-warning" style="width:300px"></p>
 				<p><input type="submit" name="school" id="school" value="UA" class="btn btn-warning" style="width:300px"></p>
 				<p><input type="submit" name="school" id="school" value="Thomas More" class="btn btn-warning" style="width:300px"></p>
             </div>
-            <div class="col-sm-4">
+            <div class="col-sm-6">
 				<p><input type="submit" name="school" id="school" value="KDG" class="btn btn-warning" style="width:300px"></p>
 				<p><input type="submit" name="school" id="school" value="KUL" class="btn btn-success" style="width:300px"></p>
 				<p><input type="submit" name="school" id="school" value="VUB" class="btn btn-warning" style="width:300px"></p>
@@ -93,12 +93,12 @@
 				
 				if($user_data['school'] == 'VUB'){
 		?>
-            <div class="col-sm-4">
+            <div class="col-sm-6">
 				<p><input type="submit" name="school" id="school" value="AP" class="btn btn-warning" style="width:300px"></p>
 				<p><input type="submit" name="school" id="school" value="UA" class="btn btn-warning" style="width:300px"></p>
 				<p><input type="submit" name="school" id="school" value="Thomas More" class="btn btn-warning" style="width:300px"></p>
             </div>
-            <div class="col-sm-4">
+            <div class="col-sm-6">
 				<p><input type="submit" name="school" id="school" value="KDG" class="btn btn-warning" style="width:300px"></p>
 				<p><input type="submit" name="school" id="school" value="KUL" class="btn btn-warning" style="width:300px"></p>
 				<p><input type="submit" name="school" id="school" value="VUB" class="btn btn-success" style="width:300px"></p>
@@ -109,12 +109,12 @@
 			# Als er nog geen school in de sessie staat dan blijven alle knoppen gewoon oranje.
 			else{
 		?>
-			<div class="col-sm-4">
+			<div class="col-sm-6">
 				<p><input type="submit" name="school" id="school" value="AP" class="btn btn-warning" style="width:300px"></p>
 				<p><input type="submit" name="school" id="school" value="UA" class="btn btn-warning" style="width:300px"></p>
 				<p><input type="submit" name="school" id="school" value="Thomas More" class="btn btn-warning" style="width:300px"></p>
             </div>
-            <div class="col-sm-4">
+            <div class="col-sm-6">
 				<p><input type="submit" name="school" id="school" value="KDG" class="btn btn-warning" style="width:300px"></p>
 				<p><input type="submit" name="school" id="school" value="KUL" class="btn btn-warning" style="width:300px"></p>
 				<p><input type="submit" name="school" id="school" value="VUB" class="btn btn-warning" style="width:300px"></p>
