@@ -9,9 +9,14 @@
     <div id="info" class="form-group">
     <?php 
         echo validation_errors(); 
-        echo form_open("beursapp/infoForm");
         $user_data = $this->session->userdata('user_data');
-    ?>	
+        //var_dump($user_data);
+    ?>
+    </div>
+    
+<?php
+        echo form_open("beursapp/infoForm");
+?>    
 
 <div class="col-sm-6">
     <?php 
@@ -157,7 +162,7 @@
 <datalist id="postcode">
     <?php
             foreach($records as $rec){
-                    echo "<option value='".$rec->zipcode."-".$rec->name."'>\n"; 
+                    echo "<option value='".form_prep($rec->zipcode)."-".form_prep($rec->name)."'>\n"; 
             }
     ?>
 </datalist>	

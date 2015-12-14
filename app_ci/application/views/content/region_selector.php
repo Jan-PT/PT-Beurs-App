@@ -16,7 +16,7 @@
     <div id="info" class="form-group">
         <?php echo form_open("beursapp/regionForm");
 			  # Gaat kijken of er al een provincie geselecteerd was en deze als een groene button tonen ipv de oranje
-			  if($user_data['provincie']!='' && $user_data['provincie'] != null){
+			  if(isset($user_data['provincie']) && $user_data['provincie']!='' ){
 				if($user_data['provincie'] == 'Antwerpen'){
 		?>
 					<div class="col-sm-6">

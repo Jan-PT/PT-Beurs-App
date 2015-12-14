@@ -75,9 +75,12 @@ class Beursapp extends CI_Controller {
             $this->form_validation->set_rules("email", "email", "valid_email|min_length[5]|max_length[96]|callback_contactVerify[gsm]");
 
             # Als de regels falen wordt de pagina opnieuw geladen en anders wordt de sessie aangemaakt en naar de volgende functie doorgegaan.
-            if ($this->form_validation->run() == false){
-                    $this->viewLoader('content/personal_info', $bc, $codes);      
-            } else {
+            if ($this->form_validation->run() == false)
+            {
+                $this->viewLoader('content/personal_info', $bc, $codes);      
+            }
+            else
+            {
                 #Postcode en gemeente veld splitsen op '-'
                 $postcodegemeente = $this->input->post('postcode');
                 $postcodeArr = explode("-",$postcodegemeente, 2);
@@ -134,8 +137,10 @@ class Beursapp extends CI_Controller {
 	public function regionForm(){
             $data = $this->session->userdata('user_data');
             $data['provincie'] = $this->input->post('provincie');
+            
+            $this->set_session($data);
             if($data['provincie'] != ''){
-                $this->set_session($data);
+                //$this->set_session($data);
                 $this->school();
             }
             else{
@@ -147,8 +152,10 @@ class Beursapp extends CI_Controller {
 	public function schoolForm(){
             $data = $this->session->userdata('user_data');
             $data['school'] = $this->input->post('school');
+            
+            $this->set_session($data);           
             if($data['school'] != ''){
-                $this->set_session($data);
+                //$this->set_session($data);
                 $this->diploma();
             }
             else{
