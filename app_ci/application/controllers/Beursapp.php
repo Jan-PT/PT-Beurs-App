@@ -48,11 +48,20 @@ class Beursapp extends CI_Controller {
 	public function info (){
             $this->load->model('BeursappModel');
             $codes['records'] = $this->BeursappModel->getPostcodes();
-            $this->viewLoader('content/personal_info',$codes);
+            $bc['state'] = 'info';
+            
+            $this->viewLoader('content/personal_info', $bc, $codes);
+            
 	}
 	
 	# Form voor contact info van de student (op de input velden gebeurt form_validation via de form_validation library
 	public function infoForm(){
+            
+            $this->load->model('BeursappModel');
+            $codes['records'] = $this->BeursappModel->getPostcodes();
+            $bc['state'] = 'infoForm';
+
+            
             # Form validation regels
             $this->load->library("form_validation");
             
@@ -67,7 +76,7 @@ class Beursapp extends CI_Controller {
 
             # Als de regels falen wordt de pagina opnieuw geladen en anders wordt de sessie aangemaakt en naar de volgende functie doorgegaan.
             if ($this->form_validation->run() == false){
-                    $this->viewLoader('content/personal_info');      
+                    $this->viewLoader('content/personal_info', $bc, $codes);      
             } else {
                 #Postcode en gemeente veld splitsen op '-'
                 $postcodegemeente = $this->input->post('postcode');
@@ -130,7 +139,7 @@ class Beursapp extends CI_Controller {
                 $this->school();
             }
             else{
-                $this->viewLoader('content/region_selector'); 
+                $this->viewLoader('content/region_selector', array('state' => 'regionForm') ); 
             }		
 	}
 	
@@ -143,7 +152,7 @@ class Beursapp extends CI_Controller {
                 $this->diploma();
             }
             else{
-                $this->viewLoader('content/school_selector'); 
+                $this->viewLoader('content/school_selector', array('state' => 'schoolForm')); 
             }		
 	}
 	
@@ -160,7 +169,7 @@ class Beursapp extends CI_Controller {
                 $this->job();
             }
             else{
-                $this->viewLoader('content/diploma_selector'); 
+                $this->viewLoader('content/diploma_selector', array('state' => 'diplomaForm')); 
             }		
 	}
 	
@@ -186,7 +195,7 @@ class Beursapp extends CI_Controller {
                 $this->type();
             }
             else{
-                $this->viewLoader('content/job_selector'); 
+                $this->viewLoader('content/job_selector', array('state' => 'jobForm')); 
             }		
 	}
 	
@@ -209,7 +218,7 @@ class Beursapp extends CI_Controller {
                 $this->processed();
             }
             else{
-                $this->viewLoader('content/job_type'); 
+                $this->viewLoader('content/job_type', array('state' => 'typeForm')); 
             }		
 	}
 	
@@ -225,45 +234,47 @@ class Beursapp extends CI_Controller {
 	# View met de verschillende provincies 
 	public function region (){
             $data = $this->session->userdata('user_data');			
-            $this->viewLoader('content/region_selector');
+            $this->viewLoader('content/region_selector', array('state' => 'region') );
 	}
 	
 	# View met de scholen binnen de gekozen provincie
 	public function school(){            
-            $this->viewLoader('content/school_selector');
+            $this->viewLoader('content/school_selector', array('state' => 'school'));
 	}
 	
 	# View met de verschillende mogelijke diploma's 
 	public function diploma(){
             //var_dump($this->session);
-            $this->viewLoader('content/diploma_selector');
+            $this->viewLoader('content/diploma_selector', array('state' => 'diploma'));
 	}
 	
 	# View met de mogelijke jobs
 	public function job(){
-            $this->viewLoader('content/job_selector');
+            $this->viewLoader('content/job_selector', array('state' => 'job'));
 	}
 	
 	# View met de type jobs (stage, vaste job)
 	public function type(){
-            $this->viewLoader('content/job_type');
+            $this->viewLoader('content/job_type', array('state' => 'type'));
 	}
 	
 	# View met bedanking & melding succesvolle verwerking gegevens
 	public function processed(){
             
-            $this->viewLoader('content/data_processed');
+            $this->viewLoader('content/data_processed', array('state' => 'processed'));
 	}
 	
 	# Een functie om de header, meegegeven content en footer in één keer te laden.
-	public function viewLoader($content, $data = NULL){
+	public function viewLoader($content, $bc, $data = NULL){
             if (isset($data)){
                 $this->load->view('templates/header');
                 $this->load->view($content, $data);
+                $this->load->view('templates/breadcrumbs',$bc);
                 $this->load->view('templates/footer');
             } else {
                 $this->load->view('templates/header');
                 $this->load->view($content);
+                $this->load->view('templates/breadcrumbs',$bc);
                 $this->load->view('templates/footer');
             }
 	}

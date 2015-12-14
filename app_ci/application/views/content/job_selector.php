@@ -18,19 +18,19 @@
 			</div>
 			<div class="input-group">
                             <span class="input-group-addon">
-                                <input <input <?php if(strpos($user_data['jobs'],'sales') !== false){ echo "checked";} ?> value="sales" name="sales" type="checkbox" id="sales" aria-label="...">	
+                                <input <?php if(strpos($user_data['jobs'],'sales') !== false){ echo "checked";} ?> value="sales" name="sales" type="checkbox" id="sales" aria-label="...">	
                             </span>
                             <label  class="form-control" aria-label="...">Sales</label>
 			</div>
 			<div class="input-group">
                             <span class="input-group-addon">
-                                <input <input <?php if(strpos($user_data['jobs'],'ict_applications') !== false){ echo "checked";} ?> value="ict_applications" name="ict_applications" type="checkbox" id="ict_applications" aria-label="...">	
+                                <input <?php if(strpos($user_data['jobs'],'ict_applications') !== false){ echo "checked";} ?> value="ict_applications" name="ict_applications" type="checkbox" id="ict_applications" aria-label="...">	
                             </span>
                             <label class="form-control" aria-label="...">ICT Applications</label>
 			</div>
 			<div class="input-group">
                             <span class="input-group-addon">
-                                <input <input <?php if(strpos($user_data['jobs'],'ict_development') !== false){ echo "checked";} ?> value="ict_development" name="ict_development" type="checkbox" id="ict_development" aria-label="...">
+                                <input <?php if(strpos($user_data['jobs'],'ict_development') !== false){ echo "checked";} ?> value="ict_development" name="ict_development" type="checkbox" id="ict_development" aria-label="...">
                             </span>
                             <label  class="form-control" aria-label="...">ICT Development</label>
 			</div>
