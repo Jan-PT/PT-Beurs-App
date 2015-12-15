@@ -1,4 +1,6 @@
-
+<?php 
+    //var_dump($state) 
+?>
 <div id="breadcrumbs" class="col-sm-12">
     <ol class="breadcrumb">
         <?php 
@@ -57,8 +59,8 @@
 		
 	<?php				
                 break;
-            case 'diploma':
-            case 'diplomaForm':
+            case 'job':
+            case 'jobForm':
         ?>
         <li><a href="<?php echo base_url(); ?>index.php/beursapp/home"> Startpagina </a> </li>
         <li><a href="<?php echo base_url(); ?>index.php/beursapp/info"> Persoonlijke info </a>  </li>
@@ -72,6 +74,17 @@
                 break;
             case 'type':
             case 'typeForm':
+        ?>
+        <li><a href="<?php echo base_url(); ?>index.php/beursapp/home"> Startpagina </a> </li>
+        <li><a href="<?php echo base_url(); ?>index.php/beursapp/info"> Persoonlijke info </a>  </li>
+        <li><a href="<?php echo base_url();?>index.php/beursapp/region"> School:Regio </a></li>
+        <li><a href="<?php echo base_url();?>index.php/beursapp/school"> School: Instelling</a></li> 
+        <li><a href="<?php echo base_url();?>index.php/beursapp/diploma"> School: Diploma</a></li> 
+        <li><a href="<?php echo base_url(); ?>index.php/beursapp/job"> Gewenste functie </a> </li>			
+        <li class="active"> Contact </li>	
+        
+        <?php
+                break;
             case 'processed':
             default:
         ?>

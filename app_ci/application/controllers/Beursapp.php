@@ -228,6 +228,28 @@ class Beursapp extends CI_Controller {
                 $this->viewLoader('content/job_type', array('state' => 'typeForm')); 
             }		
 	}
+	# Functie die geladen wordt bij het verzenden van het form op job_type
+	public function contactForm(){
+            $data = $this->session->userdata('user_data');
+            $data['type']='';
+            if($this->input->post('vaste_job')!=null){
+                $data['type'] .= $this->input->post('vaste_job')."-";
+            }
+            if($this->input->post('stage')!=null){
+                $data['type'] .= $this->input->post('stage')."-";
+            }
+            if($this->input->post('andere')!=null){
+                $data['type'] .= $this->input->post('andere');
+            }
+
+            if($data['type'] != ''){
+                $this->set_session($data);
+                $this->processed();
+            }
+            else{
+                $this->viewLoader('content/job_type', array('state' => 'typeForm')); 
+            }		
+	}
 	
 	# Functie die geladen wordt bij het verzenden van het form op data_processed
 	# Sessie wordt vernietigd bij het verzenden van dit form en na de timer voor de redirect 

@@ -8,7 +8,7 @@
 <div class="panel-body">
 	<div id="info" class="form-group">
 		<?php
-			echo form_open("beursapp/typeForm");
+			echo form_open("beursapp/contactForm");
 		?>
 			<div class="input-group ">
                             <span class="input-group-addon">

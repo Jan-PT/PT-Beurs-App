@@ -34,7 +34,7 @@
             "id" => "voornaam",
             "placeholder" => "Voornaam",
             "value" => $user_data['voornaam'],
-            "class" => "form-control",
+            "class" => "form-control input-lg",
             "tabindex" => "1"
             );	
         echo "<p>".form_input($voornaam)."</p>";
@@ -45,10 +45,10 @@
             "id" => "gsm",
             "placeholder" => "Gsm +32123456789",
             "value" => str_replace(' ', '', $user_data['gsm']),
-            "class" => "form-control",
+            "class" => "form-control input-lg",
             "tabindex" => "3",
             "pattern" => "[+]{1}[0-9]{11}",
-            "title" => "+xx xxx xx xx xx"
+            "title" => "+xxxxxxxxxxx"
             );
         echo "<p>".form_input($gsm)."</p>";
 
@@ -58,7 +58,7 @@
             "id" => "email",
             "placeholder" => "Email",
             "value" => $user_data['email'],
-            "class" => "form-control",
+            "class" => "form-control input-lg",
             "tabindex" => "5"
             );
         echo "<p>".form_input($email)."</p>";
@@ -71,7 +71,7 @@
             "id" => "voornaam",
             "placeholder" => "Voornaam",
             "value" => set_Value("voornaam"),
-            "class" => "form-control",
+            "class" => "form-control input-lg",
             "tabindex" => "1"
             );	
         echo "<p>".form_input($voornaam)."</p>";
@@ -82,10 +82,10 @@
             "id" => "gsm",
             "placeholder" => "Gsm +32123456789",
             "value" => set_Value("gsm"),
-            "class" => "form-control",
+            "class" => "form-control input-lg",
             "tabindex" => "3",
             "pattern" => "[+]{1}[0-9]{11}",
-            "title" => "+xx xxx xx xx xx"                                            
+            "title" => "+xxxxxxxxxxx"                                            
         );
         
         echo "<p>".form_input($gsm)."</p>";
@@ -96,7 +96,7 @@
             "id" => "email",
             "placeholder" => "Email",
             "value" => set_Value("email"),
-            "class" => "form-control",
+            "class" => "form-control input-lg",
             "tabindex" => "5"
             );
         echo "<p>".form_input($email)."</p>";
@@ -113,7 +113,7 @@
             "id" => "naam",
             "placeholder" => "Naam",
             "value" => $user_data['naam'],
-            "class" => "form-control",
+            "class" => "form-control input-lg",
             "tabindex" => "2"
         );	
         echo "<p>".form_input($naam)."</p>";
@@ -125,7 +125,7 @@
             "list"=>"postcode",
             "value" => $postcodefield,
             "placeholder" => "Postcode",
-            "class" => "form-control",
+            "class" => "form-control input-lg",
             "tabindex" => "4"
         );	
         echo "<p>".form_input($postcode)."</p>";	
@@ -139,7 +139,7 @@
             "id" => "naam",
             "placeholder" => "Naam",
             "value" => set_Value("naam"),
-            "class" => "form-control",
+            "class" => "form-control input-lg",
             "tabindex" => "2"
         );	
         echo "<p>".form_input($naam)."</p>";
@@ -149,13 +149,13 @@
             "list"=>"postcode",
             "value" => set_Value("postcode"),
             "placeholder" => "Postcode",
-            "class" => "form-control",
+            "class" => "form-control input-lg",
             "tabindex" => "4"
         );	
         echo "<p>".form_input($postcode)."</p>";	
     }
     ?>
-    <input type="submit" class="btn btn-warning col-sm-12" value="Volgende">
+    <input type="submit" class="btn btn-warning btn-lg btn-block" value="Volgende">
 </div>
 
 <!-- Datalist met alle postcode opties die zich in de database bevinden. Deze datalist wordt achter het postcode input veld geplaats aan de hand van de id's -->
@@ -171,4 +171,3 @@
                 echo form_close();
         ?>
     </div>
-</div>

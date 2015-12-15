@@ -20,14 +20,14 @@
 				if($user_data['provincie'] == 'Antwerpen'){
 		?>
 					<div class="col-sm-6">
-						<p><input type="submit" name="provincie" id="provincie" value="Antwerpen" class="btn btn-success" style="width:300px"></p>
-						<p><input type="submit" name="provincie" id="provincie" value="Oost-Vlaanderen" class="btn btn-warning" style="width:300px"></p>
-						<p><input type="submit" name="provincie" id="provincie" value="Limburg" class="btn btn-warning" style="width:300px"></p>
+						<p><input type="submit" name="provincie" id="provincie" value="Antwerpen" class="btn btn-lg btn-block btn-success"></p>
+						<p><input type="submit" name="provincie" id="provincie" value="Oost-Vlaanderen" class="btn btn-lg btn-block btn-warning"></p>
+						<p><input type="submit" name="provincie" id="provincie" value="Limburg" class="btn btn-lg btn-block btn-warning"></p>
 					</div>
 					<div class="col-sm-6">
-						<p><input type="submit" name="provincie" id="provincie" value="Vlaams-Brabant" class="btn btn-warning" style="width:300px"></p>
-						<p><input type="submit" name="provincie" id="provincie" value="West-Vlaanderen" class="btn btn-warning" style="width:300px"></p>
-						<p><input type="submit" name="provincie" id="provincie" value="Andere" class="btn btn-warning" style="width:300px"></p>
+						<p><input type="submit" name="provincie" id="provincie" value="Vlaams-Brabant" class="btn btn-lg btn-block btn-warning"></p>
+						<p><input type="submit" name="provincie" id="provincie" value="West-Vlaanderen" class="btn btn-lg btn-block btn-warning"></p>
+						<p><input type="submit" name="provincie" id="provincie" value="Andere" class="btn btn-lg btn-block btn-warning"></p>
 					</div>
 		<?php
 				}
@@ -35,14 +35,14 @@
 				if($user_data['provincie'] == 'Oost-Vlaanderen'){
 		?>
 					<div class="col-sm-6">
-						<p><input type="submit" name="provincie" id="provincie" value="Antwerpen" class="btn btn-warning" style="width:300px"></p>
-						<p><input type="submit" name="provincie" id="provincie" value="Oost-Vlaanderen" class="btn btn-success" style="width:300px"></p>
-						<p><input type="submit" name="provincie" id="provincie" value="Limburg" class="btn btn-warning" style="width:300px"></p>
+						<p><input type="submit" name="provincie" id="provincie" value="Antwerpen" class="btn btn-lg btn-block btn-warning"></p>
+						<p><input type="submit" name="provincie" id="provincie" value="Oost-Vlaanderen" class="btn btn-lg btn-block btn-success"></p>
+						<p><input type="submit" name="provincie" id="provincie" value="Limburg" class="btn btn-lg btn-block btn-warning"></p>
 					</div>
 					<div class="col-sm-6">
-						<p><input type="submit" name="provincie" id="provincie" value="Vlaams-Brabant" class="btn btn-warning" style="width:300px"></p>
-						<p><input type="submit" name="provincie" id="provincie" value="West-Vlaanderen" class="btn btn-warning" style="width:300px"></p>
-						<p><input type="submit" name="provincie" id="provincie" value="Andere" class="btn btn-warning" style="width:300px"></p>
+						<p><input type="submit" name="provincie" id="provincie" value="Vlaams-Brabant" class="btn btn-lg btn-block btn-warning"></p>
+						<p><input type="submit" name="provincie" id="provincie" value="West-Vlaanderen" class="btn btn-lg btn-block btn-warning"></p>
+						<p><input type="submit" name="provincie" id="provincie" value="Andere" class="btn btn-lg btn-block btn-warning"></p>
 					</div>
 		<?php
 				}
@@ -50,14 +50,14 @@
 				if($user_data['provincie'] == 'Limburg'){
 		?>
 					<div class="col-sm-6">
-						<p><input type="submit" name="provincie" id="provincie" value="Antwerpen" class="btn btn-warning" style="width:300px"></p>
-						<p><input type="submit" name="provincie" id="provincie" value="Oost-Vlaanderen" class="btn btn-warning" style="width:300px"></p>
-						<p><input type="submit" name="provincie" id="provincie" value="Limburg" class="btn btn-success" style="width:300px"></p>
+						<p><input type="submit" name="provincie" id="provincie" value="Antwerpen" class="btn btn-lg btn-block btn-warning"></p>
+						<p><input type="submit" name="provincie" id="provincie" value="Oost-Vlaanderen" class="btn btn-lg btn-block btn-warning"></p>
+						<p><input type="submit" name="provincie" id="provincie" value="Limburg" class="btn btn-lg btn-block btn-success"></p>
 					</div>
 					<div class="col-sm-6">
-						<p><input type="submit" name="provincie" id="provincie" value="Vlaams-Brabant" class="btn btn-warning" style="width:300px"></p>
-						<p><input type="submit" name="provincie" id="provincie" value="West-Vlaanderen" class="btn btn-warning" style="width:300px"></p>
-						<p><input type="submit" name="provincie" id="provincie" value="Andere" class="btn btn-warning" style="width:300px"></p>
+						<p><input type="submit" name="provincie" id="provincie" value="Vlaams-Brabant" class="btn btn-lg btn-block btn-warning"></p>
+						<p><input type="submit" name="provincie" id="provincie" value="West-Vlaanderen" class="btn btn-lg btn-block btn-warning"></p>
+						<p><input type="submit" name="provincie" id="provincie" value="Andere" class="btn btn-lg btn-block btn-warning"></p>
 					</div>
 		<?php
 				}
@@ -65,14 +65,14 @@
 				if($user_data['provincie'] == 'Vlaams-Brabant'){
 		?>
 					<div class="col-sm-6">
-						<p><input type="submit" name="provincie" id="provincie" value="Antwerpen" class="btn btn-warning" style="width:300px"></p>
-						<p><input type="submit" name="provincie" id="provincie" value="Oost-Vlaanderen" class="btn btn-warning" style="width:300px"></p>
-						<p><input type="submit" name="provincie" id="provincie" value="Limburg" class="btn btn-warning" style="width:300px"></p>
+						<p><input type="submit" name="provincie" id="provincie" value="Antwerpen" class="btn btn-lg btn-block btn-warning"></p>
+						<p><input type="submit" name="provincie" id="provincie" value="Oost-Vlaanderen" class="btn btn-lg btn-block btn-warning"></p>
+						<p><input type="submit" name="provincie" id="provincie" value="Limburg" class="btn btn-lg btn-block btn-warning"></p>
 					</div>
 					<div class="col-sm-6">
-						<p><input type="submit" name="provincie" id="provincie" value="Vlaams-Brabant" class="btn btn-success" style="width:300px"></p>
-						<p><input type="submit" name="provincie" id="provincie" value="West-Vlaanderen" class="btn btn-warning" style="width:300px"></p>
-						<p><input type="submit" name="provincie" id="provincie" value="Andere" class="btn btn-warning" style="width:300px"></p>
+						<p><input type="submit" name="provincie" id="provincie" value="Vlaams-Brabant" class="btn btn-lg btn-block btn-success"></p>
+						<p><input type="submit" name="provincie" id="provincie" value="West-Vlaanderen" class="btn btn-lg btn-block btn-warning"></p>
+						<p><input type="submit" name="provincie" id="provincie" value="Andere" class="btn btn-lg btn-block btn-warning"></p>
 					</div>
 		<?php
 				}
@@ -80,14 +80,14 @@
 				if($user_data['provincie'] == 'West-Vlaanderen'){
 		?>
 					<div class="col-sm-6">
-						<p><input type="submit" name="provincie" id="provincie" value="Antwerpen" class="btn btn-warning" style="width:300px"></p>
-						<p><input type="submit" name="provincie" id="provincie" value="Oost-Vlaanderen" class="btn btn-warning" style="width:300px"></p>
-						<p><input type="submit" name="provincie" id="provincie" value="Limburg" class="btn btn-warning" style="width:300px"></p>
+						<p><input type="submit" name="provincie" id="provincie" value="Antwerpen" class="btn btn-lg btn-block btn-warning"></p>
+						<p><input type="submit" name="provincie" id="provincie" value="Oost-Vlaanderen" class="btn btn-lg btn-block btn-warning"></p>
+						<p><input type="submit" name="provincie" id="provincie" value="Limburg" class="btn btn-lg btn-block btn-warning"></p>
 					</div>
 					<div class="col-sm-6">
-						<p><input type="submit" name="provincie" id="provincie" value="Vlaams-Brabant" class="btn btn-warning" style="width:300px"></p>
-						<p><input type="submit" name="provincie" id="provincie" value="West-Vlaanderen" class="btn btn-success" style="width:300px"></p>
-						<p><input type="submit" name="provincie" id="provincie" value="Andere" class="btn btn-warning" style="width:300px"></p>
+						<p><input type="submit" name="provincie" id="provincie" value="Vlaams-Brabant" class="btn btn-lg btn-block btn-warning"></p>
+						<p><input type="submit" name="provincie" id="provincie" value="West-Vlaanderen" class="btn btn-lg btn-block btn-success"></p>
+						<p><input type="submit" name="provincie" id="provincie" value="Andere" class="btn btn-lg btn-block btn-warning"></p>
 					</div>
 		<?php
 				}
@@ -95,14 +95,14 @@
 				if($user_data['provincie'] == 'Andere'){
 		?>
 					<div class="col-sm-6">
-						<p><input type="submit" name="provincie" id="provincie" value="Antwerpen" class="btn btn-warning" style="width:300px"></p>
-						<p><input type="submit" name="provincie" id="provincie" value="Oost-Vlaanderen" class="btn btn-warning" style="width:300px"></p>
-						<p><input type="submit" name="provincie" id="provincie" value="Limburg" class="btn btn-warning" style="width:300px"></p>
+						<p><input type="submit" name="provincie" id="provincie" value="Antwerpen" class="btn btn-lg btn-block btn-warning"></p>
+						<p><input type="submit" name="provincie" id="provincie" value="Oost-Vlaanderen" class="btn btn-lg btn-block btn-warning"></p>
+						<p><input type="submit" name="provincie" id="provincie" value="Limburg" class="btn btn-lg btn-block btn-warning"></p>
 					</div>
 					<div class="col-sm-6">
-						<p><input type="submit" name="provincie" id="provincie" value="Vlaams-Brabant" class="btn btn-warning" style="width:300px"></p>
-						<p><input type="submit" name="provincie" id="provincie" value="West-Vlaanderen" class="btn btn-warning" style="width:300px"></p>
-						<p><input type="submit" name="provincie" id="provincie" value="Andere" class="btn btn-success" style="width:300px"></p>
+						<p><input type="submit" name="provincie" id="provincie" value="Vlaams-Brabant" class="btn btn-lg btn-block btn-warning"></p>
+						<p><input type="submit" name="provincie" id="provincie" value="West-Vlaanderen" class="btn btn-lg btn-block btn-warning"></p>
+						<p><input type="submit" name="provincie" id="provincie" value="Andere" class="btn btn-lg btn-block btn-success"></p>
 					</div>
 		<?php
 				}
@@ -111,14 +111,14 @@
 			  # Als er nog geen provincie in de sessie staat dan blijven alle knoppen gewoon oranje.
 		?>
             <div class="col-sm-6">
-                <p><input type="submit" name="provincie" id="provincie" value="Antwerpen" class="btn btn-warning" style="width:300px"></p>
-                <p><input type="submit" name="provincie" id="provincie" value="Oost-Vlaanderen" class="btn btn-warning" style="width:300px"></p>
-                <p><input type="submit" name="provincie" id="provincie" value="Limburg" class="btn btn-warning" style="width:300px"></p>
+                <p><input type="submit" name="provincie" id="provincie" value="Antwerpen" class="btn btn-lg btn-block btn-warning"></p>
+                <p><input type="submit" name="provincie" id="provincie" value="Oost-Vlaanderen" class="btn btn-lg btn-block btn-warning"></p>
+                <p><input type="submit" name="provincie" id="provincie" value="Limburg" class="btn btn-lg btn-block btn-warning"></p>
             </div>
             <div class="col-sm-6">
-                <p><input type="submit" name="provincie" id="provincie" value="Vlaams-Brabant" class="btn btn-warning" style="width:300px"></p>
-                <p><input type="submit" name="provincie" id="provincie" value="West-Vlaanderen" class="btn btn-warning" style="width:300px"></p>
-                <p><input type="submit" name="provincie" id="provincie" value="Andere" class="btn btn-warning" style="width:300px"></p>
+                <p><input type="submit" name="provincie" id="provincie" value="Vlaams-Brabant" class="btn btn-lg btn-block btn-warning"></p>
+                <p><input type="submit" name="provincie" id="provincie" value="West-Vlaanderen" class="btn btn-lg btn-block btn-warning"></p>
+                <p><input type="submit" name="provincie" id="provincie" value="Andere" class="btn btn-lg btn-block btn-warning"></p>
             </div>
         <?php 
 			} echo form_close(); 
