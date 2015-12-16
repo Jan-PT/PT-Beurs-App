@@ -55,7 +55,7 @@ class Beursapp extends CI_Controller {
 	}
 	
 	# Form voor contact info van de student (op de input velden gebeurt form_validation via de form_validation library
-	public function infoForm(){
+	public function infoForm (){
             
             $this->load->model('BeursappModel');
             $codes['records'] = $this->BeursappModel->getPostcodes();
@@ -135,6 +135,10 @@ class Beursapp extends CI_Controller {
 	
 	# Functie die geladen wordt bij het verzenden van het form op region_selector
 	public function regionForm(){
+            $this->load->model('BeursappModel');
+            $codes['regions'] = $this->BeursappModel->getRegions();
+            
+            
             $data = $this->session->userdata('user_data');
             $data['provincie'] = $this->input->post('provincie');
             
@@ -144,7 +148,7 @@ class Beursapp extends CI_Controller {
                 $this->school();
             }
             else{
-                $this->viewLoader('content/region_selector', array('state' => 'regionForm') ); 
+                $this->viewLoader('content/region_selector', array('state' => 'regionForm'), $codes ); 
             }		
 	}
 	
@@ -262,8 +266,9 @@ class Beursapp extends CI_Controller {
 	
 	# View met de verschillende provincies 
 	public function region (){
-            $data = $this->session->userdata('user_data');			
-            $this->viewLoader('content/region_selector', array('state' => 'region') );
+            $this->load->model('BeursappModel');
+            $codes['regions'] = $this->BeursappModel->getRegions();
+            $this->viewLoader('content/region_selector', array('state' => 'region'), $codes );
 	}
 	
 	# View met de scholen binnen de gekozen provincie

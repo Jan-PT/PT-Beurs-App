@@ -6,12 +6,30 @@ class BeursappModel extends CI_Model {
 	#Query gaat de zipcode en naam opvragen van de postcodes (voor de postcode lijst op personal_info page)
 	public function getPostcodes(){
             #$query = $this->db->get('pt_postcodes');
-            $query = $this->db->query('SELECT zipcode,name FROM pt_postcodes');
+            $query = $this->db->query('SELECT zipcode, name FROM pt_postcodes');
             return $query->result();
 	}
+        public function getRegions(){
+            
+            $query = $this->db->query('SELECT id, name, crm_name FROM pt_school_region');
+            
+            return $query->result();
+            
+        }
+        public function getSchools($region){
+            
+            if(isset($region)){
+                $sql = "SELECT school, crm_school FROM pt_school_view where crm_region = ?" ;
+                
+                $query = $this->db->query($sql, $region);
+                
+                return $query->result();
+            }
+                           
+            
+        }
 
-
-        public function setUserData(){
+                public function setUserData(){
             if ($this->session->userdata('user_data')){
                 $user_data = $this->session->userdata('user_data');
 

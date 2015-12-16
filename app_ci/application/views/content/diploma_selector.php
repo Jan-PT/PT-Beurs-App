@@ -13,15 +13,23 @@
 	<h1></h1>
 </div>
 <div class="panel-body">
-	<div id="info" class="col-sm-7 form-group">
+	<div id="info" class="col-sm-12 form-group">
 		<?php
 			echo form_open("beursapp/diplomaForm");
 			# Gaat kijken of er al een diploma lv geselecteerd was en deze in de dropdown lijst op de button weergeven
-			if($user_data['diplomaLV']!=''){
+			
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        if($user_data['diplomaLV']!=''){
 				if($user_data['diplomaLV'] == 'Professionele bachelor'){
 		?>          
             
-			<select id="diplomaLV" name="diplomaLV" class="btn btn-warning dropdown-toggle">
+			<select id="diplomaLV" name="diplomaLV" class="btn btn-lg btn-warning dropdown-toggle">
 				<option id="diplomaLV" name="diplomaLV" value="Professionele bachelor" selected>Professionele bachelor</option>
 				<option id="diplomaLV" name="diplomaLV" value="Technische bachelor">Technische bachelor</option>
 				<option id="diplomaLV" name="diplomaLV" value="Master">Master</option>
@@ -31,7 +39,7 @@
 				
 				if($user_data['diplomaLV'] == 'Technische bachelor'){
 		?>
-			<select id="diplomaLV" name="diplomaLV" class="btn btn-warning dropdown-toggle">
+			<select id="diplomaLV" name="diplomaLV" class="btn btn-lg btn-warning dropdown-toggle">
 				<option id="diplomaLV" name="diplomaLV" value="Professionele bachelor">Professionele bachelor</option>
 				<option id="diplomaLV" name="diplomaLV" value="Technische bachelor" selected>Technische bachelor</option>
 				<option id="diplomaLV" name="diplomaLV" value="Master">Master</option>
@@ -41,7 +49,7 @@
 				
 				if($user_data['diplomaLV'] == 'Master'){
 		?>
-			<select id="diplomaLV" name="diplomaLV" class="btn btn-warning dropdown-toggle">
+			<select id="diplomaLV" name="diplomaLV" class="btn btn-lg btn-warning dropdown-toggle">
 				<option id="diplomaLV" name="diplomaLV" value="Professionele bachelor">Professionele bachelor</option>
 				<option id="diplomaLV" name="diplomaLV" value="Technische bachelor">Technische bachelor</option>
 				<option id="diplomaLV" name="diplomaLV" value="Master" selected>Master</option>
@@ -52,7 +60,7 @@
 			else{
 			# Indien er nog geen diplomaLV in de sessie zit komt er gewoon Diploma niveau als verborgen veld op de button
 		?>
-			<select id="diplomaLV" name="diplomaLV" class="btn btn-warning dropdown-toggle">
+			<select id="diplomaLV" name="diplomaLV" class="btn btn-lg btn-warning dropdown-toggle">
 				<option id="diplomaLV" name="diplomaLV" value="" hidden selected>Diploma niveau</option>
 				<option id="diplomaLV" name="diplomaLV" value="Professionele bachelor">Professionele bachelor</option>
 				<option id="diplomaLV" name="diplomaLV" value="Technische bachelor">Technische bachelor</option>
@@ -69,7 +77,7 @@
 			}
 			else{
 		?>
-			<input list="diploma" name="diploma" value="" class="form-control">
+			<input list="diploma" name="diploma" value="" class="form-control input-lg">
 		<?php
 			}
 		?>
@@ -98,7 +106,7 @@
                             $months[] = $i;
                         }
                         $years = array(0 => 'Jaar');
-                        for ($i = $jaar-5; $i <= $jaar+5; $i++)
+                        for ($i = $jaar-4; $i <= $jaar+5; $i++)
                         {
                             $years[$i] = $i; 
                         }
@@ -113,13 +121,13 @@
                         
                         echo "<p>";
                             echo form_label('Wanneer studeer je af?:');
-                            echo form_dropdown('grad_maand', $months, $selected_month, 'class="btn btn-warning dropdown-toggle"'); 
-                            echo form_dropdown('grad_jaar', $years, $selected_year, 'class="btn btn-warning dropdown-toggle"'); 
+                            echo form_dropdown('grad_maand', $months, $selected_month, 'class="btn btn-lg btn-warning dropdown-toggle"'); 
+                            echo form_dropdown('grad_jaar', $years, $selected_year, 'class="btn btn-lg btn-warning dropdown-toggle"'); 
                         echo "</p>";
                         ?>
 
                         <BR>
-			<input type="submit" class="form-control btn btn-warning" value="Volgende">
+			<input type="submit" class="form-control btn btn-lg btn-warning" value="Volgende">
 		<?php 
 			echo form_close(); 
 		?>
