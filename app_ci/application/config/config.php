@@ -24,9 +24,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |
 | BASE_URL = Het deel van de url dat zich voor de map van het project bevindt!
 */
-//$config['base_url'] = 'http://127.0.0.1/app_ci/';
-//$config['base_url'] = 'http://127.0.0.1:8080/app_ci/';
-$config['base_url'] = 'http://192.168.1.60/app_ci/';
+//$config['base_url'] = 'http://127.0.0.1:8080/app_ci/'; //Tablet config
+
+//$config['base_url'] = 'http://127.0.0.1/app_ci/'; //home localhost
+//$config['base_url'] = 'http://192.168.1.60/app_ci/'; //home networked
+$config['base_url'] = 'http://192.168.1.59/app_ci/'; // home wireless
+
+//$config['base_url'] = 'http://192.168.50.51/app_ci/'; // work wireless
 
 
 /*

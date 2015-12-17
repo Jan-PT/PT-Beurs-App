@@ -22,7 +22,7 @@
             case 'regionForm':
         ?>
         <li><a href="<?php echo base_url(); ?>index.php/beursapp/home"> Startpagina </a> </li>
-        <li><a href="<?php echo base_url(); ?>index.php/beursapp/infoForm"> Persoonlijke info </a>  </li>
+        <li><a href="<?php echo base_url(); ?>index.php/beursapp/info"> Persoonlijke info </a>  </li>
         <li class="active"> School:Regio </li>
         <li> School: Instelling </li>         
         <li> School: Diploma </li>           
@@ -36,7 +36,7 @@
         
         ?>
         <li><a href="<?php echo base_url(); ?>index.php/beursapp/home"> Startpagina </a> </li>
-        <li><a href="<?php echo base_url(); ?>index.php/beursapp/infoForm"> Persoonlijke info </a>  </li>
+        <li><a href="<?php echo base_url(); ?>index.php/beursapp/info"> Persoonlijke info </a>  </li>
         <li><a href="<?php echo base_url();?>index.php/beursapp/region"> School:Regio </a></li>
         <li class="active"> School: Instelling </li>
         <li> School: Diploma </li>           

@@ -11,7 +11,9 @@
 </div>
 <div class="panel-body">
     <p>Bedankt. We hebben je gegevens successvol ontvangen en verwerkt. </p>
-	<?php
+	
+    <div class="col-sm-12">
+        <?php
 		echo form_open("beursapp/confirmationForm");
 		# Alle info van de student wordt hieronder weergegeven.
 	?>
@@ -66,8 +68,9 @@
 		</tr>
 	</table>
 	<BR>
-	<input type="submit" class="btn btn-warning" value="Afsluiten">
+	<input type="submit" class="btn btn-lg btn-warning btn-block" value="Afsluiten">
 	<?php
 		echo form_close(); 
 	?>
+        </div>
 </div>

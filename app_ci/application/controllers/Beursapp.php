@@ -65,14 +65,13 @@ class Beursapp extends CI_Controller {
             # Form validation regels
             $this->load->library("form_validation");
             
-            $this->form_validation->set_message('contactVerify', 'Email of gsm-nummer is verplicht.');
             $this->form_validation->set_message('alpha_dash_space', 'Naam mag geen nummers bevatten.');
             
-            $this->form_validation->set_rules("naam", "naam", "required|callback_alpha_dash_space|min_length[3]|max_length[30]);");
-            $this->form_validation->set_rules("gsm", "gsm nummer", "numeric|min_length[10]|max_length[15]|callback_contactVerify[email]");
             $this->form_validation->set_rules("voornaam", "voornaam", "required|callback_alpha_dash_space|min_length[3]|max_length[30]");
+            $this->form_validation->set_rules("naam", "naam", "required|callback_alpha_dash_space|min_length[3]|max_length[30]);");
+            $this->form_validation->set_rules("gsm", "gsm nummer", "required|numeric|min_length[11]|max_length[12]");
             $this->form_validation->set_rules("postcode", "postcode", "required|min_length[4]|max_length[50]");
-            $this->form_validation->set_rules("email", "email", "valid_email|min_length[5]|max_length[96]|callback_contactVerify[gsm]");
+            $this->form_validation->set_rules("email", "email", "required|valid_email|min_length[5]|max_length[96]");
 
             # Als de regels falen wordt de pagina opnieuw geladen en anders wordt de sessie aangemaakt en naar de volgende functie doorgegaan.
             if ($this->form_validation->run() == false)
@@ -83,19 +82,48 @@ class Beursapp extends CI_Controller {
             {
                 #Postcode en gemeente veld splitsen op '-'
                 $postcodegemeente = $this->input->post('postcode');
-                $postcodeArr = explode("-",$postcodegemeente, 2);
-                $postcode = $postcodeArr[0];
-                $gemeente = $postcodeArr[1];
-                
+                if(strpos($postcodegemeente, "-") !== false)
+                {
+                    $postcodeArr = explode("-",$postcodegemeente, 2);
+                    $postcode = $postcodeArr[0];
+                    if( isset($postcode[1]) )
+                    {
+                        $gemeente = $postcodeArr[1];
+                    }
+                    else
+                    {
+                        $gemeente = '';
+                    }
+                }
+                else
+                {
+                    $postcode = $postcodegemeente;
+                    $gemeente = '';
+                }
                 $gsm = $this->input->post('gsm');
                 
-                $gsmeerst = substr($gsm, 0, 3);
-                $gsmtweed = substr($gsm, 3, 3);
-                $gsmderde = substr($gsm, 6, 2);
-                $gsmvierd = substr($gsm, 8, 2);
-                $gsmvijfd = substr($gsm, 10, 2);
+                if( strlen($gsm) == 11 )
+                {
+                    $gsmeerst = substr($gsm, 0, 3);
+                    $gsmtweed = substr($gsm, 3, 1);
+                    $gsmderde = substr($gsm, 4, 3);
+                    $gsmvierd = substr($gsm, 7, 2);
+                    $gsmvijfd = substr($gsm, 9, 2);
+                    
+                    $strGsm = $gsmeerst . " " . $gsmtweed . " " . $gsmderde . " " . $gsmvierd . " " . $gsmvijfd;
+                    
+                }
+                else
+                {
+                    $gsmeerst = substr($gsm, 0, 3);
+                    $gsmtweed = substr($gsm, 3, 3);
+                    $gsmderde = substr($gsm, 6, 2);
+                    $gsmvierd = substr($gsm, 8, 2);
+                    $gsmvijfd = substr($gsm, 10, 2);
                 
-                $strGsm = $gsmeerst . " " . $gsmtweed . " " . $gsmderde . " " . $gsmvierd . " " . $gsmvijfd;
+                    $strGsm = $gsmeerst . " " . $gsmtweed . " " . $gsmderde . " " . $gsmvierd . " " . $gsmvijfd;
+
+                }
                 
                 $data = array (
                     'naam'  => $this->input->post('naam'),
@@ -136,7 +164,7 @@ class Beursapp extends CI_Controller {
 	# Functie die geladen wordt bij het verzenden van het form op region_selector
 	public function regionForm(){
             $this->load->model('BeursappModel');
-            $codes['regions'] = $this->BeursappModel->getRegions();
+            $codes['db_regions'] = $this->BeursappModel->getRegions();
             
             
             $data = $this->session->userdata('user_data');
@@ -145,7 +173,14 @@ class Beursapp extends CI_Controller {
             $this->set_session($data);
             if($data['provincie'] != ''){
                 //$this->set_session($data);
-                $this->school();
+                if($data['provincie'] != 'Andere'){
+                    $this->school();
+                }
+                else{
+                    //If andere go to Andere
+                }
+                
+                
             }
             else{
                 $this->viewLoader('content/region_selector', array('state' => 'regionForm'), $codes ); 
@@ -154,33 +189,57 @@ class Beursapp extends CI_Controller {
 	
 	# Functie die geladen wordt bij het verzenden van het form op school_selector
 	public function schoolForm(){
-            $data = $this->session->userdata('user_data');
-            $data['school'] = $this->input->post('school');
+            $this->load->model('BeursappModel');
+
+            $user_data = $this->session->userdata('user_data');
+            $user_data['school'] = $this->input->post('school');
             
-            $this->set_session($data);           
-            if($data['school'] != ''){
-                //$this->set_session($data);
+
+            
+            if($user_data['school'] != ''){
+                $this->set_session($user_data);
                 $this->diploma();
             }
             else{
-                $this->viewLoader('content/school_selector', array('state' => 'schoolForm')); 
+                if( 
+                    isset( $user_data['provincie']) 
+                    && $user_data['provincie'] != ''
+                    && $user_data['provincie'] != 'Andere')
+                {
+                    $code['db_schools'] = $this->BeursappModel->getSchools($user_data['provincie']);
+                    $this->viewLoader('content/school_selector', array('state' => 'schoolForm'), $code);
+                }
+                else{
+                    //If andere go to Andere
+                }
             }		
 	}
 	
 	# Functie die geladen wordt bij het verzenden van het form op diploma_selector
 	public function diplomaForm(){
-            $data = $this->session->userdata('user_data');
-            $data['diplomaLV'] = $this->input->post('diplomaLV');
-            $data['diploma'] = $this->input->post('diploma');
-            $data['grad_maand'] = $this->input->post('grad_maand');
-            $data['grad_jaar'] = $this->input->post('grad_jaar');
+            
+            $this->load->model('BeursappModel');
+            $data['db_diplomaLVs'] = $this->BeursappModel->getDiplomaLVs();
+            
+            $user_data = $this->session->userdata('user_data');
+            $user_data['diplomaLV'] = $this->input->post('diplomaLV');
+            $user_data['diploma'] = $this->input->post('diploma');
+            $user_data['grad_maand'] = $this->input->post('grad_maand');
+            $user_data['grad_jaar'] = $this->input->post('grad_jaar');
 
-            if($data['diplomaLV'] != '' && $data['diploma'] != ''&& $data['grad_maand'] != ''&& $data['grad_jaar'] != ''){
-                $this->set_session($data);
+            if($user_data['diplomaLV'] != '' 
+                    && $user_data['diploma'] != ''
+                    && $user_data['grad_maand'] != ''
+                    && $user_data['grad_jaar'] != ''){
+                $this->set_session($user_data);
                 $this->job();
             }
             else{
-                $this->viewLoader('content/diploma_selector', array('state' => 'diplomaForm')); 
+                
+                if( isset($user_data['diplomaLV']) && $user_data['diplomaLV'] != '' ){
+                    $data['diplomas'] = $this->BeursappModel->getDiplomas($user_data['diplomaLV']);
+                }
+                $this->viewLoader('content/diploma_selector', array('state' => 'diplomaForm'), $data); 
             }		
 	}
 	
@@ -203,7 +262,7 @@ class Beursapp extends CI_Controller {
 
             if($data['jobs'] != ''){
                 $this->set_session($data);
-                $this->type();
+                $this->contact();
             }
             else{
                 $this->viewLoader('content/job_selector', array('state' => 'jobForm')); 
@@ -235,25 +294,17 @@ class Beursapp extends CI_Controller {
 	# Functie die geladen wordt bij het verzenden van het form op job_type
 	public function contactForm(){
             $data = $this->session->userdata('user_data');
-            $data['type']='';
-            if($this->input->post('vaste_job')!=null){
-                $data['type'] .= $this->input->post('vaste_job')."-";
-            }
-            if($this->input->post('stage')!=null){
-                $data['type'] .= $this->input->post('stage')."-";
-            }
-            if($this->input->post('andere')!=null){
-                $data['type'] .= $this->input->post('andere');
-            }
 
-            if($data['type'] != ''){
-                $this->set_session($data);
-                $this->processed();
-            }
-            else{
-                $this->viewLoader('content/job_type', array('state' => 'typeForm')); 
-            }		
-	}
+            
+//            if($data['type'] != ''){
+//                $this->set_session($data);
+//                $this->processed();
+//            }
+//            else{
+//                $this->viewLoader('content/contact_selector', array('state' => 'typeForm')); 
+//            }
+            $this->processed();
+        }
 	
 	# Functie die geladen wordt bij het verzenden van het form op data_processed
 	# Sessie wordt vernietigd bij het verzenden van dit form en na de timer voor de redirect 
@@ -267,24 +318,50 @@ class Beursapp extends CI_Controller {
 	# View met de verschillende provincies 
 	public function region (){
             $this->load->model('BeursappModel');
-            $codes['regions'] = $this->BeursappModel->getRegions();
+            $codes['db_regions'] = $this->BeursappModel->getRegions();
             $this->viewLoader('content/region_selector', array('state' => 'region'), $codes );
 	}
 	
 	# View met de scholen binnen de gekozen provincie
-	public function school(){            
-            $this->viewLoader('content/school_selector', array('state' => 'school'));
+	public function school(){
+            $this->load->model('BeursappModel');
+            $user_data = $this->session->userdata('user_data');
+            if( isset( $user_data['provincie']) 
+                    && $user_data['provincie'] != ''
+                    && $user_data['provincie'] != 'Andere')
+            {
+                $data['db_schools'] = $this->BeursappModel->getSchools($user_data['provincie']);
+                $this->viewLoader('content/school_selector', array('state' => 'school'), $data);
+            }
+            else{
+                $this->viewLoader('content/school_selector', array('state' => 'school'));
+            }
 	}
 	
 	# View met de verschillende mogelijke diploma's 
 	public function diploma(){
             //var_dump($this->session);
-            $this->viewLoader('content/diploma_selector', array('state' => 'diploma'));
+            $this->load->model('BeursappModel');
+            
+            $user_data = $this->session->userdata('user_data');
+            
+            $data['db_diplomaLVs'] = $this->BeursappModel->getDiplomaLVs();
+
+
+            if( isset($user_data['diplomaLV']) && $user_data['diplomaLV'] != '' ) {
+                    $data['diplomas'] = $this->BeursappModel->getDiplomas($user_data['diplomaLV']);
+            }
+            
+            $this->viewLoader('content/diploma_selector', array('state' => 'diploma'), $data);
 	}
 	
 	# View met de mogelijke jobs
 	public function job(){
             $this->viewLoader('content/job_selector', array('state' => 'job'));
+	}
+	# View met de mogelijke jobs
+	public function contact(){
+            $this->viewLoader('content/contact_selector', array('state' => 'contact'));
 	}
 	
 	# View met de type jobs (stage, vaste job)
@@ -315,22 +392,32 @@ class Beursapp extends CI_Controller {
         
 	# Een functie die gebruikt wordt om de sessie in te stellen
     public function set_session($session_data) {
-        $data = array (
-            'naam'  => $session_data['naam'],
-            'voornaam' => $session_data['voornaam'],
-            'gsm' => $session_data['gsm'],
-            'postcode' => $session_data['postcode'],
-            'gemeente' => $session_data['gemeente'],
-            'email' => $session_data['email'],
-            'provincie' => $session_data['provincie'],
-            'school' => $session_data['school'],
-            'diplomaLV' => $session_data['diplomaLV'],
-            'diploma' => $session_data['diploma'],
-            'grad_maand' => $session_data['grad_maand'],
-            'grad_jaar' => $session_data['grad_jaar'],
-            'jobs' => $session_data['jobs'],
-            'type' => $session_data['type']
+        $data = array (  );
+        
+        $field = array( 
+            'naam',
+            'voornaam',
+            'gsm',
+            'postcode',
+            'gemeente',
+            'email',
+            'provincie',
+            'school',
+            'andere_school',
+            'diplomaLV',
+            'diploma',
+            'grad_maand',
+            'grad_jaar',
+            'jobs',
+            'type'
         );
+        
+        foreach ($field as $val) {
+            if(isset($session_data[$val])){
+                $data[$val] = $session_data[$val];
+            }
+        }
+        
         $this->session->set_userdata('user_data', $data);
     }
     
@@ -342,4 +429,23 @@ class Beursapp extends CI_Controller {
     public function contactVerify($contact, $otherField) {
         return ($contact != '' || $this->input->post($otherField) != '');
     }
+    
+    public function getDiploma()
+    {
+        
+        if ($this->input->get('q') != NULL )
+        {
+            $this->load->model('BeursappModel');
+
+            
+            $diplomaLV = $this->input->get('q', false);
+            echo $diplomaLV;
+            echo $_GET['q'];
+            $data['diplomas'] = $this->BeursappModel->getDiplomas($diplomaLV);
+            
+            $this->load->view('templates/diplomas',$data);
+
+        }
+    }
+    
 }

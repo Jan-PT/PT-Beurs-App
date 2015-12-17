@@ -15,7 +15,7 @@
     </div>
     
 <?php
-        echo form_open("beursapp/infoForm");
+    echo form_open("beursapp/infoForm");
 ?>    
 
 <div class="col-sm-6">
@@ -47,8 +47,8 @@
             "value" => str_replace(' ', '', $user_data['gsm']),
             "class" => "form-control input-lg",
             "tabindex" => "3",
-            "pattern" => "[+]{1}[0-9]{11}",
-            "title" => "+xxxxxxxxxxx"
+            "pattern" => "[+]{1}[0-9]{10,11}",
+            "title" => "+xxxxxxxxxxx \n(11 tot 12 cijfers)"
             );
         echo "<p>".form_input($gsm)."</p>";
 
@@ -84,8 +84,8 @@
             "value" => set_Value("gsm"),
             "class" => "form-control input-lg",
             "tabindex" => "3",
-            "pattern" => "[+]{1}[0-9]{11}",
-            "title" => "+xxxxxxxxxxx"                                            
+            "pattern" => "[+]{1}[0-9]{10,11}",
+            "title" => "+xxxxxxxxxxx \n(11 tot 12 cijfers)"                                          
         );
         
         echo "<p>".form_input($gsm)."</p>";
@@ -104,7 +104,7 @@
 ?>
 </div>
 <div class="col-sm-6">
-    <?php 
+<?php 
     if ($user_data) 
     {
         $naam = array(
@@ -118,8 +118,14 @@
         );	
         echo "<p>".form_input($naam)."</p>";
 
-
-        $postcodefield = $user_data['postcode']."-".$user_data['gemeente'];
+        if($user_data['gemeente'] != '')
+        {
+            $postcodefield = $user_data['postcode']."-".$user_data['gemeente'];
+        }
+        else
+        {
+            $postcodefield = $user_data['postcode'];
+        }
         $postcode = array(
             "name" => "postcode",
             "list"=>"postcode",
@@ -154,20 +160,24 @@
         );	
         echo "<p>".form_input($postcode)."</p>";	
     }
-    ?>
-    <input type="submit" class="btn btn-warning btn-lg btn-block" value="Volgende">
+?>
 </div>
 
+<div class="col-sm-12">
+    <input type="submit" class="btn btn-warning btn-lg btn-block" value="Volgende">
+</div>
+    
 <!-- Datalist met alle postcode opties die zich in de database bevinden. Deze datalist wordt achter het postcode input veld geplaats aan de hand van de id's -->
 <datalist id="postcode">
-    <?php
-            foreach($records as $rec){
-                    echo "<option value='".form_prep($rec->zipcode)."-".form_prep($rec->name)."'>\n"; 
-            }
-    ?>
+<?php
+    foreach($records as $rec)
+    {
+        echo "<option value='".form_prep($rec->zipcode)."-".form_prep($rec->name)."'>\n"; 
+    }
+?>
 </datalist>	
 
-        <?php
-                echo form_close();
-        ?>
-    </div>
+<?php
+    echo form_close();
+?>
+</div>

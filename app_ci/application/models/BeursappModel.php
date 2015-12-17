@@ -24,12 +24,29 @@ class BeursappModel extends CI_Model {
                 $query = $this->db->query($sql, $region);
                 
                 return $query->result();
-            }
-                           
+            }                        
             
         }
+        
+        public function getDiplomaLVs(){
+            $query = $this->db->query('SELECT id, name, crm_name FROM pt_diploma_level');
+            
+            return $query->result();
+        }
+        
+        public function getDiplomas($diplomaLV){
+            if(isset($diplomaLV)){
+                $sql = "SELECT type, sub, crm_type, crm_sub FROM pt_diploma_view where crm_level = ?" ;
+                
+                $query = $this->db->query($sql, $diplomaLV);
+                
+                return $query->result();
+            } 
+        }
+        
 
-                public function setUserData(){
+
+        public function setUserData(){
             if ($this->session->userdata('user_data')){
                 $user_data = $this->session->userdata('user_data');
 
