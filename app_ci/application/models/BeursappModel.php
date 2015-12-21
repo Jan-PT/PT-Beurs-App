@@ -44,8 +44,12 @@ class BeursappModel extends CI_Model {
             } 
         }
         
+        public function getDatumTDD(){
+            
+        }
 
 
+        
         public function setUserData(){
             if ($this->session->userdata('user_data')){
                 $user_data = $this->session->userdata('user_data');

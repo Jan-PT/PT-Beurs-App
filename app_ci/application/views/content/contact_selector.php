@@ -4,6 +4,19 @@
     $user_data = $this->session->userdata('user_data'); 
     
     if($user_data !== false){
+        if(isset($user_data['contact'])){
+            $contact = $user_data['contact'];
+        }
+        else{
+            $contact = false;
+        }
+            
+    }
+    if(isset($db_tdd))
+    foreach ($db_tdd as $val) {
+        var_dump($val);
+        echo "<br>\n";
+    
         
     }
     
@@ -19,12 +32,17 @@
 		?>
 			<div class="input-group input-group-lg">
                             <span class="input-group-addon">
-                                <input type="radio" value="tdd" name="contact" id="tdd" aria-label="..." selected="true">                                    
+                                <input type="radio" value="tdd" name="contact" id="tdd" aria-label="..." 
+                                       <?php 
+                                       if($contact === false)
+                                           echo " checked";
+                                       ?>
+                                       >                                    
                             </span>
                             <label class="form-control" for='tdd' aria-label="...">
                                 
                                 <div class="col-sm-6" style="margin-top: 45px; margin-bottom: 40px">
-                                    <label>
+                                    <label for='tdd'>
                                 We hebben een aantal data gereserveerd, wat lukt voor jou?
                                     </label>
                                 </div>
@@ -44,9 +62,9 @@
                             </div>
                             <div class="input-group input-group-lg">
                                 <span class="input-group-addon">
-                                <input type="checkbox" value="dd/mm/yyyy" name="tdd3"  id="tdd3" aria-label="...">
+                                <input type="checkbox" value="andere" name="tdd3"  id="tdd3" aria-label="...">
                                 </span>
-                                <label  class="form-control" for="tdd3" aria-label="...">dd/mm/yyyy</label>
+                                <label  class="form-control" for="tdd3" aria-label="...">Andere datum</label>
                             </div>
                             </label>
                                 </div>
@@ -56,7 +74,7 @@
                                 <input type="radio" value="afspraak" name="contact" id="afspraak" arial-label='...'>                                       
                             </span>
                             <label class="form-control" for="afspraak" aria-label='...'>
-                                Contacteer mij voor een andere afspraak.
+                                Contacteer mij voor een vrijblijvend Skype gesprek.
                             </label>
                         </div>
 			<div class="input-group input-group-lg">
@@ -85,8 +103,14 @@
     }
     else{
      document.getElementById("tdd1").disabled = true;    
-     document.getElementById("tdd2").disabled = true;    
+     document.getElementById("tdd1").checked = false;    
+     
+     document.getElementById("tdd2").disabled = true;
+     document.getElementById("tdd2").checked = false;    
+
      document.getElementById("tdd3").disabled = true;    
-    }
+     document.getElementById("tdd3").checked = false;    
+
+        }
   }  
 </script>

@@ -63,9 +63,13 @@
 			<td><?php echo $user_data['jobs'];?></td>
 		</tr>
 		<tr>
-			<th>Type: </th>
-			<td><?php echo $user_data['type'];?></td>
+			<th>Contact: </th>
+			<td><?php //echo $user_data[''];?></td>
 		</tr>
+<!--		<tr>
+			<th>Type: </th>
+			<td><?php // echo $user_data['type'];?></td>
+		</tr>-->
 	</table>
 	<BR>
 	<input type="submit" class="btn btn-lg btn-warning btn-block" value="Afsluiten">

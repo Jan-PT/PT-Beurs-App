@@ -27,8 +27,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 //$config['base_url'] = 'http://127.0.0.1:8080/app_ci/'; //Tablet config
 
 //$config['base_url'] = 'http://127.0.0.1/app_ci/'; //home localhost
-//$config['base_url'] = 'http://192.168.1.60/app_ci/'; //home networked
-$config['base_url'] = 'http://192.168.1.59/app_ci/'; // home wireless
+$config['base_url'] = 'http://192.168.1.60/app_ci/'; //home networked
+//$config['base_url'] = 'http://192.168.1.59/app_ci/'; // home wireless
 
 //$config['base_url'] = 'http://192.168.50.51/app_ci/'; // work wireless
 
@@ -430,7 +430,7 @@ $config['standardize_newlines'] = FALSE;
 |          for backwards compatibility purposes!
 |
 */
-$config['global_xss_filtering'] = FALSE;
+$config['global_xss_filtering'] = TRUE;
 
 /*
 |--------------------------------------------------------------------------

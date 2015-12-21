@@ -66,10 +66,11 @@ class Beursapp extends CI_Controller {
             $this->load->library("form_validation");
             
             $this->form_validation->set_message('alpha_dash_space', 'Naam mag geen nummers bevatten.');
+            $this->form_validation->set_message('plus_num_space', 'Gsm mag alleen nummers en spaties bevatten.');
             
             $this->form_validation->set_rules("voornaam", "voornaam", "required|callback_alpha_dash_space|min_length[3]|max_length[30]");
             $this->form_validation->set_rules("naam", "naam", "required|callback_alpha_dash_space|min_length[3]|max_length[30]);");
-            $this->form_validation->set_rules("gsm", "gsm nummer", "required|numeric|min_length[11]|max_length[12]");
+            $this->form_validation->set_rules("gsm", "gsm nummer", "required|callback_plus_num_space|min_length[11]|max_length[20]");
             $this->form_validation->set_rules("postcode", "postcode", "required|min_length[4]|max_length[50]");
             $this->form_validation->set_rules("email", "email", "required|valid_email|min_length[5]|max_length[96]");
 
@@ -101,7 +102,7 @@ class Beursapp extends CI_Controller {
                     $gemeente = '';
                 }
                 $gsm = $this->input->post('gsm');
-                
+                $gsm = str_replace(' ', '', $gsm);
                 if( strlen($gsm) == 11 )
                 {
                     $gsmeerst = substr($gsm, 0, 3);
@@ -132,6 +133,7 @@ class Beursapp extends CI_Controller {
                     'postcode' => $postcode,
                     'gemeente' => $gemeente,
                     'email' => $this->input->post('email'),
+                    'andere_school' => false,
                     'provincie' => '',
                     'school' => '',
                     'diplomaLV' => '',
@@ -139,24 +141,10 @@ class Beursapp extends CI_Controller {
                     'grad_maand' => '',
                     'grad_jaar' => '',
                     'jobs' => '',
-                    'type' => '',
+                    'type' => ''
                 );
 
-                $user_data = $this->session->userdata('user_data');
-                if ($user_data){
-                    $data['provincie'] = $user_data['provincie'];
-                    $data['school'] = $user_data['school'];
-                    $data['diplomaLV'] = $user_data['diplomaLV'];
-                    $data['diploma'] = $user_data['diploma'];
-                    $data['jobs'] = $user_data['jobs'];
-                    $data['type'] = $user_data['type'];
-                }
-
-                //$this->session->set_userdata('user_data', $data);
                 $this->set_session($data);
-
-                //Poging tot toevoegen van data aan datacollector-
-                //$this->dataCollector = $data;
                 $this->region();
             }
 	}
@@ -170,14 +158,14 @@ class Beursapp extends CI_Controller {
             $data = $this->session->userdata('user_data');
             $data['provincie'] = $this->input->post('provincie');
             
-            $this->set_session($data);
+            //$this->set_session($data);
             if($data['provincie'] != ''){
-                //$this->set_session($data);
+                $this->set_session($data);
                 if($data['provincie'] != 'Andere'){
                     $this->school();
                 }
                 else{
-                    //If andere go to Andere
+                    $this->andere_school();
                 }
                 
                 
@@ -194,53 +182,81 @@ class Beursapp extends CI_Controller {
             $user_data = $this->session->userdata('user_data');
             $user_data['school'] = $this->input->post('school');
             
-
             
             if($user_data['school'] != ''){
-                $this->set_session($user_data);
-                $this->diploma();
+                if($user_data['school'] != 'Andere'){
+                    $this->set_session($user_data);
+                    $this->diploma();
+                }
+                else {
+                    $this->andere_school();
+
+                }
             }
             else{
-                if( 
-                    isset( $user_data['provincie']) 
+                if( isset( $user_data['provincie']) 
                     && $user_data['provincie'] != ''
-                    && $user_data['provincie'] != 'Andere')
+                    )
                 {
-                    $code['db_schools'] = $this->BeursappModel->getSchools($user_data['provincie']);
-                    $this->viewLoader('content/school_selector', array('state' => 'schoolForm'), $code);
+                    if( isset( $user_data['andere_school'] ) 
+                        && $user_data['andere_school'] == false
+                            ){
+                        
+                        $code['db_schools'] = $this->BeursappModel->getSchools($user_data['provincie']);
+                        $this->viewLoader('content/school_selector', array('state' => 'schoolForm'), $code);
+                    }
+                    else{
+                        $this->andere_school();
+                    }
                 }
                 else{
-                    //If andere go to Andere
+                    $this->region();
                 }
             }		
 	}
-	
-	# Functie die geladen wordt bij het verzenden van het form op diploma_selector
+        
+        public function andere_schoolForm(){
+            
+        }
+
+
+        # Functie die geladen wordt bij het verzenden van het form op diploma_selector
 	public function diplomaForm(){
+            
+            
+            $this->load->library("form_validation");
+            
+            $this->form_validation->set_message('alpha_dash_space', 'diploma mag geen nummers bevatten.');
+            $this->form_validation->set_message('month_year', 'Kies een afstudeer maand en/of jaar.');
+            
+            $this->form_validation->set_rules("diplomaLV", "diploma level", "required|min_length[3]|max_length[25]");
+            $this->form_validation->set_rules("diploma", "diploma", "required|min_length[3]|max_length[50]);");
+            $this->form_validation->set_rules("grad_maand", "afstudeer maand", "required|numeric|callback_month_year|min_length[1]|max_length[2]");
+            $this->form_validation->set_rules("grad_jaar", "afstudeer jaar", "required|numeric|callback_month_year|min_length[1]|max_length[4]");
+            
+            
             
             $this->load->model('BeursappModel');
             $data['db_diplomaLVs'] = $this->BeursappModel->getDiplomaLVs();
             
-            $user_data = $this->session->userdata('user_data');
-            $user_data['diplomaLV'] = $this->input->post('diplomaLV');
-            $user_data['diploma'] = $this->input->post('diploma');
-            $user_data['grad_maand'] = $this->input->post('grad_maand');
-            $user_data['grad_jaar'] = $this->input->post('grad_jaar');
-
-            if($user_data['diplomaLV'] != '' 
-                    && $user_data['diploma'] != ''
-                    && $user_data['grad_maand'] != ''
-                    && $user_data['grad_jaar'] != ''){
-                $this->set_session($user_data);
-                $this->job();
-            }
-            else{
-                
+            if ($this->form_validation->run() == false)
+            {
                 if( isset($user_data['diplomaLV']) && $user_data['diplomaLV'] != '' ){
                     $data['diplomas'] = $this->BeursappModel->getDiplomas($user_data['diplomaLV']);
                 }
-                $this->viewLoader('content/diploma_selector', array('state' => 'diplomaForm'), $data); 
-            }		
+                $this->viewLoader('content/diploma_selector', array('state' => 'diplomaForm'), $data);      
+            }
+            else{
+                $user_data = $this->session->userdata('user_data');
+                $user_data['diplomaLV'] = urldecode($this->input->post('diplomaLV'));
+                $user_data['diploma'] = $this->input->post('diploma');
+                $user_data['grad_maand'] = $this->input->post('grad_maand');
+                $user_data['grad_jaar'] = $this->input->post('grad_jaar');
+
+                    $this->set_session($user_data);
+                    $this->job();
+
+            }
 	}
 	
 	# Functie die geladen wordt bij het verzenden van het form op job_selector
@@ -314,7 +330,11 @@ class Beursapp extends CI_Controller {
             $this->session->sess_destroy();
             $this->home();
 	}
-	
+        public function andere_school(){
+        
+            $this->viewLoader('content/andere_school_selector', array('state' => 'andere_school'));
+
+        }
 	# View met de verschillende provincies 
 	public function region (){
             $this->load->model('BeursappModel');
@@ -425,6 +445,15 @@ class Beursapp extends CI_Controller {
     {     
         return ( ! preg_match("/^([-a-z_ ])+$/i", $str)) ? FALSE : TRUE;
     } 
+    function plus_num_space($str)
+    {     
+        return ( ! preg_match("/[+]{1}[0-9 ]+/", $str)) ? FALSE : TRUE;
+    } 
+
+    function month_year($data){
+        return $data > 0;
+            
+    }
 	
     public function contactVerify($contact, $otherField) {
         return ($contact != '' || $this->input->post($otherField) != '');
@@ -436,16 +465,16 @@ class Beursapp extends CI_Controller {
         if ($this->input->get('q') != NULL )
         {
             $this->load->model('BeursappModel');
-
-            
+ 
             $diplomaLV = $this->input->get('q', false);
-            echo $diplomaLV;
-            echo $_GET['q'];
+//            echo $diplomaLV;
+//            echo $_GET['q'];
             $data['diplomas'] = $this->BeursappModel->getDiplomas($diplomaLV);
             
             $this->load->view('templates/diplomas',$data);
 
         }
+
     }
     
 }

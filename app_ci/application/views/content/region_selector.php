@@ -12,7 +12,7 @@
             . "<button type=\"submit\" name=\"provincie\" id=\"provincie\" "
 
             . "value=\"";
-        echo form_prep($region->crm_name); 
+        echo form_prep($db_region->crm_name); 
         echo "\"";
 
         echo "class=\"btn btn-lg btn-block ";
