@@ -5,7 +5,8 @@ function showDiploma(str) {
     if (str == "") {
         document.getElementById("diploma").innerHTML = "";
 
-        document.getElementById("diploma_list").placeholder = "Kies uwe diploma niveau hierboven eerst.";
+        document.getElementById("diploma_list").placeholder = 
+                "Kies eerst hierboven je diploma niveau.";
 
         return;
     } else { 
@@ -17,17 +18,17 @@ function showDiploma(str) {
             xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
         }
         xmlhttp.onreadystatechange = function() {
-            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+            if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
                 document.getElementById("diploma").innerHTML = xmlhttp.responseText;
             }
         };
 
-        xmlhttp.open("GET","<?php echo base_url(); ?>beursapp/getDiploma?q="+ str,true);
+        xmlhttp.open("GET","<?php echo base_url(); ?>index.php/beursapp/getDiploma?q="+ str,true);
         //xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 
         xmlhttp.send();
         
-        document.getElementById("diploma_list").placeholder = "Kies of typ uwe diploma hier.";
+        document.getElementById("diploma_list").placeholder = "Kies of typ uw diploma hier.";
         return;
     }
 }
@@ -53,6 +54,11 @@ function showDiploma(str) {
 
 	<div id="info" class="col-sm-12 form-group">
 <?php
+//    echo '<br>user_data <br>';
+//    var_dump($user_data);
+//    
+//    echo '<br>post <br>';
+//    var_dump($_POST);
 
     echo validation_errors();
 
@@ -144,7 +150,7 @@ function showDiploma(str) {
 <BR>
     <input list="diploma" name="diploma" id="diploma_list"
            class="form-control input-lg" 
-           placeholder="Kies uwe diploma niveau hierboven eerst."
+           placeholder="Kies eerst hierboven uw diploma niveau."
 <?php 
     # Indien er al een diploma in de sessie zit wordt deze terug in het veld geladen.
     #  Anders is het veld nog leeg
@@ -183,10 +189,12 @@ function showDiploma(str) {
     $selected_year = set_value('grad_jaar');
 
     if ($user_data !== false){
-       if( isset($user_data['grad_maand'])) {
+       if( isset($user_data['grad_maand'] ) 
+            && $user_data['grad_maand'] != '') {
             $selected_month = $user_data['grad_maand'];
         }
-       if( isset($user_data['grad_jaar'])) {
+       if( isset($user_data['grad_jaar'])
+               && $user_data['grad_jaar'] != '') {
             $selected_year = $user_data['grad_jaar'];
         }
     }

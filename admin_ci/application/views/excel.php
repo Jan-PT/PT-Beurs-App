@@ -1,5 +1,6 @@
 <?php
-header("Content-type: application/vnd-ms-excel");
+//header("Content-type: application/vnd-ms-excel");
+header("Content-type: application/vnd.ms-excel");
  
 // Defines the name of the export file
 header("Content-Disposition: attachment; filename=export@".date('d-m-Y|H:i:s', time()).".xls");

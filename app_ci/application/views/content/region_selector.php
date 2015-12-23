@@ -8,6 +8,8 @@
     
     function printButton($db_region, $region)
     {
+        $test = false;
+        
         echo "<p>"
             . "<button type=\"submit\" name=\"provincie\" id=\"provincie\" "
 
@@ -17,6 +19,7 @@
 
         echo "class=\"btn btn-lg btn-block ";
         if($region !== false && $region == $db_region->crm_name){
+            $test = true;
             echo "btn-success";
         }
         else{
@@ -28,7 +31,7 @@
         echo form_prep($db_region->name);
         echo "</button>"
              . "</p>\n";
-        
+        return $test;
     }
 
 
@@ -45,7 +48,11 @@
 
 <div class="panel-body">
     <div id="info" class="form-group">
+    </div>
 <?php 
+
+//    var_dump($user_data);
+
     echo form_open("beursapp/regionForm");
             
 //        //testing sql output
@@ -69,6 +76,7 @@
 //        echo "size of ". $size_records . "<br>";         
 //        echo "prov ".$region ."<br><br>";
 ?>
+    
         <div class="col-sm-6">
 <?php
     
@@ -106,25 +114,13 @@
         }
     }
 ?>
-            <p><button type="submit" name="provincie" id="provincie" value="Andere" class="btn btn-lg btn-block btn-warning">Andere provincie</button></p>
+            <p><button type="submit" name="provincie" id="provincie" value="Andere" class="btn btn-lg btn-block btn-warning">Ander</button></p>
         </div>
 <?php        
-                    #  Gaat kijken of er al een provincie geselecteerd was en deze als een groene button tonen ipv de oranje
+    #  Gaat kijken of er al een provincie geselecteerd was en deze als een groene button tonen ipv de oranje
 
-			  # Als er nog geen provincie in de sessie staat dan blijven alle knoppen gewoon oranje.
-?>
-<!--            <div class="col-sm-6">
-                <p><button type="submit" name="provincie" id="provincie" value="Antwerpen" class="btn btn-lg btn-block btn-warning">Antwerpen</button></p>
-                <p><button type="submit" name="provincie" id="provincie" value="Brussel" class="btn btn-lg btn-block btn-warning">Brussel</button></p>
-                <p><button type="submit" name="provincie" id="provincie" value="Oost-Vlaanderen" class="btn btn-lg btn-block btn-warning">Oost-Vlaanderen</button></p>
-                <p><button type="submit" name="provincie" id="provincie" value="Limburg" class="btn btn-lg btn-block btn-warning">Limburg</button></p>
-            </div>
-            <div class="col-sm-6">
-                <p><button type="submit" name="provincie" id="provincie" value="Vlaams-Brabant" class="btn btn-lg btn-block btn-warning">Vlaams-Brabant</button></p>
-                <p><button type="submit" name="provincie" id="provincie" value="West-Vlaanderen" class="btn btn-lg btn-block btn-warning">West-Vlaanderen</button></p>
-                <p><button type="submit" name="provincie" id="provincie" value="Andere" class="btn btn-lg btn-block btn-warning">Andere</button></p>
-            </div>-->
-<?php 
+    # Als er nog geen provincie in de sessie staat dan blijven alle knoppen gewoon oranje.
+ 
     echo form_close(); 
 ?>
     </div>

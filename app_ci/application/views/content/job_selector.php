@@ -7,9 +7,9 @@
     {
         $jobs = $user_data['jobs'];
     }
-    else
+    else{
         $jobs = '';
-
+    }
 ?>
 	<h1>In welke functie(s) ben je geïnteresseerd?</h1>
 </div>

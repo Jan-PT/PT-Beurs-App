@@ -6,6 +6,7 @@
     
 </head>
 <body>
-            <a href="index.php/admin/getexcel">Click here to export data</a>
+    <p><a href="<?php echo base_url('/admin/getexcel');?>">Click here to export data</a></p>
+    <p><a href="<?php echo base_url('/admin/sendMail');?>">Click here to send mail</a></p>
 </body>
 </html>

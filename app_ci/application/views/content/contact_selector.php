@@ -12,23 +12,27 @@
         }
             
     }
-    if(isset($db_tdd))
-    foreach ($db_tdd as $val) {
-        var_dump($val);
-        echo "<br>\n";
     
-        
-    }
+////Debug 
+//    echo '<br>post <br>';
+//    var_dump($_POST);
+//    
+//    echo '<br>user_data <br>';
+//    var_dump($user_data);
+    
     
 ?>
-	<h1>Plan onmiddellijk een afspraak met ons</h1>
+    <h1>We contacteren je graag... </h1>
+<!--            <h1>Plan onmiddellijk een afspraak met ons</h1>-->
         <p>
         </p>
 </div>
 <div class="panel-body">
     <div id="info" class="form-group" onchange="setTDD();">
 		<?php
-			echo form_open("beursapp/contactForm");
+			
+                    $attributes = array('id' => 'contactForm');
+                    echo form_open("beursapp/contactForm", $attributes);
 		?>
 			<div class="input-group input-group-lg">
                             <span class="input-group-addon">
@@ -41,76 +45,148 @@
                             </span>
                             <label class="form-control" for='tdd' aria-label="...">
                                 
-                                <div class="col-sm-6" style="margin-top: 45px; margin-bottom: 40px">
+                                <div class="col-sm-6" style="margin-top: 50px; margin-bottom: 40px">
                                     <label for='tdd'>
-                                We hebben een aantal data gereserveerd, wat lukt voor jou?
+                                        Plan onmiddellijk je afspraak op één van onze Talent Detection Days
+<!--                                We hebben een aantal data gereserveerd, wat lukt voor jou?-->
                                     </label>
                                 </div>
                                 <div class="col-sm-6">
-                            <div class="input-group input-group-lg">
-                                 
-                                <span class="input-group-addon">
-                                <input type="checkbox" value="dd/mm/yyyy" name="tdd1"  id="tdd1" aria-label="...">
-                                </span>
-                                <label  class="form-control" for="tdd1" aria-label="...">dd/mm/yyyy</label>
-                            </div>
-                            <div class="input-group input-group-lg">
-                                <span class="input-group-addon">
-                                <input type="checkbox" value="dd/mm/yyyy" name="tdd2"  id="tdd2" aria-label="...">
-                                </span>
-                                <label  class="form-control" for="tdd2" aria-label="...">dd/mm/yyyy</label>
-                            </div>
-                            <div class="input-group input-group-lg">
-                                <span class="input-group-addon">
-                                <input type="checkbox" value="andere" name="tdd3"  id="tdd3" aria-label="...">
-                                </span>
-                                <label  class="form-control" for="tdd3" aria-label="...">Andere datum</label>
-                            </div>
-                            </label>
-                                </div>
-			</div>
-			<div class="input-group input-group-lg">
-                            <span class="input-group-addon">
-                                <input type="radio" value="afspraak" name="contact" id="afspraak" arial-label='...'>                                       
-                            </span>
-                            <label class="form-control" for="afspraak" aria-label='...'>
-                                Contacteer mij voor een vrijblijvend Skype gesprek.
-                            </label>
-                        </div>
-			<div class="input-group input-group-lg">
-                            <span class="input-group-addon">
-                                <input type="radio" value="reden" name="contact" id="reden" arial-label='...'>                                       
-                            </span>
-                            <label class="form-control" for="reden" aria-label='...'>
-                                Contacteer mij voor een andere reden.
-                            </label>
-                        </div>
-			<BR>
-			<input type="submit" class="btn btn-lg btn-warning btn-block" value="Volgende">
-		<?php
-			echo form_close(); 
-		?>
-	</div>
+                            
+<?php
+    
+        
+    if( isset($db_data) 
+        && count($db_data) <= 2
+        && count($db_data) > 0
+        )
+    {
+
+        //echo count($db_data);
+        $i = 1;
+        foreach($db_data as $val){
+
+            $date = $val->datum;    
+            $date_e = DateTime::createFromFormat('Y-m-d', $date)->format('d M Y');
+?>
+
+    <div class="input-group input-group-lg">
+        <span class="input-group-addon">
+        <input type="checkbox" 
+               value="<?php  echo $date; ?>" 
+               name="<?php  echo 'tdd'.$i; ?>"  
+               id="<?php  echo 'tdd'.$i; ?>" aria-label="...">
+        </span>
+        <label  class="form-control" 
+                for="<?php  echo 'tdd'.$i; ?>" 
+                aria-label="...">
+            <?php  echo $date_e; ?>        
+        </label>
+    </div>
+<?php
+    
+            $i++;
+        }
+    }
+?>
+            <div class="input-group input-group-lg">
+                <span class="input-group-addon">
+                <input type="checkbox" 
+                       value="andere" 
+                       name="tdd3"  
+                       id="tdd3" 
+                       aria-label="...">
+                </span>
+                <label  class="form-control" 
+                        for="tdd3" 
+                        aria-label="...">
+                    Andere datum
+                </label>
+            </div>
+            </label>
+                </div>
+        </div>
+        <div class="input-group input-group-lg">
+            <span class="input-group-addon">
+                <input type="radio" value="skype" name="contact" id="skype" arial-label='...'>                                       
+            </span>
+            <label class="form-control" for="skype" aria-label='...'>
+                Contacteer mij voor een vrijblijvend Skype gesprek.
+            </label>
+        </div>
+        <div class="input-group input-group-lg">
+            <span class="input-group-addon">
+                <input type="radio" value="andere" name="contact" id="andere_reden" arial-label='...'>                                       
+            </span>
+            <label class="form-control" for="andere_reden" aria-label='...'>
+                Contacteer mij voor een andere reden.
+            </label>
+        </div>
+        <BR>
+        <input type="button" class="btn btn-lg btn-warning btn-block" value="Volgende" onclick="checkTDD();">
+<?php
+        echo form_close(); 
+?>
+</div>
 </div>
 
 <script>
   function setTDD(){
-    var el = document.getElementById("tdd");
-    if(el.checked){
-        document.getElementById("tdd1").disabled = false;
-        document.getElementById("tdd2").disabled = false;
-        document.getElementById("tdd3").disabled = false;
+    var Sel_tdd = document.getElementById("tdd");
+    var Check_tdd1 = document.getElementById("tdd1");
+    var Check_tdd2 = document.getElementById("tdd2");
+    var Check_ander = document.getElementById("tdd3");
+    
+    if(Sel_tdd.checked){
+        
+
+        Check_ander.disabled = false;
+    
+        if(Check_ander.checked){
+            Check_tdd1.disabled = true;
+            Check_tdd2.disabled = true;
+        }
+        else{
+            Check_tdd1.disabled = false;
+            Check_tdd2.disabled = false;
+            //Check_tdd1.checked = false;
+            //Check_tdd2.checked = false;
+                
+        }          
     }
     else{
-     document.getElementById("tdd1").disabled = true;    
-     document.getElementById("tdd1").checked = false;    
+     Check_tdd1.disabled = true;    
+     //Check_tdd1.checked = false;    
      
-     document.getElementById("tdd2").disabled = true;
-     document.getElementById("tdd2").checked = false;    
+     Check_tdd2.disabled = true;
+     //Check_tdd2.checked = false;    
 
-     document.getElementById("tdd3").disabled = true;    
-     document.getElementById("tdd3").checked = false;    
+     Check_ander.disabled = true;    
+     //Check_ander.checked = false;    
 
+    }
+  }  
+  function checkTDD(){
+    var form = document.getElementById('contactForm');
+    var Sel_tdd = document.getElementById("tdd");
+    var Check_tdd1 = document.getElementById("tdd1");
+    var Check_tdd2 = document.getElementById("tdd2");
+    var Check_ander = document.getElementById("tdd3");
+    
+    if(Sel_tdd.checked){
+        if( !Check_tdd1.checked
+            && !Check_tdd2.checked
+            && !Check_ander.checked
+                ){
+            alert('Selecteer aub één van deze data of "andere datum".');
+            return;
         }
+        
+        form.submit();
+                  
+    }
+    else{
+        form.submit();
+    }
   }  
 </script>

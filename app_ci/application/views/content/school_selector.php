@@ -49,7 +49,11 @@
 </div>
 <div class="panel-body">
     <div id="info" class="form-group">
+    </div>
 <?php
+
+//    var_dump($user_data);
+
 
     echo form_open("beursapp/schoolForm");
     # Gaat kijken of er al een school geselecteerd was en deze als een groene button tonen ipv de oranje
@@ -124,7 +128,14 @@ else {
 }
 
 ?>
-            <p><button type="submit" name="school" id="school" value="Andere" class="btn btn-lg btn-block btn-warning">Andere school</button></p>
+            <p><button type="submit" 
+                       name="school" 
+                       id="school" 
+                       value="Andere" 
+                       class="btn btn-lg btn-block btn-warning">
+                    Ander
+                </button>
+            </p>
         </div>                        
                         
 

@@ -36,11 +36,13 @@ class Beursapp extends CI_Controller {
 	# Standaard functie van de Beursapp controller (verwijst in dit geval door naar de home functie)
 	public function index()
 	{
+            $this->set_session(array(), TRUE);
             $this->home();
 	}
 	
 	# View waarvan de studenten starten
 	public function home (){
+            
             $this->load->view('content/start_page');
 	}
 	
@@ -69,7 +71,7 @@ class Beursapp extends CI_Controller {
             $this->form_validation->set_message('plus_num_space', 'Gsm mag alleen nummers en spaties bevatten.');
             
             $this->form_validation->set_rules("voornaam", "voornaam", "required|callback_alpha_dash_space|min_length[3]|max_length[30]");
-            $this->form_validation->set_rules("naam", "naam", "required|callback_alpha_dash_space|min_length[3]|max_length[30]);");
+            $this->form_validation->set_rules("naam", "naam", "required|callback_alpha_dash_space|min_length[3]|max_length[30]");
             $this->form_validation->set_rules("gsm", "gsm nummer", "required|callback_plus_num_space|min_length[11]|max_length[20]");
             $this->form_validation->set_rules("postcode", "postcode", "required|min_length[4]|max_length[50]");
             $this->form_validation->set_rules("email", "email", "required|valid_email|min_length[5]|max_length[96]");
@@ -81,6 +83,8 @@ class Beursapp extends CI_Controller {
             }
             else
             {
+                $user_data = $this->session->userdata('user_data');
+
                 #Postcode en gemeente veld splitsen op '-'
                 $postcodegemeente = $this->input->post('postcode');
                 if(strpos($postcodegemeente, "-") !== false)
@@ -101,50 +105,17 @@ class Beursapp extends CI_Controller {
                     $postcode = $postcodegemeente;
                     $gemeente = '';
                 }
-                $gsm = $this->input->post('gsm');
-                $gsm = str_replace(' ', '', $gsm);
-                if( strlen($gsm) == 11 )
-                {
-                    $gsmeerst = substr($gsm, 0, 3);
-                    $gsmtweed = substr($gsm, 3, 1);
-                    $gsmderde = substr($gsm, 4, 3);
-                    $gsmvierd = substr($gsm, 7, 2);
-                    $gsmvijfd = substr($gsm, 9, 2);
-                    
-                    $strGsm = $gsmeerst . " " . $gsmtweed . " " . $gsmderde . " " . $gsmvierd . " " . $gsmvijfd;
-                    
-                }
-                else
-                {
-                    $gsmeerst = substr($gsm, 0, 3);
-                    $gsmtweed = substr($gsm, 3, 3);
-                    $gsmderde = substr($gsm, 6, 2);
-                    $gsmvierd = substr($gsm, 8, 2);
-                    $gsmvijfd = substr($gsm, 10, 2);
-                
-                    $strGsm = $gsmeerst . " " . $gsmtweed . " " . $gsmderde . " " . $gsmvierd . " " . $gsmvijfd;
 
-                }
-                
-                $data = array (
-                    'naam'  => $this->input->post('naam'),
-                    'voornaam' => $this->input->post('voornaam'),
-                    'gsm' => $strGsm,
-                    'postcode' => $postcode,
-                    'gemeente' => $gemeente,
-                    'email' => $this->input->post('email'),
-                    'andere_school' => false,
-                    'provincie' => '',
-                    'school' => '',
-                    'diplomaLV' => '',
-                    'diploma' => '',
-                    'grad_maand' => '',
-                    'grad_jaar' => '',
-                    'jobs' => '',
-                    'type' => ''
-                );
+                $user_data['naam']  = $this->input->post('naam');
+                $user_data['voornaam'] = $this->input->post('voornaam');
+                $user_data['gsm'] = $this->input->post('gsm');
+                $user_data['postcode'] = $postcode;
+                $user_data['gemeente'] = $gemeente;
+                $user_data['email'] = $this->input->post('email');
+                $user_data['andere_school'] = false;
 
-                $this->set_session($data);
+
+                $this->set_session($user_data);
                 $this->region();
             }
 	}
@@ -152,26 +123,29 @@ class Beursapp extends CI_Controller {
 	# Functie die geladen wordt bij het verzenden van het form op region_selector
 	public function regionForm(){
             $this->load->model('BeursappModel');
-            $codes['db_regions'] = $this->BeursappModel->getRegions();
+            $data['db_regions'] = $this->BeursappModel->getRegions();
             
             
-            $data = $this->session->userdata('user_data');
-            $data['provincie'] = $this->input->post('provincie');
+            $user_data = $this->session->userdata('user_data');
+            $user_data['provincie'] = $this->input->post('provincie');
             
             //$this->set_session($data);
-            if($data['provincie'] != ''){
-                $this->set_session($data);
-                if($data['provincie'] != 'Andere'){
+            if($user_data['provincie'] != ''){
+                if($user_data['provincie'] != 'Andere'){
+                    $user_data['andere_school'] = FALSE;
+                    $this->set_session($user_data);
                     $this->school();
                 }
                 else{
+                    $user_data['andere_school'] = TRUE;
+                    $user_data['provincie'] = '';
+                    $this->set_session($user_data);
+                    unset( $_POST );
                     $this->andere_school();
                 }
-                
-                
             }
             else{
-                $this->viewLoader('content/region_selector', array('state' => 'regionForm'), $codes ); 
+                $this->viewLoader('content/region_selector', array('state' => 'regionForm'), $data ); 
             }		
 	}
 	
@@ -185,10 +159,16 @@ class Beursapp extends CI_Controller {
             
             if($user_data['school'] != ''){
                 if($user_data['school'] != 'Andere'){
+                    
+                    $user_data['andere_school'] = FALSE;
                     $this->set_session($user_data);
                     $this->diploma();
                 }
                 else {
+                    $user_data['andere_school'] = TRUE;
+                    $user_data['school'] = '';
+                    $this->set_session($user_data);
+                    unset( $_POST );
                     $this->andere_school();
 
                 }
@@ -202,8 +182,8 @@ class Beursapp extends CI_Controller {
                         && $user_data['andere_school'] == false
                             ){
                         
-                        $code['db_schools'] = $this->BeursappModel->getSchools($user_data['provincie']);
-                        $this->viewLoader('content/school_selector', array('state' => 'schoolForm'), $code);
+                        $data['db_schools'] = $this->BeursappModel->getSchools($user_data['provincie']);
+                        $this->viewLoader('content/school_selector', array('state' => 'schoolForm'), $data);
                     }
                     else{
                         $this->andere_school();
@@ -216,6 +196,32 @@ class Beursapp extends CI_Controller {
 	}
         
         public function andere_schoolForm(){
+            $this->load->model('BeursappModel');
+
+            $user_data = $this->session->userdata('user_data');
+            $user_data['provincie'] = $this->input->post('provincie'); 
+            $user_data['school'] = $this->input->post('school');
+            
+                        # Form validation regels
+            $this->load->library("form_validation");
+            
+            $this->form_validation->set_message('alpha_dash', 'regio-veld mag alleen letters en - bevatten.');
+            $this->form_validation->set_message('alpha_dash_space', 'school-veld mag alleen letters, - en spaties bevatten.');
+            
+            $this->form_validation->set_rules("provincie", "provincie", "required|callback_alpha_dash|min_length[3]|max_length[30]");
+            $this->form_validation->set_rules("school", "school", "required|callback_alpha_dash_space|min_length[3]|max_length[30]");
+
+            # Als de regels falen wordt de pagina opnieuw geladen en anders wordt de sessie aangemaakt en naar de volgende functie doorgegaan.
+            if ($this->form_validation->run() == false)
+            {
+                $this->viewLoader('content/andere_school_selector', array('state' => 'andere_schoolForm'));      
+            }
+            else
+            {
+                $this->set_session($user_data);
+            
+                $this->diploma();
+            }
             
         }
 
@@ -223,6 +229,7 @@ class Beursapp extends CI_Controller {
         # Functie die geladen wordt bij het verzenden van het form op diploma_selector
 	public function diplomaForm(){
             
+            $user_data = $this->session->userdata('user_data');
             
             $this->load->library("form_validation");
             
@@ -248,7 +255,8 @@ class Beursapp extends CI_Controller {
             }
             else{
                 $user_data = $this->session->userdata('user_data');
-                $user_data['diplomaLV'] = urldecode($this->input->post('diplomaLV'));
+//                $user_data['diplomaLV'] = urldecode($this->input->post('diplomaLV'));
+                $user_data['diplomaLV'] = $this->input->post('diplomaLV');
                 $user_data['diploma'] = $this->input->post('diploma');
                 $user_data['grad_maand'] = $this->input->post('grad_maand');
                 $user_data['grad_jaar'] = $this->input->post('grad_jaar');
@@ -261,23 +269,25 @@ class Beursapp extends CI_Controller {
 	
 	# Functie die geladen wordt bij het verzenden van het form op job_selector
 	public function jobForm(){
-            $data = $this->session->userdata('user_data');
-            $data['jobs']='';
+            $user_data = $this->session->userdata('user_data');
+            $user_data['jobs']='';
+            
+            if($this->input->post('ict_applications')!=null){
+                $user_data['jobs'] .= $this->input->post('ict_applications')."-";
+            }
+            if($this->input->post('ict_infrastructure')!=null){
+                $user_data['jobs'] .= $this->input->post('ict_infrastructure'). "-";
+            }
             if($this->input->post('management')!=null){
-                $data['jobs'] .= $this->input->post('management')."-";
+                $user_data['jobs'] .= $this->input->post('management')."-";
             }
             if($this->input->post('sales')!=null){
-                $data['jobs'] .= $this->input->post('sales')."-";
-            }
-            if($this->input->post('ict_applications')!=null){
-                $data['jobs'] .= $this->input->post('ict_applications')."-";
-            }
-            if($this->input->post('ict_development')!=null){
-                $data['jobs'] .= $this->input->post('ict_development');
+                $user_data['jobs'] .= $this->input->post('sales')."-";
             }
 
-            if($data['jobs'] != ''){
-                $this->set_session($data);
+
+            if($user_data['jobs'] != ''){
+                $this->set_session($user_data);
                 $this->contact();
             }
             else{
@@ -287,20 +297,20 @@ class Beursapp extends CI_Controller {
 	
 	# Functie die geladen wordt bij het verzenden van het form op job_type
 	public function typeForm(){
-            $data = $this->session->userdata('user_data');
-            $data['type']='';
+            $user_data = $this->session->userdata('user_data');
+            $user_data['type']='';
             if($this->input->post('vaste_job')!=null){
-                $data['type'] .= $this->input->post('vaste_job')."-";
+                $user_data['type'] .= $this->input->post('vaste_job')."-";
             }
             if($this->input->post('stage')!=null){
-                $data['type'] .= $this->input->post('stage')."-";
+                $user_data['type'] .= $this->input->post('stage')."-";
             }
             if($this->input->post('andere')!=null){
-                $data['type'] .= $this->input->post('andere');
+                $user_data['type'] .= $this->input->post('andere');
             }
 
-            if($data['type'] != ''){
-                $this->set_session($data);
+            if($user_data['type'] != ''){
+                $this->set_session($user_data);
                 $this->processed();
             }
             else{
@@ -309,17 +319,38 @@ class Beursapp extends CI_Controller {
 	}
 	# Functie die geladen wordt bij het verzenden van het form op job_type
 	public function contactForm(){
-            $data = $this->session->userdata('user_data');
+            $this->load->model('BeursappModel');
+            
+            $user_data = $this->session->userdata('user_data');
+            $data['db_data'] = $this->BeursappModel->getDatumTDD();
+            
+            $user_data['contact'] = $this->input->post('contact');
+            $user_data['tdd'] = '';
 
             
-//            if($data['type'] != ''){
-//                $this->set_session($data);
-//                $this->processed();
-//            }
-//            else{
-//                $this->viewLoader('content/contact_selector', array('state' => 'typeForm')); 
-//            }
-            $this->processed();
+            
+            if($user_data['contact'] != ''){
+                
+                if($user_data['contact'] == 'tdd'){
+                    if($this->input->post('tdd3') != null){
+                        $user_data['tdd'] .= $this->input->post('tdd3');
+                    }
+                    else{
+                        if($this->input->post('tdd1') != null){
+                            $user_data['tdd'] .= $this->input->post('tdd1')."_";
+                        }
+                        if($this->input->post('tdd2') != null){
+                            $user_data['tdd'] .= $this->input->post('tdd2')."_";
+                        }
+                    }
+                }
+                
+                $this->set_session($user_data);
+                $this->processed();
+            }
+            else{
+                $this->viewLoader('content/contact_selector', array('state' => 'contactForm'), $data); 
+            }
         }
 	
 	# Functie die geladen wordt bij het verzenden van het form op data_processed
@@ -328,8 +359,19 @@ class Beursapp extends CI_Controller {
             $this->load->model('BeursappModel');
             $this->BeursappModel->setUserData();
             $this->session->sess_destroy();
-            $this->home();
+            $this->personalLogo();
 	}
+        
+        public function personalLogoForm(){
+            $this->endpage();
+        }
+        public function endpageForm(){
+            $this->index();
+        }
+
+
+
+
         public function andere_school(){
         
             $this->viewLoader('content/andere_school_selector', array('state' => 'andere_school'));
@@ -338,8 +380,8 @@ class Beursapp extends CI_Controller {
 	# View met de verschillende provincies 
 	public function region (){
             $this->load->model('BeursappModel');
-            $codes['db_regions'] = $this->BeursappModel->getRegions();
-            $this->viewLoader('content/region_selector', array('state' => 'region'), $codes );
+            $data['db_regions'] = $this->BeursappModel->getRegions();
+            $this->viewLoader('content/region_selector', array('state' => 'region'), $data );
 	}
 	
 	# View met de scholen binnen de gekozen provincie
@@ -381,7 +423,12 @@ class Beursapp extends CI_Controller {
 	}
 	# View met de mogelijke jobs
 	public function contact(){
-            $this->viewLoader('content/contact_selector', array('state' => 'contact'));
+            
+            $this->load->model('BeursappModel');
+                       
+            $data['db_data'] = $this->BeursappModel->getDatumTDD();
+            
+            $this->viewLoader('content/contact_selector', array('state' => 'contact'), $data);
 	}
 	
 	# View met de type jobs (stage, vaste job)
@@ -395,6 +442,13 @@ class Beursapp extends CI_Controller {
             $this->viewLoader('content/data_processed', array('state' => 'processed'));
 	}
 	
+        public function personalLogo(){
+            $this->viewLoader('content/personal_logo', array('state' => 'personalLogo'));
+        }
+        public function endpage(){
+            $this->viewLoader('content/end_page', array('state' => 'endpage'));
+        }
+        
 	# Een functie om de header, meegegeven content en footer in één keer te laden.
 	public function viewLoader($content, $bc, $data = NULL){
             if (isset($data)){
@@ -411,30 +465,40 @@ class Beursapp extends CI_Controller {
 	}
         
 	# Een functie die gebruikt wordt om de sessie in te stellen
-    public function set_session($session_data) {
+    public function set_session($session_data, $empty_field = FALSE) {
         $data = array (  );
         
         $field = array( 
-            'naam',
+            'naam',                 //info velden
             'voornaam',
             'gsm',
             'postcode',
             'gemeente',
             'email',
+
+            'andere_school',        //school velden
             'provincie',
             'school',
-            'andere_school',
-            'diplomaLV',
+
+            'diplomaLV',            //diploma velden
             'diploma',
             'grad_maand',
             'grad_jaar',
-            'jobs',
-            'type'
+            
+            'jobs',                 //extra velden
+            'contact',
+            'tdd'
         );
         
         foreach ($field as $val) {
             if(isset($session_data[$val])){
-                $data[$val] = $session_data[$val];
+                if( $empty_field != TRUE ){
+                    $data[$val] = $session_data[$val];
+                }
+                else{
+                    $data[$val] = '';
+                }
+                    
             }
         }
         
@@ -445,9 +509,13 @@ class Beursapp extends CI_Controller {
     {     
         return ( ! preg_match("/^([-a-z_ ])+$/i", $str)) ? FALSE : TRUE;
     } 
+    function alpha_dash($str)
+    {     
+        return ( ! preg_match("/^([a-z-])+$/i", $str)) ? FALSE : TRUE;
+    } 
     function plus_num_space($str)
     {     
-        return ( ! preg_match("/[+]{1}[0-9 ]+/", $str)) ? FALSE : TRUE;
+        return ( ! preg_match("/[+]{1}[0-9 ]+$/", $str)) ? FALSE : TRUE;
     } 
 
     function month_year($data){
@@ -460,15 +528,12 @@ class Beursapp extends CI_Controller {
     }
     
     public function getDiploma()
-    {
-        
+    {        
         if ($this->input->get('q') != NULL )
         {
             $this->load->model('BeursappModel');
  
-            $diplomaLV = $this->input->get('q', false);
-//            echo $diplomaLV;
-//            echo $_GET['q'];
+            $diplomaLV = $this->input->get('q');
             $data['diplomas'] = $this->BeursappModel->getDiplomas($diplomaLV);
             
             $this->load->view('templates/diplomas',$data);
@@ -476,5 +541,6 @@ class Beursapp extends CI_Controller {
         }
 
     }
+
     
 }
