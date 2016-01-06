@@ -30,7 +30,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 //$config['base_url'] = 'http://192.168.1.60/app_ci/'; //home networked
 //$config['base_url'] = 'http://192.168.1.59/app_ci/'; // home wireless
 
-$config['base_url'] = 'http://192.168.50.51/app_ci/'; // work wireless
+$config['base_url'] = 'http://192.168.50.26/app_ci/'; // work wireless
 
 
 /*
@@ -84,7 +84,8 @@ $config['url_suffix'] = '';
 | than english.
 |
 */
-$config['language']	= 'dutch';
+//$config['language']	= 'dutch';
+$config['language']	= 'english';
 
 /*
 |--------------------------------------------------------------------------

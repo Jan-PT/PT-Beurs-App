@@ -23,9 +23,9 @@
 </div>
 <div class="panel-body">
     <div class="col-sm-12">
-    <p> We hebben je gegevens successvol ontvangen. <br>Check je even of deze correct zijn? </p>
+    <p> We hebben je gegevens succesvol ontvangen. <br>Check je even of deze correct zijn? </p>
     <p>
-        Indien je iets wil veranderen, druk onderaan in de <b>progress bar</b> op het gerelateerde item. 
+        Indien je iets wenst te veranderen, druk onderaan in de <b>progress bar</b> op het gerelateerde item. 
     </p>
     </div>
     <div class="col-sm-12">
@@ -35,57 +35,77 @@
 	?>
 	<table>
 		<tr>
-			<th>Naam: </th>
-			<td><?php echo getUserData('voornaam',$user_data).' '.getUserData('naam',$user_data); ?></td>
+                    <th>Naam: </th>
+                    <td><?php echo getUserData('voornaam',$user_data).' '.getUserData('naam',$user_data); ?></td>
 		</tr>
 		<tr>
-			<th>Gsm nummer: </th>
-			<td><?php echo getUserData('gsm',$user_data);?></td>
+                    <th>Gsm nummer: </th>
+                    <td><?php echo getUserData('gsm',$user_data);?></td>
 		</tr>
 		<tr>
-			<th>Email: </th>
-			<td><?php echo getUserData('email',$user_data);?></td>
+                    <th>Email: </th>
+                    <td><?php echo getUserData('email',$user_data);?></td>
 		</tr>
 		<tr>
-			<th>Postcode: </th>
-			<td><?php echo getUserData('postcode',$user_data);?></td>
+                    <th>Postcode: </th>
+                    <td><?php echo getUserData('postcode',$user_data);?></td>
 		</tr>
                 <tr>
-			<th>Gemeente: </th>
-			<td><?php echo getUserData('gemeente',$user_data);?></td>
+                    <th>Gemeente: </th>
+                    <td><?php echo getUserData('gemeente',$user_data);?></td>
 		</tr>
 		<tr>
-			<th>Provincie: </th>
-			<td><?php echo getUserData('provincie',$user_data);?></td>
+                    <th>Provincie: </th>
+                    <td><?php echo getUserData('provincie',$user_data);?></td>
 		</tr>
 		<tr>
-			<th>School: </th>
-			<td><?php echo getUserData('school',$user_data);?></td>
+                    <th>School: </th>
+                    <td><?php echo getUserData('school',$user_data);?></td>
 		</tr>
 		<tr>
-			<th>Diploma niveau: </th>
-			<td><?php echo getUserData('diplomaLV',$user_data);?></td>
+                    <th>Diploma niveau: </th>
+                    <td><?php echo getUserData('diplomaLV',$user_data);?></td>
 		</tr>
 		<tr>
-			<th>Diploma: </th>
-			<td><?php echo getUserData('diploma',$user_data);?></td>
+                    <th>Diploma: </th>
+                    <td><?php echo getUserData('diploma',$user_data);?></td>
+		</tr>
+		<tr>
+                    <th>Diploma subtype: </th>
+                    <td><?php echo getUserData('diplomaSub',$user_data);?></td>
 		</tr>
                 <tr>
-			<th>Afstuderen in: </th>
-			<td><?php echo getUserData('grad_maand',$user_data);?> - <?php echo getUserData('grad_jaar',$user_data);?></td>
+                    <th>Afstuderen in: </th>
+                    <td><?php echo getUserData('grad_maand',$user_data);?> - 
+                        <?php echo getUserData('grad_jaar',$user_data);?>
+                    </td>
 		</tr>
 		<tr>
-			<th>Jobs: </th>
-			<td><?php echo getUserData('jobs',$user_data);?></td>
+                    <th>Jobs: </th>
+                    <td><?php 
+                        $temp = getUserData('jobs',$user_data);
+                        echo str_replace("-", ", ", $temp);
+                        ?>
+                    </td>
 		</tr>
 		<tr>
-			<th>Contact: </th>
-			<td><?php echo getUserData('contact',$user_data);?></td>
+                    <th>Contact: </th>
+                    <td><?php echo getUserData('contact',$user_data);?></td>
 		</tr>
+                <?php if( 'tdd' == getUserData('contact',$user_data) ) :
+                        
+                ?>
 		<tr>
-			<th>TDD: </th>
-			<td><?php echo getUserData('tdd',$user_data);?></td>
+                    <th>Talent Detection Days: </th>
+                    <td><?php 
+                        $temp = getUserData('tdd',$user_data);
+                        echo str_replace("_", ", ", $temp);
+                        ?>
+                    </td>
 		</tr>
+                <?php
+                    endif;
+                ?>
 
 	</table>
 	<BR>

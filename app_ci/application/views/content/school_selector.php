@@ -6,6 +6,8 @@
     
     function printButton($school, $userdata)
     {
+        $selected = FALSE;
+        
         echo "<p>"
             . "<button type=\"submit\" name=\"school\" id=\"school\" "
 
@@ -16,9 +18,11 @@
         echo "class=\"btn btn-lg btn-block ";
         if($userdata !== false && $userdata == $school->crm_school){
             echo "btn-success";
+            $selected = true;
         }
         else{
             echo "btn-warning";
+            $selected = false;
         }
 
         echo "\">";
@@ -26,6 +30,23 @@
         echo form_prep($school->school);
         echo "</button>"
              . "</p>\n";
+        return $selected;
+    }
+    
+    function set_selected($selected, $test)
+    {
+        if($selected == false && $test == true)
+        {
+            return true;
+        }
+        elseif ($selected == true) 
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
         
     }
     
@@ -52,23 +73,8 @@
     </div>
 <?php
 
-//    var_dump($user_data);
-
-
     echo form_open("beursapp/schoolForm");
     # Gaat kijken of er al een school geselecteerd was en deze als een groene button tonen ipv de oranje
-
-        
-//    if(isset($schools)){
-//        foreach($schools as $rec)
-//        {
-//             echo form_prep($rec->school)."-". form_prep($rec->crm_school) . "<br>\n";        
-//        }
-//    }
-//    else
-//    {
-//        echo "No School";
-//    }
         
 if(isset($db_schools)){        
     $size_records = count($db_schools);
@@ -80,27 +86,42 @@ if(isset($db_schools)){
     else
     {
         $school = false;
+    }  
+    
+    
+    if( isset($user_data['andere_school']) && $user_data['andere_school']!= false )
+    {
+        $andere = $user_data['andere_school'];
     }
+    else
+    {
+        $andere = false;
+    }
+        
 
-//        echo "<br>";
-//        echo "size of ". $size_records . "<br>";         
-//        echo "prov ".$provincie ."<br><br>";
 ?>
         <div class="col-sm-6">
 <?php
     
+        
+    $selected = false;
+
     if($size_records % 2 == 0)
     {
         for($i = 0; $i < ($size_records/2); $i++)
         {
-            printButton($db_schools[$i], $school);
+            $temp = printButton($db_schools[$i], $school);
+            $selected = set_selected($selected, $temp);            
+
         }        
     }
     else
     {
         for($i = 0; $i <= (int)($size_records/2); $i++)
         {
-            printButton($db_schools[$i], $school);
+            $temp = printButton($db_schools[$i], $school);
+            $selected = set_selected($selected, $temp);            
+
         }
     }
 ?>
@@ -112,14 +133,18 @@ if(isset($db_schools)){
     {
         for($i = ($size_records/2); $i < $size_records; $i++ )
         {
-            printButton($db_schools[$i], $school);
+            $temp = printButton($db_schools[$i], $school);
+            $selected = set_selected($selected, $temp);            
+
         }
     }
     else
     {
         for($i = (int)($size_records/2)+1; $i < $size_records; $i++ )
         {
-            printButton($db_schools[$i], $school);
+            $temp = printButton($db_schools[$i], $school);
+            $selected = set_selected($selected, $temp);            
+
         }
     }
 } 
@@ -132,7 +157,22 @@ else {
                        name="school" 
                        id="school" 
                        value="Andere" 
-                       class="btn btn-lg btn-block btn-warning">
+                       class="btn btn-lg btn-block 
+                    <?php
+                        if($selected == true){
+                            echo "btn-warning";
+                        }
+                        elseif($school != false && $andere == true){
+                            echo "btn-success";
+                        }
+                        else{
+                            echo "btn-warning";  
+                        }
+                        
+                       
+                       
+                    ?>
+                    ">
                     Ander
                 </button>
             </p>

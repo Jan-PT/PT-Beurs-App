@@ -54,26 +54,14 @@ function showDiploma(str) {
 
 	<div id="info" class="col-sm-12 form-group">
 <?php
-//    echo '<br>user_data <br>';
-//    var_dump($user_data);
-//    
-//    echo '<br>post <br>';
-//    var_dump($_POST);
+
 
     echo validation_errors();
 
     echo form_open("beursapp/diplomaForm");
     # Gaat kijken of er al een diploma lv geselecteerd was en 
     # deze in de dropdown lijst op de button weergeven
- 
-//    //testing sql output
-//    foreach($db_diplomaLVs as $rec)
-//    {
-//         echo form_prep($rec->id)."-".form_prep($rec->name)
-//         ."-". form_prep($rec->crm_name). "<br>\n";        
-//    }   
-    
-//    echo set_value('diplomaLV')."<br>";
+
     
     if(isset($user_data['diplomaLV']) && $user_data['diplomaLV'] != '' )
     {
@@ -86,7 +74,7 @@ function showDiploma(str) {
     {
         $diplomaLV = false;
     }
-//    echo $diplomaLV . "<br>";
+   
 ?>    
 
 <select id="diplomaLV" name="diplomaLV" 
@@ -101,7 +89,7 @@ function showDiploma(str) {
     foreach ($db_diplomaLVs as $val) {
         echo "<option id=\"diplomaLV\" name=\"diplomaLV\""
          . " value=\"";
-        echo urlencode(form_prep($val->crm_name));
+        echo urlencode($val->crm_name);
         echo "\"";
         
         if($diplomaLV !== false && $diplomaLV == urlencode($val->crm_name)){
@@ -111,6 +99,7 @@ function showDiploma(str) {
         
         echo ">";
         echo form_prep($val->name);
+
         echo "</option>\n";
     }
 ?>
@@ -154,11 +143,30 @@ function showDiploma(str) {
 <?php 
     # Indien er al een diploma in de sessie zit wordt deze terug in het veld geladen.
     #  Anders is het veld nog leeg
-    if(isset($user_data['diploma']) && $user_data['diploma'] != ''){
-        echo 'value="'.form_prep($user_data['diploma']) . '">';
+    if(isset($user_data['diploma'])
+            && $user_data['diploma'] != ''        
+    ){
+        if( isset($user_data['diplomaSub']) && 
+            $user_data['diplomaSub'] != ''){
+
+            echo 'value="'.form_prep($user_data['diploma'])."_". form_prep($user_data['diplomaSub']). '">';
+        }
+        else{
+            echo 'value="'.form_prep($user_data['diploma']). '">';
+        }
+        
+        
     }
     else{
-        echo 'value="'.  set_value('diploma').'">';
+        $set_diplomaSub = set_value('diplomaSub');
+        
+        if(isset($set_diplomaSub) && $set_diplomaSub != ''){
+            echo 'value="'.  set_value('diploma'). "_". $set_diplomaSub.'">';
+        }
+        else{
+            echo 'value="'.  set_value('diploma').'">';
+           
+        }
     }
 ?>
 

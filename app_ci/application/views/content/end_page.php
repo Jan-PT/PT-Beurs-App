@@ -9,7 +9,7 @@
     ?>
                 
         <h2>
-            We sturen je later een bevestigingsmail met je persoonlijk logo.
+            We sturen je weldra een bevestigingsmail met je persoonlijk logo.
         </h2>
         <br>
         

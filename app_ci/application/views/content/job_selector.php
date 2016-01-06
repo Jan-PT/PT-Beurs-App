@@ -40,6 +40,15 @@
 
     <div class="input-group input-group-lg">
         <span class="input-group-addon">
+            <input <?php if(strpos($jobs,'ict_ba_fa') !== false){ echo "checked";} ?> value="ict_ba_fa" name="ict_ba_fa" type="checkbox" id="ict_ba_fa" aria-label="...">
+        </span>
+        <label for="ict_ba_fa" class="form-control" aria-label="...">
+            ICT Business Analyst / Functional Analyst
+        </label>
+    </div>
+
+    <div class="input-group input-group-lg">
+        <span class="input-group-addon">
             <input <?php if(strpos($jobs,'management') !== false){ echo "checked";} ?> value="management" name="management" type="checkbox" id="management" aria-label="...">
         </span>
         <label for="management" class="form-control" aria-label="...">

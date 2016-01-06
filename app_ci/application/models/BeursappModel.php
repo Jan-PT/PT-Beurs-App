@@ -48,11 +48,12 @@ class BeursappModel extends CI_Model {
                 $sql = "SELECT type, sub, crm_type, crm_sub
                         FROM pt_diploma_view 
                         WHERE crm_level = ?" ;
-                
+
                 $query = $this->db->query( $sql, $diplomaLV );
-                
+
                 return $query->result();
-            } 
+            }
+
         }
         
         public function getDatumTDD(){
@@ -63,6 +64,23 @@ class BeursappModel extends CI_Model {
             
             $query = $this->db->query( $sql );
             return $query->result();
+        }
+        
+        public function getPreload(){
+            $sql = "SELECT beurs, "
+                    . "andere_school, "
+                    . "provincie, "
+                    . "school, "
+                    . "diplomaLV, "
+                    . "diploma, "
+                    . "diplomaSub, "
+                    . "grad_jaar "
+                    . "FROM pt_presets "
+                    . "ORDER BY id DESC "
+                    . "LIMIT 0,1";
+            
+            $query = $this->db->query( $sql );
+            return $query->result_array();        
         }
 
 
@@ -77,6 +95,7 @@ class BeursappModel extends CI_Model {
                     'last_name' => $user_data['naam'],
                     'diploma_level' => $user_data['diplomaLV'],
                     'diploma_type' => $user_data['diploma'],
+                    'diploma_sub_type' => $user_data['diplomaSub'],
                     'school' => $user_data['school'],
                     'graduation_month' => $user_data['grad_maand'],
                     'graduation_year' => $user_data['grad_jaar'],
@@ -88,6 +107,20 @@ class BeursappModel extends CI_Model {
             
                 $query = $this->db->insert_string('pt_crm', $data); 
                 $this->db->query( $query );
+                
+                $temp_id = $this->db->insert_id();
+                //echo $temp_id;
+                
+                $extra_data = array(
+                    'id' => $temp_id,
+                    'jobs' => $user_data['jobs'],
+                    'contact' => $user_data['contact'],
+                    'tdd' => $user_data['tdd']
+                    
+                );
+                
+                $extra_query = $this->db->insert_string('pt_extra', $extra_data); 
+                $this->db->query( $extra_query );
                 
             }
         }

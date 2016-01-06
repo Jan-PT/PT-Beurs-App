@@ -25,102 +25,70 @@
     # Als de user het form nog niet succesvol doorlopen is kan er nog geen data uit de sessie ($user_data) in de iput velden geladen worden.
     # Dan wordt er indien een veld correct is ingevuld maar er fouten zijn bij andere velden de ingevulde waarde van dit veld behouden
     # en anders de placeholder getoond.
-    if($user_data ) 
-    {
 
-        $voornaam = array(
-            "type" => "text",
-            "name" => "voornaam",
-            "id" => "voornaam",
-            "placeholder" => "Voornaam",
-            //"value" => $user_data['voornaam'],
-            "class" => "form-control input-lg",
-            "tabindex" => "1"
-            );	
-        if(isset($user_data['voornaam'])){
-            $voornaam["value"] = $user_data['voornaam'];
-        }
 
-        echo "<p>".form_input($voornaam)."</p>";
-
-        $gsm = array(
-            "type" => "tel",
-            "name" => "gsm",
-            "id" => "gsm",
-            "placeholder" => "Gsm +32 123 45 67 89",
-            //"value" => str_replace(' ', '', $user_data['gsm']),
-            "class" => "form-control input-lg bfh-phone",
-            "tabindex" => "3",
-            "data-format" => "+32 ddd dd dd dd"
-            //"pattern" => "[+]{1}[0-9]{10,11}",
-            //"title" => "+xxxxxxxxxxx \n(11 tot 12 cijfers)"
-            );
-        if(isset($user_data['gsm'])){
-            $gsm["value"] = str_replace(' ', '', $user_data['gsm']);
-        }
-        
-        echo "<p>".form_input($gsm)."</p>";
-
-        $email = array(
-            "type" => "email",
-            "name" => "email",
-            "id" => "email",
-            "placeholder" => "Email",
-            //"value" => $user_data['email'],
-            "class" => "form-control input-lg",
-            "tabindex" => "5"
-            );
-        if(isset($user_data['email'])){
-            $email["value"] = $user_data['email'];
-        }
-        echo "<p>".form_input($email)."</p>";
-    } 
-    else
-    {
-        $voornaam = array(
-            "type" => "text",
-            "name" => "voornaam",
-            "id" => "voornaam",
-            "placeholder" => "Voornaam",
-            "value" => set_Value("voornaam"),
-            "class" => "form-control input-lg",
-            "tabindex" => "1"
-            );	
-        echo "<p>".form_input($voornaam)."</p>";
-
-        $gsm = array(
-            "type" => "tel",
-            "name" => "gsm",
-            "id" => "gsm",
-            "placeholder" => "Gsm +32123456789",
-            "value" => set_Value("gsm"),
-            "class" => "form-control input-lg bfh-phone",
-            "tabindex" => "3",
-            "data-format" => "+32 ddd dd dd dd"
-
-//            "pattern" => "[+]{1}[0-9]{10,11}",
-//            "title" => "+xxxxxxxxxxx \n(11 tot 12 cijfers)"                                          
-        );
-        
-        echo "<p>".form_input($gsm)."</p>";
-
-        $email = array(
-            "type" => "email",
-            "name" => "email",
-            "id" => "email",
-            "placeholder" => "Email",
-            "value" => set_Value("email"),
-            "class" => "form-control input-lg",
-            "tabindex" => "5"
-            );
-        echo "<p>".form_input($email)."</p>";
+    $voornaam = array(
+        "type" => "text",
+        "name" => "voornaam",
+        "id" => "voornaam",
+        "placeholder" => "Voornaam",
+        //"value" => $user_data['voornaam'],
+        "class" => "form-control input-lg",
+        "tabindex" => "1"
+        );	
+    if(isset($user_data['voornaam']) && $user_data['voornaam'] != ''){
+        $voornaam["value"] = $user_data['voornaam'];
     }
+    else{
+        $voornaam['value'] = set_value('voornaam');
+    }
+
+    echo "<p>".form_input($voornaam)."</p>";
+
+    $gsm = array(
+        "type" => "tel",
+        "name" => "gsm",
+        "id" => "gsm",
+        "placeholder" => "Gsm +32 123 45 67 89",
+        //"value" => str_replace(' ', '', $user_data['gsm']),
+        "class" => "form-control input-lg bfh-phone",
+        "tabindex" => "3",
+        "data-format" => "+32 ddd dd dd dd"
+        //"pattern" => "[+]{1}[0-9]{10,11}",
+        //"title" => "+xxxxxxxxxxx \n(11 tot 12 cijfers)"
+        );
+    if(isset($user_data['gsm']) && $user_data['gsm'] != ''){
+        $gsm["value"] = $user_data['gsm'];
+    }
+    else{
+        $gsm['value'] = set_value('gsm');
+    }
+           
+    echo "<p>".form_input($gsm)."</p>";
+
+    $email = array(
+        "type" => "email",
+        "name" => "email",
+        "id" => "email",
+        "placeholder" => "Email",
+        //"value" => $user_data['email'],
+        "class" => "form-control input-lg",
+        "tabindex" => "5"
+        );
+    if(isset($user_data['email']) && $user_data['email'] != ''){
+        $email["value"] = $user_data['email'];
+    }
+    else{
+        $email['value'] = set_value('email');
+    }
+    echo "<p>".form_input($email)."</p>";
+     
+    
 ?>
 </div>
 <div class="col-sm-6">
 <?php 
-    if ($user_data) 
-    {
+
         $naam = array(
             "type" => "text",
             "name" => "naam",
@@ -131,11 +99,16 @@
             "tabindex" => "2"
         );
         
-        if(isset($user_data['naam'])){
+        if(isset($user_data['naam']) && $user_data['naam'] != ''){
             $naam["value"] = $user_data['naam'];
         }
+        else{
+            $naam['value'] = set_value('naam');           
+        }
+            
         echo "<p>".form_input($naam)."</p>";
 
+        
         if( isset($user_data['postcode'], $user_data['gemeente']) ) {
             if($user_data['gemeente'] != '')
             {
@@ -158,35 +131,19 @@
             "placeholder" => "Postcode",
             "class" => "form-control input-lg",
             "tabindex" => "4"
-        );	
+        );
+        
+        if(isset($user_data['postcode'], $user_data['gemeente'])
+                && $user_data['postcode'] != ''
+                && $user_data['gemeente'] != ''){
+            $postcode["value"] = $user_data['postcode']."-".$user_data['gemeente'];
+        }
+        else{
+            $postcode['value'] = set_value('postcode');           
+        }
+        
         echo "<p>".form_input($postcode)."</p>";	
 
-    } 
-    else
-    {
-        $naam = array(
-            "type" => "text",
-            "name" => "naam",
-            "id" => "naam",
-            "placeholder" => "Naam",
-            "value" => set_Value("naam"),
-            "class" => "form-control input-lg",
-            "tabindex" => "2"
-        );	
-        echo "<p>".form_input($naam)."</p>";
-
-        $postcode = array(
-            "type" => "tel",
-
-            "name" => "postcode",
-            "list"=>"postcode",
-            "value" => set_Value("postcode"),
-            "placeholder" => "Postcode",
-            "class" => "form-control input-lg",
-            "tabindex" => "4"
-        );	
-        echo "<p>".form_input($postcode)."</p>";	
-    }
 ?>
 </div>
 

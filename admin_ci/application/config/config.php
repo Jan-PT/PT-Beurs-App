@@ -16,8 +16,8 @@
 | environments.
 |
 */
-//$config['base_url'] = 'http://127.0.0.1:8080/admin_ci/index.php';
-$config['base_url'] = 'http://localhost/admin_ci/index.php';
+//$config['base_url'] = 'http://127.0.0.1:8080/admin_ci/';
+$config['base_url'] = 'http://localhost/admin_ci/';
 
 /*
 |--------------------------------------------------------------------------
