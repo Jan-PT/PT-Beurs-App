@@ -4,7 +4,22 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="shortcut icon" href="<?php echo base_url('assets/images/icon/icon.ico');?>">
+<?php
+    $temp = base_url();
+    
+    if(strpos($temp, ':8080') === FALSE){
+        $temp = base_url();
+    }
+    else{
+        $temp = '';
+    }
+
+?>
+
+    <link rel="shortcut icon" href="<?php 
+	//echo $temp.'icon.ico';
+	echo base_url('assets/images/icon/icon.ico');
+	?>">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <title>HTTPPTTPT</title>
     <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/other/style.css');?>" />
@@ -13,7 +28,7 @@
     <script src="<?php echo base_url('assets/js/jquery/jquery-1.11.3.min.js');?>"></script>
     <script src="<?php echo base_url('assets/js/bootstrap/bootstrap.min.js');?>"></script>
     <script src="<?php echo base_url('assets/js/bootstrap/bootstrap.js');?>"></script>
-    <link rel="manifest" href="<?php echo base_url('manifest.json');?>">
+    <link rel="manifest" href="<?php echo $temp.'manifest.json'; ?>">
 </head>
 <body>
     <div id="container" class="container-fluid">

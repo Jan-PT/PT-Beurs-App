@@ -1,21 +1,31 @@
-<!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <title>Preset View</title>
+
+<?php
+    if(isset($ip) && $ip != ''){
+        $url_getDiploma = base_url('index.php/admin/getDiplomas/'.$ip.'?q=');
+    }
+    else{
+        $url_getDiploma = base_url('index.php/admin/getDiplomas?q=');
+    }  
+
+    if(isset($ip) && $ip != ''){
+        $url_getSchool = base_url('index.php/admin/getSchools/'.$ip.'?q=');
+    }
+    else{
+        $url_getSchool = base_url('index.php/admin/getSchools?q=');
+    }
+?>
+
         
 <script>
-function showDiploma(str) {
-    if (str == "") {
-        document.getElementById("diploma").innerHTML = "";
+    
 
-        document.getElementById("diploma_list").placeholder = 
-                "Kies uw diploma hier.";
+function showDiploma(str) {  
+  
+    if (str == "") {
+        document.getElementById("diploma_list").innerHTML = "";
+
+//        document.getElementById("diploma").placeholder = 
+//                "Kies uw diploma hier.";
 
         return;
     } else { 
@@ -30,75 +40,81 @@ function showDiploma(str) {
             if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
                 
             
-            document.getElementById("diploma").innerHTML = xmlhttp.responseText;
+            document.getElementById("diploma_list").innerHTML = xmlhttp.responseText;
             }
         };
 
-        xmlhttp.open("GET","<?php echo base_url(); ?>index.php/admin/getDiploma?q="+ str,true);
+        xmlhttp.open("GET","<?php echo $url_getDiploma; ?>"+ str,true);
         //xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 
         xmlhttp.send();
 
-        document.getElementById("diploma_list").placeholder = "Kies uw diploma hier.";
+//        document.getElementById("diploma").placeholder = "Kies uw diploma hier.";
         return;
     }
 }
-//function showSchool(str) {
-//    if (str == "") {
-//        document.getElementById("diploma").innerHTML = "";
-//
-//        document.getElementById("diploma_list").placeholder = 
-//                "Kies uw diploma hier.";
-//
-//        return;
-//    } else { 
-//        if (window.XMLHttpRequest) {
-//            // code for IE7+, Firefox, Chrome, Opera, Safari
-//            xmlhttp = new XMLHttpRequest();
-//        } else {
-//            // code for IE6, IE5
-//            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-//        }
-//        xmlhttp.onreadystatechange = function() {
-//            if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
-//                
-//            
-//            document.getElementById("diploma").innerHTML = xmlhttp.responseText;
-//            }
-//        };
-//
-//        xmlhttp.open("GET","<?php echo base_url(); ?>index.php/admin/getSchool?q="+ str,true);
-//        //xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-//
-//        xmlhttp.send();
-//
-//        document.getElementById("diploma_list").placeholder = "Kies uw diploma hier.";
-//        return;
-//    }
-//}
 
-</script>        
-    </head>
-    <body>
-        <h1>Preset Form</h1>
-        <?php
-        
-        
-//        echo "db_preset <br>";
-//        var_dump($db_preset);
-//        echo "<br>";
-//        echo "db_diplomaLV <br>";
-//        var_dump($db_diplomaLV);
-//        echo "<br>";
-//        echo "db_diploma <br>";
-//        var_dump($db_diploma);
-//        
-        if(isset($test_post)){
-            var_dump($test_post);
+
+function showSchool(str) {
+
+    if (str == "") {
+        document.getElementById("school_list").innerHTML = "";
+
+//        document.getElementById("school").placeholder = 
+//                "Kies school hier.";
+
+        return;
+    } else { 
+        if (window.XMLHttpRequest) {
+            // code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
+        } else {
+            // code for IE6, IE5
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
         }
-        echo "<br>";
-        echo "<br>";
-        echo "<br>";
+        xmlhttp.onreadystatechange = function() {
+            if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
+                
+            
+            document.getElementById("school_list").innerHTML = xmlhttp.responseText;
+            }
+        };
+
+        xmlhttp.open("GET","<?php echo $url_getSchool; ?>"+ str,true);
+        //xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
+        xmlhttp.send();
+
+//        document.getElementById("school").placeholder = "Kies school hier.";
+        return;
+    }
+}
+
+</script>
+
+
+<div class="panel-body">
+    <div id="info" class="form-group">
+    <?php 
+        echo validation_errors(); 
+
+    ?>
+    </div>
+
+<div class="col-sm-12">
+        <h1>Preset Form
+<?php
+        if(isset($ip) && $ip != ''){
+            echo 'van IP = ' . $ip;
+        }
+?>
+        </h1>
+        <?php
+
+
+        //
+        // Preset Diploma Niveau van database
+        //
         
         if(isset($db_preset['diplomaLV'])){
             $diplomaLV = $db_preset['diplomaLV'];
@@ -106,26 +122,60 @@ function showDiploma(str) {
         else{
             $diplomaLV = false;
         }
+        //
+        // Preset Diploma type van database
+        //        
         if(isset($db_preset['diploma'])){
             $diploma = $db_preset['diploma'];
         }
         else{
             $diploma = false;
         }
+        //
+        // Preset Diploma Sub type van database
+        //
         if(isset($db_preset['diplomaSub'])){
             $diplomaSub = $db_preset['diplomaSub'];
         }
         else{
             $diplomaSub = false;
         }
+        
+        
+        
+        if(isset($db_preset['provincie'])){
+            $region = $db_preset['provincie'];
+        }
+        else{
+            $region = false;
+        }
+        //
+        // Preset Diploma type van database
+        //        
+        if(isset($db_preset['school'])){
+            $school = $db_preset['school'];
+        }
+        else{
+            $school = false;
+        }
+       
+        
+        $hidden = array();
+        if(isset($db_preset['id'])){
+            $hidden['id'] = $db_preset['id'];
+        }
+       
+        
+        if(isset($ip) && $ip != ''){
+           $url_form = 'admin/presetForm/'.$ip;
+        }
+        else{
+            $url_form = 'admin/presetForm';
+        }        
 
         
         
-        $hidden = array(
-            'id' => $db_preset['id']
-        );
-        
-        echo form_open('admin/presetForm', '', $hidden);
+        echo form_open($url_form, '', $hidden);
         
         
         
@@ -145,64 +195,84 @@ function showDiploma(str) {
             $beurs['value'] = set_value('beurs');
         }
 
-        echo "<p>Beurs : ".form_input($beurs)."</p>";
-        
-//        
-//        if( isset($db_preset['andere_school']) && $db_preset['andere_school'] == 1) {
-//            $andere_school = true;
-//        }
-//        else{
-//            $andere_school = false;
-//        }
-//        
-//        echo "<p>Andere School: "
-//            . form_checkbox('andere_school','andere_school', $andere_school)
-//            . "</p>";
-?>
+        echo "<p>Beurs :<br> ".form_input($beurs)."</p>";
 
-<?php       
-        $provincie = array(
-        "type" => "text",
-        "name" => "provincie",
-        "id" => "provincie",
-        "list" => "provincie_list",
-        "placeholder" => "Provincie",
-        "class" => "form-control input-lg",
-        );
-        
-        if(isset($db_preset['provincie']) && $db_preset['provincie'] != ''){
-            $provincie["value"] = $db_preset['provincie'];
-        }
-        else{
-            $provincie['value'] = set_value('provincie');
+
+?>
+        <p> Provincie: <br>
+<select id="provincie" name="provincie" 
+        class="btn btn-primary btn-lg btn-block dropdown-toggle" 
+        onchange="showSchool(this.value);">
+    <option id="provincie" name="provincie" value="" 
+            
+            <?php if($region === false) echo "selected"; ?>
+            >Provincie
+    </option>
+  <?php      
+    foreach ($db_region as $val) {
+        echo "<option id=\"provincie\" name=\"provincie\""
+         . " value=\"";
+        echo urlencode($val->crm_name);
+        echo "\"";
+
+        if($region !== false && $region == urlencode($val->crm_name)){
+            echo " selected";
         }
 
-        echo "<p>Provincie : ".form_input($provincie)."</p>";
-?>
-        
-        
-<?php             
-        $school = array(
-        "type" => "text",
-        "name" => "school",
-        "id" => "school",
-        "list" => "school_list",
-        "placeholder" => "School",
-        "class" => "form-control input-lg",
-        );
-        
-        if(isset($db_preset['school']) && $db_preset['school'] != ''){
-            $school["value"] = $db_preset['school'];
-        }
-        else{
-            $school['value'] = set_value('school');
-        }
 
-        echo "<p>School : ".form_input($school)."</p>";
+        echo ">";
+        echo form_prep($val->name);
+
+        echo "</option>\n";
+    }
 ?>
-        <p> Diploma LV
+</select>
+        </p>
+        
+<datalist id="school_list">
+<?php
+    if( isset($db_school) )
+    {
+        foreach ($db_school as $val) {
+            echo "<option value=\"";
+            echo form_prep($val->crm_school);
+           
+            echo "\">";
+            echo form_prep($val->school);
+          
+            echo "</option>\n";                     
+        }
+        
+    }
+    else{
+        echo "<option value=''></option>\n";
+    }
+
+?>    
+</datalist>  
+        
+  <p> School: <br>
+    <input list="school_list" name="school" id="school"
+           class="form-control input-lg" 
+           placeholder="Kies uw school hier."
+           
+<?php 
+    if(isset($school)
+            && $school != ''        
+    ){
+        echo 'value="'.form_prep($school). '">';
+    }
+    else{
+        echo 'value="'.set_value('school').'">';
+    }
+    ?>
+  </p>
+        
+        
+        
+        <p> Diploma niveau:<br>
 <select id="diplomaLV" name="diplomaLV" 
-        class="" 
+        class="btn btn-primary btn-lg btn-block dropdown-toggle" 
         onchange="showDiploma(this.value);">
     <option id="diplomaLV" name="diplomaLV" value="" 
             hidden
@@ -230,7 +300,7 @@ function showDiploma(str) {
 </select>
         </p>
         
-<datalist id="diploma">
+<datalist id="diploma_list">
 <?php
     if( isset($db_diploma) )
     {
@@ -253,14 +323,14 @@ function showDiploma(str) {
         
     }
     else{
-        echo "<option value=''>";
+        echo "<option value=''></option>\n";
     }
 
 ?>    
 </datalist>  
         
-  <p> diploma_sub 
-    <input list="diploma" name="diploma" id="diploma_list"
+  <p> Diploma type en sub type: <br>
+    <input list="diploma_list" name="diploma" id="diploma"
            class="form-control input-lg" 
            placeholder="Kies uw diploma hier."
            
@@ -290,6 +360,27 @@ function showDiploma(str) {
     }
     ?>
   </p>
+  <p> Graduatie Jaar:<br>
+<?php
+    $this->load->helper('date');
+
+    $jaar = date('Y'); 
+
+    $years = array('' => 'Jaar');
+    for ($i = $jaar-4; $i <= $jaar+5; $i++)
+    {
+        $years[$i] = $i; 
+    }
+    $selected_year = set_value('grad_jaar');
+    if( isset($db_preset['grad_jaar'])
+               && $db_preset['grad_jaar'] != '') {
+            $selected_year = $db_preset['grad_jaar'];
+    }
+    echo form_dropdown('grad_jaar', $years, $selected_year, 
+            'class="btn btn-primary btn-lg btn-block dropdown-toggle"'); 
+
+?>
+  </p>
 <BR>
 
     <input type="submit" class="btn btn-lg btn-warning btn-block" value="Submit">
@@ -297,6 +388,5 @@ function showDiploma(str) {
 <?php 
     echo form_close(); 
 ?>       
-           
-    </body>
-</html>
+</div>
+</div>

@@ -27,8 +27,50 @@ class Beursapp extends CI_Controller {
     }
 
         # Een functie die gebruikt wordt om de sessie in te stellen
-    public function set_session($session_data, $empty_field = FALSE) {
-        $data = array (  );
+    public function set_session($session_data) {
+
+        $data = array();
+        
+        $field = array( 
+            'naam',                 //info velden
+            'voornaam',
+            'gsm',
+            'postcode',
+            'gemeente',
+            'email',
+
+            'andere_school',        //school velden
+            'provincie',
+            'school',
+
+            'diplomaLV',            //diploma velden
+            'diploma',
+            'diplomaSub',
+            'grad_maand',
+            'grad_jaar',
+
+            'jobs',                 //extra velden
+            'contact',
+            'tdd'
+        );
+
+        foreach ($field as $val) {
+
+            if(isset($session_data[$val])){
+                $data[$val] = $session_data[$val];   
+            }
+            else{
+                //nothing happens
+            }
+            
+        }
+
+        $this->session->set_userdata('user_data', $data);
+    }
+    public function empty_session() {
+
+            $data = array();
+
 
         $field = array( 
             'naam',                 //info velden
@@ -54,17 +96,7 @@ class Beursapp extends CI_Controller {
         );
 
         foreach ($field as $val) {
-            
-            if( $empty_field == TRUE){
-                $data[$val] = '';
-            }
-            elseif(isset($session_data[$val])){
-                $data[$val] = $session_data[$val];   
-            }
-            else{
-                //nothing happens
-            }
-            
+                $data[$val] = '';           
         }
 
         $this->session->set_userdata('user_data', $data);
@@ -74,18 +106,20 @@ class Beursapp extends CI_Controller {
     public function index()
     {
         $this->load->model('BeursappModel');
+
+        $this->empty_session();
+        
         $preload = $this->BeursappModel->getPreload();
-        var_dump($preload);
-        #maak de user data leeg
-        $this->set_session(array(), TRUE);
-        if(is_array($preload)){
-            $this->set_session($preload[0]);
+
+        
+        if(isset($preload)){
+            $this->set_session($preload);
         }
         $this->home();
     }
 
     # View waarvan de studenten starten
-    public function home (){
+    public function home(){
 
         $this->load->view('content/start_page');
     }
@@ -270,8 +304,8 @@ class Beursapp extends CI_Controller {
         $this->form_validation->set_message('alpha_dash', 'regio-veld mag alleen letters en - bevatten.');
         $this->form_validation->set_message('alpha_dash_space', 'school-veld mag alleen letters, - en spaties bevatten.');
 
-        $this->form_validation->set_rules("provincie", "provincie", "required|callback_alpha_dash|min_length[3]|max_length[40]school");
-        $this->form_validation->set_rules("school", "school", "required|callback_alpha_dash_space|min_length[3]|max_length[30]school");
+        $this->form_validation->set_rules("provincie", "provincie", "required|callback_alpha_dash|min_length[3]|max_length[40]");
+        $this->form_validation->set_rules("school", "school", "required|callback_alpha_dash_space|min_length[3]|max_length[60]");
 
         # Als de regels falen wordt de pagina opnieuw geladen en anders wordt de sessie aangemaakt en naar de volgende functie doorgegaan.
         if ($this->form_validation->run() == false)
@@ -299,7 +333,7 @@ class Beursapp extends CI_Controller {
         $this->form_validation->set_message('month_year', 'Kies een afstudeer maand en/of jaar.');
 
         $this->form_validation->set_rules("diplomaLV", "diploma level", "required|min_length[3]|max_length[20]");
-        $this->form_validation->set_rules("diploma", "diploma", "required|min_length[3]|max_length[60]school");
+        $this->form_validation->set_rules("diploma", "diploma", "required|min_length[3]|max_length[60]");
         $this->form_validation->set_rules("grad_maand", "afstudeer maand", "required|numeric|callback_month_year|min_length[1]|max_length[2]");
         $this->form_validation->set_rules("grad_jaar", "afstudeer jaar", "required|numeric|callback_month_year|min_length[1]|max_length[4]");
 
@@ -434,7 +468,8 @@ class Beursapp extends CI_Controller {
 
         $this->session->sess_destroy();
 
-        $this->personalLogo();
+//        $this->personalLogo();
+        $this->endpage();
     }
 
     public function personalLogoForm(){

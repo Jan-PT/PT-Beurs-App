@@ -95,7 +95,7 @@
         foreach($db_data as $val){
 
             $date = $val->datum;    
-            $date_e = DateTime::createFromFormat('Y-m-d', $date)->format('d M Y');
+            $date_e = DateTime::createFromFormat('Y-m-d', $date)->format('d/m/Y')
 ?>
 
     <div class="input-group input-group-lg">
@@ -226,16 +226,26 @@
     var Check_tdd2 = document.getElementById("tdd2");
     var Check_ander = document.getElementById("tdd3");
     
+    var tdd1_exist = !!Check_tdd1;
+    var tdd2_exist = !!Check_tdd2;
+    
+
+    
     if(Sel_tdd.checked){
-        if( !Check_tdd1.checked
-            && !Check_tdd2.checked
-            && !Check_ander.checked
-                ){
-            alert('Selecteer aub één van deze data of "andere datum".');
-            return;
+        if( Check_ander.checked
+            || (tdd1_exist && Check_tdd1.checked)
+            || (tdd2_exist && Check_tdd2.checked)
+            ){
+            form.submit();
+            
+            
+        }
+        else{
+           alert('Selecteer aub één van deze data of "andere datum".');
+           return; 
         }
         
-        form.submit();
+        
                   
     }
     else{

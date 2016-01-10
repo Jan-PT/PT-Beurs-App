@@ -16,6 +16,3 @@
           href="<?php echo base_url('index.php/admin/clearDB');?>">Clear DB </a></p>
 </body>
 </html>
-<script>
-
-</script>

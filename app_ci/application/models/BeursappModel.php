@@ -80,7 +80,8 @@ class BeursappModel extends CI_Model {
                     . "LIMIT 0,1";
             
             $query = $this->db->query( $sql );
-            return $query->result_array();        
+            
+            return $query->row_array();
         }
 
 
@@ -102,7 +103,8 @@ class BeursappModel extends CI_Model {
                     'mobile_phone' => $user_data['gsm'],
                     'private_email' => $user_data['email'],
                     'address_postal_code' => $user_data['postcode'],
-                    'address_city_belgium' => $user_data['gemeente']                        
+                    'address_city' => $user_data['gemeente']                        
+//                    'address_city_belgium' => $user_data['gemeente']  //werkt niet in crm                      
                     );
             
                 $query = $this->db->insert_string('pt_crm', $data); 

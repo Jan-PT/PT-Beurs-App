@@ -51,6 +51,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |
 | De default_controller is de controller waar standaard naar verwezen wordt. Deze moet dus in dit geval onze Beursapp controller zijn.
 */
-$route['default_controller'] = 'Beursapp';
+$route['default_controller'] = 'Beursapp/index';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;

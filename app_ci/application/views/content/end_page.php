@@ -9,7 +9,8 @@
     ?>
                 
         <h2>
-            We sturen je weldra een bevestigingsmail met je persoonlijk logo.
+            <!--We sturen je weldra een bevestigingsmail met je persoonlijk logo.-->
+            We sturen je weldra een bevestigingsmail.
         </h2>
         <br>
         

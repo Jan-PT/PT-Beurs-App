@@ -17,6 +17,7 @@
 
 //header("Refresh: 10;url=confirmationForm");
 	$user_data = $this->session->userdata('user_data');
+
 ?>
 <div id="header">
     <h1>Verwerking gegevens</h1>
@@ -110,12 +111,13 @@
 	</table>
 	<BR>
         
-
+<!--
         <p> Is alles correct, klik "volgende" om je persoonlijke "Topstarters" logo aan te maken. <br>
             <i>
                 Hierna kan je je gegevens <b>niet</b> meer aanpassen.
             </i>
          </p>
+-->
 	<input type="submit" class="btn btn-lg btn-warning btn-block" value="Volgende">
 	<?php
 		echo form_close(); 

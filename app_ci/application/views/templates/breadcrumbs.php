@@ -17,8 +17,8 @@
         <li> Gewenste functie </li>
         <li> Contact </li>
         <li> Verwerking gegevens</li>
-        <li> &#10097; &#10097;</li>
-        <li> Persoonlijk logo</li>
+<!--        <li> &#10097; &#10097;</li>
+        <li> Persoonlijk logo</li>-->
         <li> Einde</li>
         
 
@@ -36,8 +36,8 @@
         <li> Gewenste functie </li>
         <li> Contact </li>
         <li> Verwerking gegevens</li>
-        <li> &#10097; &#10097;</li>
-        <li> Persoonlijk logo</li>
+<!--        <li> &#10097; &#10097;</li>
+        <li> Persoonlijk logo</li>-->
         <li> Einde</li>
 	<?php				
                 break;
@@ -53,8 +53,8 @@
         <li> Gewenste functie </li>
         <li> Contact </li>
         <li> Verwerking gegevens</li>
-        <li> &#10097; &#10097;</li>
-        <li> Persoonlijk logo</li>
+<!--        <li> &#10097; &#10097;</li>
+        <li> Persoonlijk logo</li>-->
         <li> Einde</li>
 	<?php				
                 break;
@@ -70,8 +70,8 @@
         <li> Gewenste functie </li>
         <li> Contact </li>
         <li> Verwerking gegevens</li>
-        <li> &#10097; &#10097;</li>
-        <li> Persoonlijk logo</li>
+<!--        <li> &#10097; &#10097;</li>
+        <li> Persoonlijk logo</li>-->
         <li> Einde</li>
 
         
@@ -89,8 +89,8 @@
         <li> Gewenste functie </li>
         <li> Contact </li>
         <li> Verwerking gegevens</li>
-        <li> &#10097; &#10097;</li>
-        <li> Persoonlijk logo</li>
+<!--        <li> &#10097; &#10097;</li>
+        <li> Persoonlijk logo</li>-->
         <li> Einde</li>
 		
 	<?php				
@@ -106,8 +106,8 @@
         <li class="active"> Gewenste functie </li>       
         <li> Contact </li>
         <li> Verwerking gegevens</li>
-        <li> &#10097; &#10097;</li>
-        <li> Persoonlijk logo</li>
+<!--        <li> &#10097; &#10097;</li>
+        <li> Persoonlijk logo</li>-->
         <li> Einde</li>
 		
 	<?php				
@@ -123,8 +123,8 @@
         <li><a href="<?php echo base_url(); ?>index.php/beursapp/job"> Gewenste functie </a> </li>			
         <li class="active"> Contact </li>
         <li> Verwerking gegevens</li>
-        <li> &#10097; &#10097;</li>
-        <li> Persoonlijk logo</li>
+<!--        <li> &#10097; &#10097;</li>
+        <li> Persoonlijk logo</li>-->
         <li> Einde</li>
         
         <?php
@@ -141,8 +141,8 @@
         <li><a href="<?php echo base_url(); ?>index.php/beursapp/job"> Gewenste functie </a> </li>			
         <li><a href="<?php echo base_url(); ?>index.php/beursapp/contact"> Contact </a> </li>
         <li class="active"> Verwerking gegevens</li>
-        <li> &#10097; &#10097;</li>
-        <li> Persoonlijk logo</li>
+<!--        <li> &#10097; &#10097;</li>
+        <li> Persoonlijk logo</li>-->
         <li> Einde</li>
 
         <?php
@@ -159,8 +159,8 @@
         <li> Gewenste functie </li>
         <li> Contact </li>
         <li> Verwerking gegevens</li>
-        <li> &#10097; &#10097;</li>
-        <li class="active"> Persoonlijk logo</li>
+<!--        <li> &#10097; &#10097;</li>
+        <li class="active"> Persoonlijk logo</li>-->
         <li> Einde </li>
         
         
@@ -177,8 +177,8 @@
         <li> Gewenste functie </li>
         <li> Contact </li>
         <li> Verwerking gegevens</li>
-        <li> &#10097; &#10097;</li>
-        <li> Persoonlijk logo</li>
+<!--        <li> &#10097; &#10097;</li>
+        <li> Persoonlijk logo</li>-->
         <li class="active"> Einde </li>
         <?php
                 break;
@@ -192,8 +192,8 @@
         <li> Gewenste functie </li>
         <li> Contact </li>
         <li> Verwerking gegevens</li>
-        <li> &#10097; &#10097;</li>
-        <li> Persoonlijk logo</li>
+<!--        <li> &#10097; &#10097;</li>
+        <li> Persoonlijk logo</li>-->
         <li> Einde </li>
         <?php
             break;
