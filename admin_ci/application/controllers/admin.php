@@ -2,10 +2,71 @@
 
 class admin extends CI_Controller {
    
-    public function index()
-    {
+    public function index(){
+        $this->home();
+    }
+
+    public function home(){
         $this->load->view('header');
-        $this->load->view('admin_page');
+        $this->load->view('DB_selector');
+        $this->load->view('footer');
+    }
+    public function homeForm() {
+        
+        
+        
+        $this->load->library("form_validation");
+        $this->form_validation->set_message('ipv4_test', 'IP moet van de vorm "XXX.XXX.XXX.XXX" zijn.');
+
+        $this->form_validation->set_rules("ip", "Ip adress", "callback_ipv4_test|min_length[7]|max_length[15]");
+
+        
+        if ($this->form_validation->run() == false){
+        
+            $this->load->view('header');
+            $this->load->view('DB_selector');
+            $this->load->view('footer');
+        }
+        else{
+            
+            $IP = $this->input->post('ip');
+            
+            $db = $this->testDB($IP);
+            if($db !== false){
+                $this->admin_page($IP);
+            }
+            else{
+                $data['ip'] = $IP;
+                $this->load->view('header');
+                $this->load->view('database_error',$data);
+                $this->load->view('footer');
+            }
+                
+            
+        }
+            
+    }
+    
+    
+    public function admin_page( $IP = NULL )
+    {
+        $data = array();
+        if(isset($IP)){
+            $db = $this->testDB($IP);
+            if( $db !== FALSE ){
+                $data['ip'] = $IP;
+            }
+            else{
+                $data['ip'] = $IP;                
+                $this->load->view('header');                
+                $this->load->view('database_error',$data);
+                $this->load->view('footer');
+                return;
+            }
+        }
+            
+        $this->load->view('header');
+        $this->load->view('admin_page', $data);
         $this->load->view('footer');
         
     }
@@ -22,7 +83,10 @@ class admin extends CI_Controller {
                 $db_data = $this->admin_model->getEmailInfo($db);
             }
             else{
-                echo 'DB connection error with '.$IP.'<br>';
+                $data['ip'] = $IP;
+                $this->load->view('header');
+                $this->load->view('database_error',$data);
+                $this->load->view('footer');
                 return;
             }
         }
@@ -90,7 +154,10 @@ class admin extends CI_Controller {
 
                 }
                 else{
-                    echo 'DB connection error with '.$IP.'<br>';
+                    $data['ip'] = $IP;
+                    $this->load->view('header');
+                    $this->load->view('database_error',$data);
+                    $this->load->view('footer');
                     return;
                 }
         }
@@ -120,8 +187,10 @@ class admin extends CI_Controller {
 
                 }
                 else{
-                    echo 'DB connection error with '.$IP.'<br>';
-                    return;
+                    $data['ip'] = $IP;
+                    $this->load->view('header');
+                    $this->load->view('database_error',$data);
+                    $this->load->view('footer');
                 }
         }
         else{
@@ -209,15 +278,15 @@ class admin extends CI_Controller {
             
             $this->load->view('header');
             
-            echo "Succes!";
+            //echo "Succes!";
             $this->load->view('tdd_view', $data);
+            $this->load->view('succes_page', $data);
             $this->load->view('footer');
             
         }
         
 
     }
-    
 
     public function preset( $IP = NULL ){
         $this->load->model('admin_model');
@@ -236,7 +305,10 @@ class admin extends CI_Controller {
                     $db_school = $this->admin_model->getSchools(NULL, $db);
                 }
                 else{
-                    echo 'DB connection error with '.$IP.'<br>';
+                    $data['ip'] = $IP;
+                    $this->load->view('header');
+                    $this->load->view('database_error',$data);
+                    $this->load->view('footer');
                     return;
                 }
         }
@@ -279,7 +351,11 @@ class admin extends CI_Controller {
                     $db_school = $this->admin_model->getSchools(NULL, $db);
                 }
                 else{
-                    echo 'DB connection error with '.$IP.'<br>';
+                    $data['ip'] = $IP;
+                    
+                    $this->load->view('header');
+                    $this->load->view('database_error',$data);
+                    $this->load->view('footer');
                     return;
                 }
         }
@@ -314,8 +390,8 @@ class admin extends CI_Controller {
         $this->form_validation->set_rules("beurs", "Beurs", "required|min_length[3]|max_length[20]");
         $this->form_validation->set_rules("provincie", "Provincie", "min_length[3]|max_length[20]");
         $this->form_validation->set_rules("school", "School", "min_length[1]|max_length[60]");
-        $this->form_validation->set_rules("diplomaLV", "diploma level", "|min_length[3]|max_length[20]");
-        $this->form_validation->set_rules("diploma", "diploma", "|min_length[3]|max_length[60]");
+        $this->form_validation->set_rules("diplomaLV", "diploma level", "min_length[3]|max_length[20]");
+        $this->form_validation->set_rules("diploma", "diploma", "min_length[3]|max_length[60]");
 
         if ($this->form_validation->run() == false){
             $this->load->view('header');
@@ -392,8 +468,10 @@ class admin extends CI_Controller {
             
             
             $this->load->view('header');
-            echo 'Succes!';
+            //echo 'Succes!';
             $this->load->view('preset_view', $data);
+            $this->load->view('succes_page', $data);
+
             $this->load->view('footer');
         }
  
@@ -468,7 +546,10 @@ class admin extends CI_Controller {
                 $this->admin_model->clearDB($db);
             }
             else{
-                echo 'DB connection error with '.$IP.'<br>';
+                $data['ip'] = $IP;
+                $this->load->view('header');
+                $this->load->view('database_error',$data);
+                $this->load->view('footer');
                 return;
             }
         }
@@ -480,19 +561,6 @@ class admin extends CI_Controller {
         echo "Cleared DB<br> ";
     }
 
-    
-    public function testEmailView(){
-        $data['db_first_name'] = 'Natasha';
-        $data['db_last_name'] = 'ieps';
-        $data['db_contact'] = 'tdd';
-        $data['db_tdd'] = 'andere_';
-
-        $this->load->view('html_email',$data);
-
-    }
-    
-    
-    
 
     public function sendMailDB( $IP = NULL){
 
@@ -510,7 +578,10 @@ class admin extends CI_Controller {
 
             }
             else{
-                echo 'DB connection error with '.$IP.'<br>';
+                $data['ip'] = $IP;
+                $this->load->view('header');
+                $this->load->view('database_error',$data);
+                $this->load->view('footer');
                 return;
             }
         }
@@ -578,6 +649,196 @@ class admin extends CI_Controller {
 
 
     }
+     public function saveDB( $IP = NULL ){
+
+        $this->load->model('admin_model');
+        $data = array();
+        
+        if(isset($IP)){
+            $db = $this->testDB($IP);
+            if( $db !== FALSE ){
+                $data['ip'] = $IP;
+                $db_data = $this->admin_model->getDBdata($db);
+                $db_extra = $this->admin_model->getDBextra($db);
+                $db_preset = $this->admin_model->getPreset($db);     
+
+                
+                $filename = "PT_CRM(".$IP.")=".date('d-m-Y ( H\ui\ms\s )') ;
+
+            }
+            else{
+                $data['ip'] = $IP;
+                $this->load->view('header');
+                $this->load->view('database_error',$data);
+                $this->load->view('footer');
+                return;
+            }
+        }
+        else{
+            
+            $db_data = $this->admin_model->getDBdata();
+            $db_extra = $this->admin_model->getDBextra();
+            $db_preset = $this->admin_model->getPreset();     
+
+            $filename = "PT_CRM=".date('d-m-Y ( H\ui\ms\s )') ;
+
+        }
+        
+
+        if(isset($db_preset['beurs']) && $db_preset['beurs'] != ''){
+            $beurs = $db_preset['beurs'];
+        }
+        else{
+            $beurs = 'Jobbeurs'; 
+        }
+
+        //echo $filename;
+        $filelocal_xlsx = 'temp/'.$filename . '.xlsx';
+        $filelocal_csv = 'temp/'.$filename . '.csv';
+
+
+
+
+        $this->make_excel($filelocal_xlsx, $db_data, $db_extra);
+//        echo "Made excel in ". $filelocal_xlsx ."!<br>";
+
+
+        $this->make_csv($filelocal_csv, $db_data);
+//        echo "Made csv in ". $filelocal_csv ."!<br>";       
+        
+
+        $this->load->view('header');
+        echo '<div class="panel-body">';
+        echo "<p>Excel bestand is te vinden in \"/www/admin_ci/". $filelocal_xlsx ."\".</p>";
+        echo "<p>Csv bestand is te vinden in \"/www/admin_ci/". $filelocal_csv ."\".</p>"; 
+        echo '</div>';
+        $this->load->view('succes_page',$data);
+
+        $this->load->view('footer');
+        
+    }
+    public function download_DB_excel( $IP = NULL ){
+
+        $this->load->model('admin_model');
+        
+        if(isset($IP)){
+            $db = $this->testDB($IP);
+            if( $db !== FALSE ){
+                $db_data = $this->admin_model->getDBdata($db);
+                $db_extra = $this->admin_model->getDBextra($db);
+                $db_preset = $this->admin_model->getPreset($db);     
+
+                
+                $filename = "PT_CRM(".$IP.")=".date('d-m-Y ( H\ui\ms\s )') ;
+
+            }
+            else{
+                $data['ip'] = $IP;
+                $this->load->view('header');
+                $this->load->view('database_error',$data);
+                $this->load->view('footer');
+                return;
+            }
+        }
+        else{
+            
+            $db_data = $this->admin_model->getDBdata();
+            $db_extra = $this->admin_model->getDBextra();
+            $db_preset = $this->admin_model->getPreset();     
+
+            $filename = "PT_CRM=".date('d-m-Y ( H\ui\ms\s )') ;
+
+        }
+        
+
+        if(isset($db_preset['beurs']) && $db_preset['beurs'] != ''){
+            $beurs = $db_preset['beurs'];
+        }
+        else{
+            $beurs = 'Jobbeurs'; 
+        }
+
+        
+// We'll be outputting an excel file
+        header('Content-type: application/vnd.ms-excel');
+
+        //echo $filename;
+       
+
+// It will be called file.xls
+        header('Content-Disposition: attachment; filename="'.$filename.'.xlsx"');
+        
+
+         $filelocal_xlsx = 'php://output';
+
+
+
+        $this->make_excel($filelocal_xlsx, $db_data, $db_extra);
+
+
+    }
+    public function download_DB_csv( $IP = NULL ){
+
+        $this->load->model('admin_model');
+        
+        if(isset($IP)){
+            $db = $this->testDB($IP);
+            if( $db !== FALSE ){
+                $db_data = $this->admin_model->getDBdata($db);
+                $db_extra = $this->admin_model->getDBextra($db);
+                $db_preset = $this->admin_model->getPreset($db);     
+
+                
+                $filename = "PT_CRM(".$IP.")=".date('d-m-Y ( H\ui\ms\s )') ;
+
+            }
+            else{
+                $data['ip'] = $IP;
+                $this->load->view('header');
+                $this->load->view('database_error',$data);
+                $this->load->view('footer');
+                return;
+            }
+        }
+        else{
+            
+            $db_data = $this->admin_model->getDBdata();
+            $db_extra = $this->admin_model->getDBextra();
+            $db_preset = $this->admin_model->getPreset();     
+
+            $filename = "PT_CRM=".date('d-m-Y ( H\ui\ms\s )') ;
+
+        }
+        
+
+        if(isset($db_preset['beurs']) && $db_preset['beurs'] != ''){
+            $beurs = $db_preset['beurs'];
+        }
+        else{
+            $beurs = 'Jobbeurs'; 
+        }
+
+        
+        // We'll be outputting an excel file
+        header('Content-type: text/csv');
+       
+
+        // It will be called file.xls
+        header('Content-Disposition: attachment; filename="'.$filename.  '.csv"');
+        
+
+         $filelocal_csv = 'php://output';
+
+
+
+        $this->make_csv($filelocal_csv, $db_data);
+
+
+
+    }
+    
+    
+    
     function make_csv($filelocal, $crm_array){
 
         //load our new PHPExcel library

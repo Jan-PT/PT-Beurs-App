@@ -12,10 +12,10 @@
     </div>
 
 <div class="col-sm-12">
-        <h1>Tdd Form
+        <h1>Talent Detection Day Pagina
 <?php
         if(isset($ip) && $ip != ''){
-            echo 'van IP = ' . $ip;
+            echo 'voor IP = ' . $ip;
         }
 ?>
         </h1>

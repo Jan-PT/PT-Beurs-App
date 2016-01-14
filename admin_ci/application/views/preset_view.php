@@ -102,10 +102,10 @@ function showSchool(str) {
     </div>
 
 <div class="col-sm-12">
-        <h1>Preset Form
+        <h1>Preset pagina
 <?php
         if(isset($ip) && $ip != ''){
-            echo 'van IP = ' . $ip;
+            echo 'voor IP = ' . $ip;
         }
 ?>
         </h1>
@@ -117,7 +117,7 @@ function showSchool(str) {
         //
         
         if(isset($db_preset['diplomaLV'])){
-            $diplomaLV = $db_preset['diplomaLV'];
+            $diplomaLV = urlencode($db_preset['diplomaLV']);
         }
         else{
             $diplomaLV = false;
@@ -144,7 +144,7 @@ function showSchool(str) {
         
         
         if(isset($db_preset['provincie'])){
-            $region = $db_preset['provincie'];
+            $region = urlencode($db_preset['provincie']);
         }
         else{
             $region = false;
@@ -201,7 +201,7 @@ function showSchool(str) {
 ?>
         <p> Provincie: <br>
 <select id="provincie" name="provincie" 
-        class="btn btn-primary btn-lg btn-block dropdown-toggle" 
+        class="btn btn-secondary btn-lg btn-block dropdown-toggle" 
         onchange="showSchool(this.value);">
     <option id="provincie" name="provincie" value="" 
             
@@ -272,10 +272,10 @@ function showSchool(str) {
         
         <p> Diploma niveau:<br>
 <select id="diplomaLV" name="diplomaLV" 
-        class="btn btn-primary btn-lg btn-block dropdown-toggle" 
+        class="btn btn-secondary btn-lg btn-block dropdown-toggle" 
         onchange="showDiploma(this.value);">
     <option id="diplomaLV" name="diplomaLV" value="" 
-            hidden
+            
             <?php if($diplomaLV === false) echo "selected"; ?>
             >Diploma niveau
     </option>
@@ -377,7 +377,7 @@ function showSchool(str) {
             $selected_year = $db_preset['grad_jaar'];
     }
     echo form_dropdown('grad_jaar', $years, $selected_year, 
-            'class="btn btn-primary btn-lg btn-block dropdown-toggle"'); 
+            'class="btn btn-secondary btn-lg btn-block dropdown-toggle"'); 
 
 ?>
   </p>

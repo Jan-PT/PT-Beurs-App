@@ -42,7 +42,7 @@ and open the template in the editor.
                         case 'tdd':
                             
 ?>
-    Je hebt intresse getoond in onze Talent Detection Day
+    Je hebt interesse getoond in onze Talent Detection Day
         <?php
             if(isset($db_tdd) && $db_tdd != ''){        
                 if( strpos($db_tdd,'andere') !== false ){
@@ -59,7 +59,7 @@ and open the template in the editor.
                         $tdd1_obj = DateTime::createFromFormat('Y-m-d', $tdd1);
 
                         
-                        echo $tdd1_obj->format('l, d M Y');
+                        echo $tdd1_obj->format('d/m/Y');
 
                         
                         if( isset($tdd_arr[1]) && $tdd_arr[1] != '')
@@ -89,7 +89,7 @@ and open the template in the editor.
                             break;
                         case 'skype':
 ?>
-    Je hebt intresse getoond in een vrijblijvend skype gesprek. 
+    Je hebt interesse getoond in een vrijblijvend skype gesprek. 
     <br>
     Wanneer lukt dit voor jou?
 <?php
