@@ -368,22 +368,12 @@ class admin extends CI_Controller {
             
         }
         
-        
-        
-
-
         $data['db_preset'] = $db_preset;
         $data['db_diplomaLV'] = $db_diplomaLV;
         $data['db_diploma'] = $db_diploma;
         $data['db_region'] = $db_region;
         $data['db_school'] = $db_school;
         
-        
-        
-//        $data['test_post'] = $this->input->post();
-
-
-
         $this->load->library("form_validation");
 
         $this->form_validation->set_rules("id", "id", "numeric|min_length[1]|max_length[10]");
@@ -540,10 +530,20 @@ class admin extends CI_Controller {
     public function clearDB( $IP = NULL ) {
         $this->load->model('admin_model');
         
+        $data = array();
+
         if(isset($IP)){
             $db = $this->testDB($IP);
             if( $db !== FALSE ){
-                $this->admin_model->clearDB($db);
+                $data['ip'] = $IP;
+                       
+                
+                $db_crm = $this->admin_model->getDBdata($db);
+                $db_preset = $this->admin_model->getPreset($db);
+                $db_tdd = $this->admin_model->getTdds($db);
+
+
+                //$this->admin_model->clearDB($db);
             }
             else{
                 $data['ip'] = $IP;
@@ -554,11 +554,100 @@ class admin extends CI_Controller {
             }
         }
         else{
+
+            $db_crm = $this->admin_model->getDBdata();
+            $db_preset = $this->admin_model->getPreset();
+            $db_tdd = $this->admin_model->getTdds();
                
-            $this->admin_model->clearDB();
+            //$this->admin_model->clearDB();
         }
 
-        echo "Cleared DB<br> ";
+        
+        $data['db_crm'] = $db_crm->result_array();
+        $data['db_preset'] = $db_preset;
+        $data['db_tdd'] = $db_tdd;
+        
+        
+                        
+            $this->load->view('header');
+            $this->load->view('clear_view',$data);
+            $this->load->view('footer');
+        
+//        echo "Cleared DB<br> ";
+    }
+
+    public function clearDBForm( $IP = NULL ) {
+        $this->load->model('admin_model');
+        
+
+        $this->load->library("form_validation");
+
+        $this->form_validation->set_rules("answer", "Antwoord", "min_length[2]|max_length[2]");
+        
+        $data = array();      
+        
+        
+        if(isset($IP)){
+            $db = $this->testDB($IP);
+            if( $db !== FALSE ){
+                $data['ip'] = $IP;
+                       
+                
+                $db_crm = $this->admin_model->getDBdata($db);
+                $db_preset = $this->admin_model->getPreset($db);
+                $db_tdd = $this->admin_model->getTdds($db);
+
+
+                //$this->admin_model->clearDB($db);
+            }
+            else{
+                $data['ip'] = $IP;
+                $this->load->view('header');
+                $this->load->view('database_error',$data);
+                $this->load->view('footer');
+                return;
+            }
+        }
+        else{
+
+            $db_crm = $this->admin_model->getDBdata();
+            $db_preset = $this->admin_model->getPreset();
+            $db_tdd = $this->admin_model->getTdds();
+               
+            //$this->admin_model->clearDB();
+        }
+
+        
+        $data['db_crm'] = $db_crm->result_array();
+        $data['db_preset'] = $db_preset;
+        $data['db_tdd'] = $db_tdd;
+        
+        if ($this->form_validation->run() == false){
+            $this->load->view('header');
+            $this->load->view('clear_view',$data);
+            $this->load->view('footer');
+
+        }
+        else{
+            $answer = $this->input->post('answer');
+            
+            echo $answer . '<br>';
+            if(strcasecmp($answer, 'ja') == 0){
+                $this->load->view('header');
+                $this->load->view('succes_page',$data);
+                $this->load->view('clear_view',$data);
+                $this->load->view('footer');                
+            }
+            else{
+                $this->load->view('header');
+                $this->load->view('admin_page',$data);
+                $this->load->view('footer');   
+            }
+
+        }
+
+        
+//        echo "Cleared DB<br> ";
     }
 
 
