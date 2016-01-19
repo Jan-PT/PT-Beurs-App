@@ -631,11 +631,19 @@ class admin extends CI_Controller {
         else{
             $answer = $this->input->post('answer');
             
-            echo $answer . '<br>';
             if(strcasecmp($answer, 'ja') == 0){
+                
+                if(isset($IP) && $db !== false){
+                    $this->admin_model->clearDB($db);
+
+                }
+                else{
+                    $this->admin_model->clearDB();
+
+                }
+                    
                 $this->load->view('header');
                 $this->load->view('succes_page',$data);
-                $this->load->view('clear_view',$data);
                 $this->load->view('footer');                
             }
             else{
