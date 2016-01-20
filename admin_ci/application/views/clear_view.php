@@ -166,7 +166,7 @@
             $form_url = 'admin/clearDBForm';
         }
         
-        echo form_open('admin/clearDBForm');
+        echo form_open($form_url);
         
         
         

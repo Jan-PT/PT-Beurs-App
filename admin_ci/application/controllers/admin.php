@@ -723,8 +723,8 @@ class admin extends CI_Controller {
 
         $this->load->library('email');
 
-        $this->email->from('Recruitment2016@planet-talent.com', 'Recruitment 2016');
-        $this->email->reply_to('talent@planet-talent.com', 'Talent');
+        $this->email->from('Recruitment2016@planet-talent.com', 'Planet Talent');
+        $this->email->reply_to('talent@planet-talent.com', 'Planet Talent');
         
         $this->email->to($mail_to);
         
