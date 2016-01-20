@@ -699,10 +699,10 @@ class admin extends CI_Controller {
         else{
             $beurs = 'Jobbeurs'; 
         }
-        $mail_to = 'vandendriessche.janmarco@gmail.com';       
+//        $mail_to = 'vandendriessche.janmarco@gmail.com';       
 //        $mail_to = 'tatyana.skoraya@planet-talent.com';
         
-//        $mail_to = 'talent@planet-talent.com';
+       $mail_to = 'talent@planet-talent.com';
 
         
         $subject = "DB ". $beurs . " (" . date('d-m-Y'). ")";
